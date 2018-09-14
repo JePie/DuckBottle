@@ -1,1 +1,1 @@
-Temp files
+Temp files which are here for temporary purpose and will be later on removed or moved to source.
