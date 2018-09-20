@@ -6,187 +6,132 @@
 #include <atlhandler.h>
 #include <iostream>
 #include <winnt.h>
-
-
-
-HWND g_hWnd;
+#include <Windows.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 using namespace std;
 
 //Initializing Function
-bool instancesRunning(LPCSTR classname, LPCWSTR windowTitle);
-void CheckDiskCapacity();
-void CheckMemoryCapacity();
-void CheckCPUStats();
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-HWND CreateWindowInstance(const HINSTANCE &hInstance, const wchar_t  CLASS_NAME[14]);
+bool IsOnlyInstance(LPCTSTR gameTitle);
+bool CheckStorage(const DWORDLONG diskSpaceNeeded);
+bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
+DWORD ReadCPUSpeed();
 
-//initializing Struct for Processor Information Function
-typedef struct _PROCESSOR_POWER_INFORMATION {
-	ULONG Number;
-	ULONG MaxMhz;
-	ULONG CurrentMhz;
-	ULONG MhzLimit;
-	ULONG MaxIdleState;
-	ULONG CurrentIdleState;
-} PROCESSOR_POWER_INFORMATION, *PPROCESSOR_POWER_INFORMATION;
 
 //Checks if an instance of the application is already running or not.
-bool instancesRunning(LPCSTR classname, LPCWSTR windowTitle) {
-
-	HANDLE handles = CreateMutex(NULL, TRUE, classname);
-	if (ERROR_ALREADY_EXISTS == GetLastError())
-	{
-		cout << "more than one instances is running" << endl;
-		return false;
+bool IsOnlyInstance(LPCTSTR gameTitle)
+{
+	HANDLE handle = CreateMutex(NULL, TRUE, gameTitle);
+	if (GetLastError() != ERROR_SUCCESS) {
+		HWND hWnd = FindWindow(gameTitle, NULL);
+		if (hWnd) {
+			// An instance of your game is already running.
+			ShowWindow(hWnd, SW_SHOWNORMAL);
+			SetFocus(hWnd);
+			SetForegroundWindow(hWnd);
+			SetActiveWindow(hWnd);
+			cout << "more than one instances is running\n" << endl;
+			return false;
+		}
 	}
 	else
 	{
-		//minxu was supposed to fix the problem
-		cout << "no multiple instances is running" << endl;
+		cout << "no multiple instances is running\n" << endl;
 	}
 	return true;
-	CloseHandle(handles);
 }
 
 //Checks if device has required disk space needed.
-void CheckDiskCapacity()
+bool CheckStorage(const DWORDLONG diskSpaceNeeded)
 {
-	wchar_t text[200];
-	ULARGE_INTEGER ulFreeSpaceAvailable;
-	ULARGE_INTEGER ulTotalSpace;
-	ULARGE_INTEGER ulTotalFreeSpace;
+	LPCTSTR lpDirectoryName = NULL;
+	__int64 lpFreeBytesAvailable;
+	__int64 lpTotalNumberOfBytes;
+	__int64 lpTotalNumberOfFreeBytes;
 
-	::GetDiskFreeSpaceEx(_T("c:\\"),
-		&ulFreeSpaceAvailable,
-		&ulTotalSpace,
-		&ulTotalFreeSpace);
+	GetDiskFreeSpaceEx(lpDirectoryName, (PULARGE_INTEGER)&lpFreeBytesAvailable, (PULARGE_INTEGER)&lpTotalNumberOfBytes, (PULARGE_INTEGER)&lpTotalNumberOfFreeBytes);
 
-	if (300 > (ulTotalFreeSpace.QuadPart / 1024 * 1024))
-	{ 
-		swprintf(text, 200, L"Insufficient disk space \nDisk space required: 300 \nDisk space available: %llu MB.", ulTotalFreeSpace.QuadPart / (1024 * 1024));
+	if ((DWORDLONG)lpTotalNumberOfBytes <= diskSpaceNeeded) {
+		cout << "\tCheck Storage Failure: Not enough physical storage.\n" << endl;
+		return false;
 	}
-	else
-	{
-		swprintf(text, 200, L"Sufficient disk space \nDisk space required: 300 \nDisk space available: %llu MB.", ulTotalFreeSpace.QuadPart / (1024 * 1024));
+	else {
+		cout << "Disk Space Check: \n" << endl;
+		cout << "\tRequested " << diskSpaceNeeded << " bytes needed." << endl;
+		cout << "\tThere are " << (DWORDLONG)lpTotalNumberOfBytes << " available bytes." << endl;
+
+		return true;
 	}
-	cout <<"Disk Capacity:"<< text<<endl;
-	//int msgboxID = MessageBox(g_hWnd, text, _T("Disk Space Available"), NULL);
 }
 
 //Displays the size of physical and virtual memory available to use.
-void CheckMemoryCapacity()
-{
-	wchar_t text[200];
-	MEMORYSTATUSEX memoryStruct = {};
-	memoryStruct.dwLength = sizeof(memoryStruct);
+bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded) {
+	MEMORYSTATUSEX status;
+	status.dwLength = sizeof(status);
+	GlobalMemoryStatusEx(&status);
 
-	GlobalMemoryStatusEx(&memoryStruct);
+	cout << "\nPhysical & Virtual Memory Check:\n" << endl;
+	cout << "\tRAM Requested: " << physicalRAMNeeded << "." << endl;
+	cout << "\tVirtual RAM Requested: " << virtualRAMNeeded << "." << endl;
+	cout << "\tThe total physical RAM available: " << status.ullAvailPhys << "." << endl;
+	cout << "\tThe total virtual RAM avaialable: " << status.ullAvailVirtual << ".\n" << endl;
 
-	int bufferSize = swprintf(text, 200, L"Physical Memory Available: %I64d MB \nVirtual Memory Available: %I64d MB", memoryStruct.ullAvailPhys / (1024 * 1024), memoryStruct.ullAvailVirtual / (1024 * 1024));
-	cout <<"Memory Capacity:"<< text << endl;
-	//int msgboxID = MessageBox(g_hWnd, text, _T("Memory Available"), NULL);
+	if (status.ullAvailPhys < physicalRAMNeeded) {
+		cout << "\tCheckMemory Failure : Not enough physical memory.\n" << endl;
 
+		return false;
+	}
+
+	if (status.ullAvailVirtual < virtualRAMNeeded) {
+		cout << "\tCheckMemory Failure : Not enough virtual memory.\n" << endl;
+
+		return false;
+	}
 }
 
 //Displays the CPU speed and architecture of the device
-void CheckCPUStats()
-{
-	SYSTEM_INFO sysInfo;
-	GetSystemInfo(&sysInfo);
+DWORD ReadCPUSpeed() {
+	DWORD BufSize = sizeof(DWORD);
+	DWORD dwMHz = 0;
+	DWORD type = REG_DWORD;
+	DWORD strType = REG_SZ;
+	char myBuff[256];
+	HKEY hKey;
+	long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+		"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0,
+		KEY_READ, &hKey);
+	if (lError == ERROR_SUCCESS) {
+		// query the key:
+		RegQueryValueEx(hKey, "~MHz", NULL, &type, (LPBYTE)
+			&dwMHz, &BufSize);
+		cout << "CPU Speed aand Architecture:\n" << endl;
+		cout <<"\t"<< dwMHz << " MHz CPU Speed" << endl;
+	}
 
-	// allocate buffer to get info for each processor
-	const int size = sysInfo.dwNumberOfProcessors * sizeof(PROCESSOR_POWER_INFORMATION);
-	LPBYTE pBuffer = new BYTE[size];
-	//CallNtPowerInformation(ProcessorInformation, NULL, 0, pBuffer, size);
-	PPROCESSOR_POWER_INFORMATION ppi = (PPROCESSOR_POWER_INFORMATION)pBuffer;
+	long mError = RegQueryValueEx(hKey, "ProcessorNameString", NULL, &strType, (LPBYTE)&myBuff, &BufSize);
 
-	wchar_t text[200];
-	swprintf(text, 200, L"Proccesor Speed: %d MHz \nCPU Architecture Value: %u", ppi->MaxMhz, sysInfo.wProcessorArchitecture);
-	cout <<"CPU:"<< text << endl;
-	int msgboxID = MessageBox(g_hWnd,(LPCSTR)text, _T("Cpu Specs"),NULL);
+	while (mError == ERROR_MORE_DATA) {
+		BufSize++;
+		mError = RegQueryValueEx(hKey, "ProcessorNameString", NULL, &strType, (LPBYTE)&myBuff, &BufSize);
+	}
+
+	cout <<"\t"<< myBuff <<"\n"<< endl;
+
+	return dwMHz;
 }
-
-
-int main(HINSTANCE hInstance, HINSTANCE hPrevInstace, PWSTR pCmdLine, int nCmdShow)
+int main()
 {
+	LPCTSTR engineName = "Tube.";
+	IsOnlyInstance(engineName);
+	DWORDLONG spaceNeeded = 3000000000;
+	CheckStorage(spaceNeeded);
+	DWORDLONG ramNeeded = 800000000;
+	DWORDLONG vRamNeeded = 160000000;
+	CheckMemory(ramNeeded, vRamNeeded);
+	ReadCPUSpeed();
 
-	const wchar_t CLASS_NAME[] = L"Editor Window";
-	const wchar_t WINDOW_TITLE[] = L"Tube Engine";
-
-	// check if window is already open
-	if (instancesRunning((LPCSTR)CLASS_NAME,WINDOW_TITLE))
-	{
-		return 0;
-	}
-
-	// create wc instance
-	g_hWnd = CreateWindowInstance(hInstance, CLASS_NAME);
-
-	if (g_hWnd == NULL)
-		return 0; //create window failed
-
-	ShowWindow(g_hWnd, nCmdShow);
-	//instancesRunning("Hello World");
-	CheckDiskCapacity();
-	CheckMemoryCapacity();
-	CheckCPUStats();
-
-	// MESSAGE LOOP
-	MSG msg = {};
-	while (GetMessage(&msg, NULL, 0, 0))
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
+	system("pause");
 
 	return 0;
-}
-
-HWND CreateWindowInstance(const HINSTANCE &hInstance, const wchar_t  CLASS_NAME[14])
-{
-	WNDCLASS wc = {};
-
-	wc.lpfnWndProc = WindowProc;
-	wc.hInstance = hInstance;
-	wc.lpszClassName = (LPCSTR)CLASS_NAME;
-
-	RegisterClass(&wc);
-
-	// creating window
-	return CreateWindowEx(
-		0,
-		(LPCSTR)CLASS_NAME,
-		"Tube Engine",
-		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
-		NULL,
-		NULL,
-		hInstance,
-		NULL
-	);
-}
-
-
-//Handling window messages.
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	switch (uMsg)
-	{
-	case WM_DESTROY: //calling quit function
-		PostQuitMessage(0);
-		return 0;
-
-	case WM_PAINT:
-	{
-		PAINTSTRUCT ps;
-		HDC hdc = BeginPaint(hwnd, &ps);
-		FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 2));
-		EndPaint(hwnd, &ps);
-		return 0;
-	}
-
-	default:
-		return DefWindowProc(hwnd, uMsg, wParam, lParam);
-	}
 }
