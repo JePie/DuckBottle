@@ -1,5 +1,5 @@
 # DuckTube Engine
-DuckTube Engine is engine developed by DuckBottle Studio at George Brown College created in partial fulfillment of the Course Game3121 : Game Engine Development
+DuckTube Engine is engine developed by DuckBottle Studio at George Brown College,created in partial fulfillment of the Course Game3121 : Game Engine Development
 
 ## Team Members
 * **Puraj Desai** - https://github.com/puraj123
