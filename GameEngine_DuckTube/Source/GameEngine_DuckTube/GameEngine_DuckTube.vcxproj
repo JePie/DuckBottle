@@ -150,11 +150,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CanvasInterface.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="cubeWall.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="enemyHealth.h" />
+    <ClInclude Include="HideArea.h" />
+    <ClInclude Include="image.h" />
+    <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="playerHealth.h" />
     <ClInclude Include="Projectiles.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Steel.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="PlayerTransform.h" />
+    <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="Ui.h" />
+    <ClInclude Include="UiText.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
