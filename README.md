@@ -1,7 +1,10 @@
-# Tube Engine
-Tube is an engine developed by DuckBottle Games Studio @GeorgeBrown for the Game Engine Development class (Course code: T163, 5th Semester).
+# DuckTube Engine
+DuckTube Engine is engine developed by DuckBottle Studio at George Brown College,created in partial fulfillment of the Course Game3121 : Game Engine Development
 
-# Team Members
-[puraj123](https://github.com/puraj123)
-[Jepie](https://github.com/Jepie)
-[daimenion](https://github.com/daimenion)
+## Team Members
+* **Puraj Desai** - https://github.com/puraj123
+* **Minxu Huang** - http://gitub.com/daimenion
+* **John Paul Valdez** - http://github.com/JePie
+
+## Starting Engine
+* Find the latest.exe file  under the Game folder.
