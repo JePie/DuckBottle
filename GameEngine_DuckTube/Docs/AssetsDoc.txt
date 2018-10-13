@@ -1,0 +1,4 @@
+/*
+ 	This folder contains all various Assets included in this project
+	Not all assets will be used in the game engine.
+*/

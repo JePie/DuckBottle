@@ -1,0 +1,6 @@
+/*
+	*FOR THE TESTING TEAM*
+	-Test folder includes test scripts,
+	-log files for diagnostics, warnings, and errors.
+	-release notes for the latest builds
+*/

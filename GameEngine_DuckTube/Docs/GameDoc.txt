@@ -1,0 +1,8 @@
+/*
+ 	This folder contains:
+	-all released game builds
+	-game data files for the game to run
+	-executables and DLLs ONLY
+	-game data files stored in Data folder
+	
+*/

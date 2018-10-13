@@ -1,3 +1,0 @@
-/*
- 	This folder contains source code for Tube Engine.	
-*/

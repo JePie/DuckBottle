@@ -1,0 +1,3 @@
+/*
+ 	This folder contains Temp files which are here temporarily and will be later on removed or moved to source.	
+*/
