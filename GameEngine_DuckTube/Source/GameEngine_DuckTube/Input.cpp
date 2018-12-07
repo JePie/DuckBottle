@@ -37,3 +37,7 @@ bool InputClass::IsKeyDown(uintptr_t key)
 {
 	return keyStates[key];
 }
+void InputClass::OnLeftMouseClick(const EventClass_LMouse_Clicked* mouseEvent)
+{
+	LMB_Clicked = true;
+}

@@ -1,7 +1,8 @@
 #pragma once
 
+#include "Eventmanager.h"
 using namespace std;
-class InputClass
+class InputClass : public EventHandler
 {
 public:
 	InputClass();
@@ -13,8 +14,11 @@ public:
 	void KeyUp(uintptr_t key);
 
 	bool IsKeyDown(uintptr_t key);
+	void OnLeftMouseClick(const EventClass_LMouse_Clicked* mouseEvent);
 
 private:
+
 	bool keyStates[256];
+	bool LMB_Clicked = false;
 };
 

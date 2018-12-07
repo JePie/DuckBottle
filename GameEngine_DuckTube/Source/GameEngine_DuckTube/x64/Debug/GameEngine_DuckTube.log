@@ -1,8 +1,12 @@
-﻿  main.cpp
-c:\users\jack huang\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(152): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\jack huang\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(157): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\jack huang\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(601): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-c:\users\jack huang\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(627): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-c:\users\jack huang\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(242): warning C4101: 'msg': unreferenced local variable
-c:\users\jack huang\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(94): warning C4715: 'CheckMemory': not all control paths return a value
-  GameEngine_DuckTube.vcxproj -> C:\Users\Jack huang\Documents\GitHub\DuckBottle\GameEngine_DuckTube\Source\x64\Debug\GameEngine_DuckTube.exe
+﻿  Eventmanager.cpp
+  Input.cpp
+  main.cpp
+c:\users\localadmin\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(157): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
+c:\users\localadmin\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(162): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
+c:\users\localadmin\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(315): error C2259: 'EventClass_LMouse_Clicked': cannot instantiate abstract class
+  c:\users\localadmin\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(315): note: due to following members:
+  c:\users\localadmin\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(315): note: 'Event::DescriptorType Event::type(void) const': is abstract
+  c:\users\localadmin\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\event.h(9): note: see declaration of 'Event::type'
+c:\users\localadmin\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(622): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\localadmin\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(648): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
