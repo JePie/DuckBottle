@@ -3,8 +3,13 @@
 #include <map>
 #include <memory>
 #include <typeindex>
-#include"Event.h"
+#pragma once
 
+class Event
+{
+protected:
+	virtual ~Event() {};
+};
 
 class HandlerFunctionBase
 {
@@ -17,6 +22,7 @@ private:
 };
 
 
+
 template < class T, class EventT >
 class MemberFunctionHandler : public HandlerFunctionBase
 {
@@ -26,7 +32,7 @@ public:
 
 	void call(const Event* event)
 	{
-		(_instance->*_function)(static_cast<EventT*>(event));
+		(_instance->*_function)(static_cast< EventT* >(event));
 	}
 
 private:
@@ -79,7 +85,8 @@ class EventClass_LMouse_Clicked : public Event
 {
 public:
 	EventClass_LMouse_Clicked() : m_eventName("default") {};
-	EventClass_LMouse_Clicked(std::string eventName) : m_eventName("Event_LeftMouse_Clicked") {};
+	EventClass_LMouse_Clicked(std::string eventName) : m_eventName("Hello, Prof !") {};
+
 	std::string getEventName() const { return m_eventName; }
 private:
 	std::string m_eventName{ " defaultName " };
