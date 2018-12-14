@@ -1,13 +1,43 @@
-﻿  stdafx.cpp
-  Input.cpp
+﻿  lua.cpp
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastate.inl(594): warning C4244: 'argument': conversion from 'lua_Integer' to 'int', possible loss of data
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastate.inl(718): warning C4244: 'argument': conversion from 'lua_Integer' to 'int', possible loss of data
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luaobject.inl(1390): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: see declaration of 'strncpy'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastateoutfile.h(81): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: see declaration of 'fopen'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastateoutfile.h(83): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: see declaration of 'fopen'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastateoutfile.h(103): error C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1469): note: see declaration of 'vsprintf'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastateoutstring.h(48): error C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1469): note: see declaration of 'vsprintf'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastateoutstring.h(63): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: see declaration of 'strncpy'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luacall.inl(113): error C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
   main.cpp
-c:\users\extri\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(152): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\extri\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(157): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\extri\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(243): warning C4002: too many actual parameters for macro '_T'
-c:\users\extri\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(611): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-c:\users\extri\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(637): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-c:\users\extri\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(251): warning C4101: 'msg': unreferenced local variable
-c:\users\extri\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(277): warning C4101: 'classObserver': unreferenced local variable
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastate.inl(594): warning C4244: 'argument': conversion from 'lua_Integer' to 'int', possible loss of data
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastate.inl(718): warning C4244: 'argument': conversion from 'lua_Integer' to 'int', possible loss of data
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luaobject.inl(1390): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: see declaration of 'strncpy'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastateoutfile.h(81): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: see declaration of 'fopen'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastateoutfile.h(83): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: see declaration of 'fopen'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastateoutfile.h(103): error C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1469): note: see declaration of 'vsprintf'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastateoutstring.h(48): error C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1469): note: see declaration of 'vsprintf'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luastateoutstring.h(63): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: see declaration of 'strncpy'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\assets\lib\luaplus51-all-master\src\luaplus\luacall.inl(113): error C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\source\gameengine_ducktube\main.cpp(153): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\source\gameengine_ducktube\main.cpp(158): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\source\gameengine_ducktube\main.cpp(244): warning C4002: too many arguments for function-like macro invocation '_T'
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\source\gameengine_ducktube\main.cpp(612): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\source\gameengine_ducktube\main.cpp(638): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\source\gameengine_ducktube\main.cpp(658): error C3861: 'test': identifier not found
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\source\gameengine_ducktube\main.cpp(684): warning C4244: 'initializing': conversion from 'lua_Integer' to 'int', possible loss of data
+c:\users\localadmin\desktop\duckbottle-master\gameengine_ducktube\source\gameengine_ducktube\main.cpp(689): warning C4244: '=': conversion from 'lua_Integer' to 'int', possible loss of data
   Generating Code...
-c:\users\extri\documents\github\duckbottle\gameengine_ducktube\source\gameengine_ducktube\main.cpp(94): warning C4715: 'CheckMemory': not all control paths return a value
-  GameEngine_DuckTube.vcxproj -> C:\Users\extri\Documents\GitHub\DuckBottle\GameEngine_DuckTube\Source\x64\Debug\GameEngine_DuckTube.exe
