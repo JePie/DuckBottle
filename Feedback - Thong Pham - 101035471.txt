@@ -1,0 +1,5 @@
+Player disappear when having 2 blocks at the end.
+Tutorial - Basic Move, when clicked on the far right/left, its not focused. Should make it focus on the tab clicked
+Refresh when looking for room is stackable
+Animation of some player froze upon death on 2v2
+Rematch when pressing Enter did it twice, only work when hold
