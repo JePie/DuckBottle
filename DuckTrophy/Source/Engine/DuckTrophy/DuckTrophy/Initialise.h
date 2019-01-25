@@ -18,6 +18,7 @@ public:
 
 	void  Run(sf::RenderWindow Window);
 	bool ReadCPUSpeed();
+	bool  HasFreeDiskSpace();
 
 private:
 	friend base<duckTubeEngine>;

@@ -91,3 +91,31 @@ bool duckTubeEngine::ReadCPUSpeed() {
 	return result;
 }
 
+bool duckTubeEngine::HasFreeDiskSpace()
+{
+
+	bool result = false;
+	int requiredSpace = 300; //program space spec requirement in MB.
+	ULARGE_INTEGER ulFreeSpace;
+	ULARGE_INTEGER ulTotalSpace;
+	ULARGE_INTEGER ulTotalFreeSpace;
+	std::string msgTxt;
+
+	GetDiskFreeSpaceEx("C:", &ulFreeSpace, &ulTotalSpace, &ulTotalFreeSpace);
+
+	int totalFreeSpaceInMb = (ulTotalFreeSpace.QuadPart / (1024 * 1024));
+
+	if (requiredSpace > totalFreeSpaceInMb) {
+		cout << "\tCheck Storage Failure: Not enough physical storage.\n" << endl;
+		result = false;
+	}
+	else {
+		cout << "Disk Space Check: \n" << endl;
+		cout << "\tRequested " << requiredSpace << " bytes needed." << endl;
+		cout << "\tThere are " << (DWORDLONG)totalFreeSpaceInMb << " available bytes." << endl;
+
+		result = true;
+	}
+
+	return result;
+}
