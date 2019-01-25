@@ -59,6 +59,35 @@ bool duckTubeEngine::SystemRequirements()
 
 	return true;
 }
+bool  duckTubeEngine::CheckMemory() {
+	bool result = false;
+	DWORDLONG physicalRAMNeeded = 512;
+	DWORDLONG virtualRAMNeeded = 1024;
+	MEMORYSTATUSEX status;
+	status.dwLength = sizeof(status);
+	GlobalMemoryStatusEx(&status);
+	std::string msgTxt;
+
+	cout << "\nPhysical & Virtual Memory Check:\n" << endl;
+	cout << "\tRAM Requested: " << physicalRAMNeeded << "." << endl;
+	cout << "\tVirtual RAM Requested: " << virtualRAMNeeded << "." << endl;
+	cout << "\tThe total physical RAM available: " << status.ullAvailPhys << "." << endl;
+	cout << "\tThe total virtual RAM avaialable: " << status.ullAvailVirtual << ".\n" << endl;
+
+	if (status.ullAvailPhys < physicalRAMNeeded) {
+		cout << "\tMemory Check Failure : Not enough physical memory.\n" << endl;
+
+		result = false;
+	}
+
+	if (status.ullAvailVirtual < virtualRAMNeeded) {
+		cout << "\tMemory Check Failure : Not enough virtual memory.\n" << endl;
+
+		result = false;
+	}
+	result = true;
+	return result;
+}
 bool duckTubeEngine::ReadCPUSpeed() {
 	DWORD BufSize = sizeof(DWORD);
 	DWORD dwMHz = 0;
