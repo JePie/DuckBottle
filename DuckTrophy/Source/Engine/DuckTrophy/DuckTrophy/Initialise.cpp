@@ -12,6 +12,7 @@
 #include <sstream>
 #include<SFML/Graphics.hpp>
 
+using namespace std;
 duckTubeEngine::~duckTubeEngine()
 {
 
@@ -74,26 +75,17 @@ bool duckTubeEngine::HasFreeDiskSpace()
 
 	int totalFreeSpaceInMb = (ulTotalFreeSpace.QuadPart / (1024 * 1024));
 
-	if (requiredSpace < totalFreeSpaceInMb)
-	{
-		msgTxt = "Sufficient space";
-		result = true;
-	}
-	else
-	{
-		std::ostringstream buffer;
-		buffer << "Insufficient space. \nDisk space required: " << requiredSpace << "MB" << ".\nDisk space available: " << totalFreeSpaceInMb << "MB";
-
-		msgTxt = buffer.str();
+	if (requiredSpace > totalFreeSpaceInMb) {
+		cout << "\tCheck Storage Failure: Not enough physical storage.\n" << endl;
 		result = false;
 	}
+	else {
+		cout << "Disk Space Check: \n" << endl;
+		cout << "\tRequested " << requiredSpace << " bytes needed." << endl;
+		cout << "\tThere are " << (DWORDLONG)totalFreeSpaceInMb << " available bytes." << endl;
 
-	int msgboxID = MessageBox(
-		nullptr,
-		msgTxt.c_str(),
-		"Storage check",
-		MB_ICONINFORMATION
-	);
+		result = true;
+	}
 
 	return result;
 }
