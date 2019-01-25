@@ -59,7 +59,37 @@ bool duckTubeEngine::SystemRequirements()
 
 	return true;
 }
+bool duckTubeEngine::ReadCPUSpeed() {
+	DWORD BufSize = sizeof(DWORD);
+	DWORD dwMHz = 0;
+	DWORD type = REG_DWORD;
+	DWORD strType = REG_SZ;
+	char myBuff[256];
+	HKEY hKey;
+	bool result = false;
+	std::string msgTxt;
+	long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+		"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0,
+		KEY_READ, &hKey);
+	if (lError == ERROR_SUCCESS) {
+		// query the key:
+		RegQueryValueEx(hKey, "~MHz", NULL, &type, (LPBYTE)
+			&dwMHz, &BufSize);
+		cout << "CPU Speed aand Architecture:\n" << endl;
+		cout << "\t" << dwMHz << " MHz CPU Speed" << endl;
+	}
 
+	long mError = RegQueryValueEx(hKey, "ProcessorNameString", NULL, &strType, (LPBYTE)&myBuff, &BufSize);
+
+	while (mError == ERROR_MORE_DATA) {
+		BufSize++;
+		mError = RegQueryValueEx(hKey, "ProcessorNameString", NULL, &strType, (LPBYTE)&myBuff, &BufSize);
+	}
+
+	cout << "\t" << myBuff << "\n" << endl;
+
+	return result;
+}
 
 bool duckTubeEngine::HasFreeDiskSpace()
 {
