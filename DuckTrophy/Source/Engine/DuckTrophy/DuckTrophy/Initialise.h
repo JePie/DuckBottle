@@ -7,6 +7,9 @@
 
 #pragma once
 #include "tubeStd.h"
+#include "Actor.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 class duckTubeEngine : public base<duckTubeEngine>
 {
@@ -20,11 +23,13 @@ public:
 	bool  HasFreeDiskSpace();
 	bool ReadCPUSpeed();
 	bool CheckMemory();
+	void input();
 
 private:
 	friend base<duckTubeEngine>;
 	duckTubeEngine(const duckTubeEngine &_copy) = delete; 
-
+	
 	bool  SystemRequirements();
+	Actor actor;
 	
 };
