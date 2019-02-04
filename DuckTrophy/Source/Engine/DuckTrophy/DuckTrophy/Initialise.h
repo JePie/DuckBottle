@@ -13,12 +13,13 @@ class duckTubeEngine : public base<duckTubeEngine>
 public:
 	duckTubeEngine();
 	~duckTubeEngine();
-
+	sf::RenderWindow Window;
 	bool Initialize();
 
-	void  Run(sf::RenderWindow Window);
-	bool ReadCPUSpeed();
+	void  Run();
 	bool  HasFreeDiskSpace();
+	bool ReadCPUSpeed();
+	bool CheckMemory();
 
 private:
 	friend base<duckTubeEngine>;
