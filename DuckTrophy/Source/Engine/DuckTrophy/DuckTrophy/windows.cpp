@@ -7,18 +7,21 @@
 
 Engine::Engine()
 {
-	InitializeWindow();
 }
 float sec;
 int x = 0;
+duckTubeEngine duck;
 void Engine::InitializeWindow()
 {
 	SlpashScreen();
-	sf::Texture s;
-	/*s.loadFromFile("duck.png");
+	sf::Texture s = sf::Texture();
+	if (!s.loadFromFile("duck.png")) {
+		printf("ERROR\n");
+	}
+	//s.create(500, 500);
 	Background.setTexture(BackgroundTex);
 	icon.loadFromFile("duck.ico");
-	Engin.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());*/
+	duck.Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 }
 
@@ -34,7 +37,7 @@ void Engine::NotifyCloseRequest()
 
 	window->close();
 }
-duckTubeEngine duck;
+
 void Engine::SlpashScreen() {
 	resolution.x = sf::VideoMode::getDesktopMode().width;
 	resolution.y = sf::VideoMode::getDesktopMode().height;
@@ -98,6 +101,7 @@ void Engine::update(float dtAsSec)
 
 	if (sec == 3000.0f)
 	{
+
 		mainWindow();
 	}
 }
