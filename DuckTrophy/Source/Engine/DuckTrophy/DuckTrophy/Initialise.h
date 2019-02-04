@@ -24,6 +24,7 @@ public:
 	bool ReadCPUSpeed();
 	bool CheckMemory();
 	void input();
+	void update(float dtAsSeconds);
 
 private:
 	friend base<duckTubeEngine>;
