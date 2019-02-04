@@ -15,7 +15,6 @@ class duckTubeEngine : public base<duckTubeEngine>
 {
 public:
 	duckTubeEngine();
-	~duckTubeEngine();
 
 	bool Initialize();
 
@@ -25,12 +24,15 @@ public:
 	bool CheckMemory();
 	void input();
 	void update(float dtAsSeconds);
+	Actor actor;
 
 private:
 	friend base<duckTubeEngine>;
 	duckTubeEngine(const duckTubeEngine &_copy) = delete; 
 	
 	bool  SystemRequirements();
-	Actor actor;
+
+	Music music;
+	Font font;
 	
 };

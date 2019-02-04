@@ -13,19 +13,22 @@
 #include<SFML/Graphics.hpp>
 
 using namespace std;
-duckTubeEngine::~duckTubeEngine()
-{
-
-}
 
 
 void duckTubeEngine::Run(sf::RenderWindow Window)
 {
+	Clock clock;
 	while (Window.isOpen())
 	{
 		sf::Event event;
 		while (Window.pollEvent(event))
 		{
+			Time dt = clock.restart();
+
+			float dtAsSeconds = dt.asSeconds();
+
+			input();
+			update(dtAsSeconds);
 			if (event.type == sf::Event::Closed)
 			{
 				Window.close();
@@ -37,8 +40,18 @@ void duckTubeEngine::Run(sf::RenderWindow Window)
 
 duckTubeEngine::duckTubeEngine()
 {
+	//Resolutions
+	Vector2f resolution;
+	resolution.x = VideoMode::getDesktopMode().width;
+	resolution.y = VideoMode::getDesktopMode().height;
 
+	//font.loadFromFile("sansation.ttf");
 
+	//Music
+	//music.openFromFile("music.wav");
+	music.setVolume(30.f);
+	music.setLoop(true);
+	music.play();
 }
 
 
