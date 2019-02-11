@@ -8,9 +8,11 @@
 #include "Initialise.h"
 #include <iostream>
 #include <windows.h>
+#include "windows.h"
 #include <string>
 #include <sstream>
 #include<SFML/Graphics.hpp>
+#include"tubeStd.h"
 
 using namespace std;
 duckTubeEngine::~duckTubeEngine()
@@ -19,18 +21,20 @@ duckTubeEngine::~duckTubeEngine()
 }
 
 
-void duckTubeEngine::Run(sf::RenderWindow Window)
+void duckTubeEngine::Run()
 {
-	while (Window.isOpen())
+	Engine engine;
+	while (engine.Window.isOpen())
 	{
 		sf::Event event;
-		while (Window.pollEvent(event))
+		while (engine.Window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 			{
-				Window.close();
+				engine.Window.close();
 			}
 		}
+
 	}
 }
 
@@ -46,7 +50,12 @@ bool duckTubeEngine::Initialize()
 {
 	if (!SystemRequirements())
 		return false;
-
+	else {
+		CheckMemory();
+		HasFreeDiskSpace();
+		ReadCPUSpeed();
+		GraphicsSystem::Instance()->CreateWin();
+	}
 	return true;
 }
 
