@@ -1,6 +1,7 @@
 #pragma once
 #include "base.h"
 #include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 #include "tubeStd.h"
 
 class Engine : public base<Engine>
@@ -27,7 +28,7 @@ public:
 	void NotifyCloseRequest();
 	void SlpashScreen();
 	void mainWindow();
-	void draw();
-	void update(float dtAsSec);
-	
+	sf::RenderWindow Window;
+	sf::SoundBuffer music;
+	sf::Sound sound;
 };

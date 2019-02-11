@@ -13,7 +13,7 @@ class duckTubeEngine : public base<duckTubeEngine>
 public:
 	duckTubeEngine();
 	~duckTubeEngine();
-	sf::RenderWindow Window;
+	
 	bool Initialize();
 
 	void  Run();
