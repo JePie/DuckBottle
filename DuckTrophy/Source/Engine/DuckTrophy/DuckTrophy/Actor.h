@@ -1,39 +1,15 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-
-using namespace sf;
-
-class Actor {
-
-private:
-
-	Vector2f position;
-	Sprite sprite;
-	Texture texture;
-
-	bool LeftPressed;
-	bool RightPressed;
-	bool UpPressed;
-	bool DownPressed;
-
-
-	float speed;
-
+#include "tubeStd.h"
+#include "windows.h"
+class Actor
+{
 public:
-
 	Actor();
-
-	void stopUp();
-	void stopDown();
-	void stopLeft();
-	void stopRight();
-
-	Sprite getSprite();
-
-	void moveLeft();
-	void moveRight();
-	void moveUp();
-	void moveDown();
-
-	void update(float elapsedTime);
+	~Actor();
+	void setImage(std::string image);
+	void setPosition(float x, float y);
+	void draw();
+	sf::Sprite actor;
+	sf::Texture actorTexture;
 };
+

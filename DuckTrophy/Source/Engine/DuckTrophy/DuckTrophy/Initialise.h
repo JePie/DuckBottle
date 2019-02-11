@@ -7,32 +7,24 @@
 
 #pragma once
 #include "tubeStd.h"
-#include "Actor.h"
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 
 class duckTubeEngine : public base<duckTubeEngine>
 {
 public:
 	duckTubeEngine();
-
+	~duckTubeEngine();
+	
 	bool Initialize();
 
-	void  Run(sf::RenderWindow Window);
+	void  Run();
 	bool  HasFreeDiskSpace();
 	bool ReadCPUSpeed();
 	bool CheckMemory();
-	void input();
-	void update(float dtAsSeconds);
-	Actor actor;
 
 private:
 	friend base<duckTubeEngine>;
 	duckTubeEngine(const duckTubeEngine &_copy) = delete; 
-	
-	bool  SystemRequirements();
 
-	Music music;
-	Font font;
+	bool  SystemRequirements();
 	
 };

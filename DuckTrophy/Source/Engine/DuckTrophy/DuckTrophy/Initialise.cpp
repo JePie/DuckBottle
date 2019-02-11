@@ -8,50 +8,41 @@
 #include "Initialise.h"
 #include <iostream>
 #include <windows.h>
+#include "windows.h"
 #include <string>
 #include <sstream>
 #include<SFML/Graphics.hpp>
+#include"tubeStd.h"
 
 using namespace std;
-
-
-void duckTubeEngine::Run(sf::RenderWindow Window)
+duckTubeEngine::~duckTubeEngine()
 {
-	Clock clock;
-	while (Window.isOpen())
+
+}
+
+
+void duckTubeEngine::Run()
+{
+	Engine engine;
+	while (engine.Window.isOpen())
 	{
 		sf::Event event;
-		while (Window.pollEvent(event))
+		while (engine.Window.pollEvent(event))
 		{
-			Time dt = clock.restart();
-
-			float dtAsSeconds = dt.asSeconds();
-
-			input();
-			update(dtAsSeconds);
 			if (event.type == sf::Event::Closed)
 			{
-				Window.close();
+				engine.Window.close();
 			}
 		}
+
 	}
 }
 
 
 duckTubeEngine::duckTubeEngine()
 {
-	//Resolutions
-	Vector2f resolution;
-	resolution.x = VideoMode::getDesktopMode().width;
-	resolution.y = VideoMode::getDesktopMode().height;
 
-	//font.loadFromFile("sansation.ttf");
 
-	//Music
-	//music.openFromFile("music.wav");
-	music.setVolume(30.f);
-	music.setLoop(true);
-	music.play();
 }
 
 
@@ -59,7 +50,12 @@ bool duckTubeEngine::Initialize()
 {
 	if (!SystemRequirements())
 		return false;
-
+	else {
+		CheckMemory();
+		HasFreeDiskSpace();
+		ReadCPUSpeed();
+		GraphicsSystem::Instance()->CreateWin();
+	}
 	return true;
 }
 

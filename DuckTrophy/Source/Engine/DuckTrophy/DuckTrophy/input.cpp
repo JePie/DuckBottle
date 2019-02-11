@@ -1,49 +1,85 @@
-
 #include "pch.h"
-#include"tubeStd.h"
-#include "Initialise.h"
-#include <iostream>
+#include "Input.h"
 
-void duckTubeEngine::input()
+Input::Input()
 {
-	if (Keyboard::isKeyPressed(Keyboard::Escape))
-	{
-		//close Window Method to invoke
-	}
+}
 
-	if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
-	{
-		actor.moveLeft();
-		std::cout << "a / left";
-	}
-	else
-	{
-		actor.stopLeft();
-	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
+Input::~Input()
+{
+}
+void Input::KeyboardHandler(UINT message, WPARAM wParam)
+{
+	wchar_t msg[32];
+	switch (message)
 	{
-		actor.moveRight();
-	}
-	else
-	{
-		actor.stopRight();
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W))
-	{
-		actor.moveUp();
-	}
-	else
-	{
-		actor.stopUp();
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S))
-	{
-		actor.moveDown();
-	}
-	else
-	{
-		actor.stopDown();
-	}
+	case WM_SYSKEYDOWN:
+		swprintf_s(msg, L"WM_SYSKEYDOWN: 0x%x\n", wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
 
+	case WM_SYSCHAR:
+		swprintf_s(msg, L"WM_SYSCHAR: %c\n", (wchar_t)wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+
+	case WM_SYSKEYUP:
+		swprintf_s(msg, L"WM_SYSKEYUP: 0x%x\n", wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+
+	case WM_KEYDOWN:
+		swprintf_s(msg, L"WM_KEYDOWN: 0x%x\n", wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+
+	case WM_KEYUP:
+		swprintf_s(msg, L"WM_KEYUP: 0x%x\n", wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+
+	case WM_CHAR:
+		swprintf_s(msg, L"WM_CHAR: %c\n", (wchar_t)wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+
+	}
+}
+
+void Input::MouseHandler(UINT message, WPARAM wParam)
+{
+	wchar_t msg[38];
+	switch (message)
+	{
+	case WM_LBUTTONDOWN:
+		swprintf_s(msg, L"WM_LBUTTONDOWN: Left Mouse Down\n", wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+
+	case WM_LBUTTONUP:
+		swprintf_s(msg, L"WM_LBUTTONDOWN: Left Mouse Up\n", wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+
+	case WM_MBUTTONDOWN:
+		swprintf_s(msg, L"WM_LBUTTONDOWN: Middle Mouse Down\n", wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+
+	case WM_MBUTTONUP:
+		swprintf_s(msg, L"WM_LBUTTONDOWN: Middle Mouse Up\n", wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+
+	case WM_RBUTTONDOWN:
+		swprintf_s(msg, L"WM_LBUTTONDOWN: Right Mouse Down\n", wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+
+	case WM_RBUTTONUP:
+		swprintf_s(msg, L"WM_LBUTTONDOWN: Right Mouse Up\n", wParam);
+		OutputDebugString((LPCSTR)msg);
+		break;
+	}
 }

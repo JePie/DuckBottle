@@ -1,6 +1,13 @@
 #include "pch.h"
-#include "Initialise.h"
-void duckTubeEngine::update(float dtAsSeconds)
+#include "Update.h"
+#include "tubeStd.h"
+
+Update::Update(float dtAsSec)
 {
-	actor.update(dtAsSeconds);
+	dtAsSec = dt.asSeconds();
+}
+
+
+Update::~Update()
+{
 }

@@ -1,22 +1,32 @@
 #pragma once
 #include "base.h"
 #include <SFML/Window.hpp>
+#include "tubeStd.h"
 
-class Window : public base<Window>
+class Engine : public base<Engine>
 {
 private:
 	sf::Window* window;
+	sf::Sprite Background;
+	sf::Texture BackgroundTex;
+	sf::Image icon;
+	sf::Clock clock;
+	float dtAsSeconds;
+	sf::Vector2f resolution;
 
 private:
 	friend base;
-	Window();
-
-	void InitializeWindow(int screenWidth = 800, int screenHeight = 600, bool isFullScreen = false);
 
 	void Shutdown();
 
 public:
-	sf::Window* GetWindow() const;
+	Engine();
 
+	sf::Window* GetWindow() const;
+	void InitializeWindow();
 	void NotifyCloseRequest();
+	void SlpashScreen();
+	void mainWindow();
+	sf::RenderWindow Window;
+	sf::Music music;
 };
