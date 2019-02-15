@@ -6,6 +6,11 @@ Component::Component()
 {
 }
 
+void Component::Update() {
+
+
+
+}
 
 Component::~Component()
 {
