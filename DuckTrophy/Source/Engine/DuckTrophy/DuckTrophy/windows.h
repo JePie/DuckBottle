@@ -27,7 +27,5 @@ public:
 	void NotifyCloseRequest();
 	void SlpashScreen();
 	void mainWindow();
-	void draw();
-	void update(float dtAsSec);
-	
+	sf::RenderWindow Window;
 };

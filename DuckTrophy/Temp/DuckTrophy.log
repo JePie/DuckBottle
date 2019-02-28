@@ -1,35 +1,49 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(376,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(376,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Input.cpp
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(56): warning C4474: 'swprintf_s' : too many arguments passed for format string
+  c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(56): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(61): warning C4474: 'swprintf_s' : too many arguments passed for format string
+  c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(61): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(66): warning C4474: 'swprintf_s' : too many arguments passed for format string
+  c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(66): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(71): warning C4474: 'swprintf_s' : too many arguments passed for format string
+  c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(71): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(76): warning C4474: 'swprintf_s' : too many arguments passed for format string
+  c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(76): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(81): warning C4474: 'swprintf_s' : too many arguments passed for format string
+  c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\input.cpp(81): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
   windows.cpp
-c:\users\localadmin\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(42): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(38): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\localadmin\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(43): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(39): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\localadmin\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(45): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(41): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
           with
           [
               T=float
           ]
-c:\users\localadmin\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(67): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(72): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\localadmin\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(68): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(73): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\localadmin\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(71): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(74): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
           with
           [
               T=float
           ]
-c:\users\localadmin\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  DuckTrophy.vcxproj -> C:\Users\localadmin\Documents\GitHub\DuckBottle\DuckTrophy\Source\Engine\DuckTrophy\DuckTrophy\..\..\..\..\Game\Debug\Win32\DuckTrophy.exe
+c:\users\daimenion\desktop\gbc\semester6\engine\duck\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  DuckTrophy.vcxproj -> C:\Users\Daimenion\Desktop\GBC\Semester6\engine\duck\DuckBottle\DuckTrophy\Source\Engine\DuckTrophy\DuckTrophy\..\..\..\..\Game\Debug\Win32\DuckTrophy.exe
