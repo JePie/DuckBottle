@@ -89,6 +89,16 @@ void Engine::mainWindow() {
 		actor.setPosition(x, 50);
 		//actor.draw();
 		Window.draw(actor.actor);
+<<<<<<< HEAD
+=======
+
+		music.loadFromFile("ChillingMusic.wav");
+		sound.setBuffer(music);
+		sound.setVolume(50.f);
+		sound.setLoop(true);
+		sound.play();
+
+>>>>>>> f2f7d64b88339ecb09802995787d309b60920598
 		icon.loadFromFile("duck.png");
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 		Update::Update(dtAsSeconds);
