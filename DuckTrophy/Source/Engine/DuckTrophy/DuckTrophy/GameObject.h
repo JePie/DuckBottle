@@ -10,7 +10,7 @@ public:
 
 	void SetTransform(const sf::Transform &matrix) { transform = matrix; };
 
-	void setParent(GameObject& p); //{ parent = s; };
+	void setParent(GameObject& p) { parent = &p; };
 	void AddChild(GameObject* s);
 
 	virtual void Update(float msec);
