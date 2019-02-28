@@ -1,6 +1,7 @@
+#include "pch.h"
 #include "Audio.h"
 #include <iostream>
-#include "pch.h"
+
 
 sf::SoundBuffer Audio::buffer;
 sf::Music Audio::music;

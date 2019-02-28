@@ -74,7 +74,7 @@ void Engine::mainWindow() {
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Main",
 		sf::Style::Default);
-	
+	WPARAM wParam = NULL;
 	while (Window.isOpen())
 	{
 		sf::Event event;
@@ -97,7 +97,7 @@ void Engine::mainWindow() {
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 		Update::Update(dtAsSeconds);
 		Input input;
-//		input.ProcessInput(wParam);
+		input.ProcessInput(wParam);
 		x += 10;
 		if (x > resolution.x) {
 			x = 0;
