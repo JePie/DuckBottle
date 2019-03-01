@@ -17,7 +17,7 @@ void Engine::InitializeWindow()
 {
 	resolution.x = sf::VideoMode::getDesktopMode().width;
 	resolution.y = sf::VideoMode::getDesktopMode().height;
-
+	//Font Invoked here
 	duck.font.loadFromFile("blackjack.otf");
 	duck.welcomeText.setFont(duck.font);
 	duck.welcomeText.setFillColor(sf::Color::White);
@@ -80,7 +80,7 @@ void Engine::mainWindow()
 	//Music Invoked Here
 	Audio::PlayMusic("ChillingMusic.wav");
 
-	//Font Invoked here
+	
 	duck.welcomeText.setString("Welcome");
 
 	Window.create(sf::VideoMode(resolution.x, resolution.y),"Main",sf::Style::Default);
