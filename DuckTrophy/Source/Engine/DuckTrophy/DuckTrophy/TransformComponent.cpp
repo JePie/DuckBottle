@@ -12,12 +12,12 @@ void TransformComponent::Update()
 	std::cout << "Pos (x: " << position.x << ", y: " << position.y << ")" << std::endl;
 }
 
-void TransformComponent::move(float x, float y) {
+void TransformComponent::moveObject(float x, float y) {
 	transform.move(x, y);
 }
-void TransformComponent::rotation(float x) {
+void TransformComponent::rotateObject(float x) {
 	transform.rotate(x);
 }
-void TransformComponent::scale(float x, float y) {
+void TransformComponent::scaleObject(float x, float y) {
 	transform.scale(x, y);
 }
