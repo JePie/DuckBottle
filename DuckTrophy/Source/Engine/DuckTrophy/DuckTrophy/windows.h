@@ -29,4 +29,5 @@ public:
 	void mainWindow();
 	sf::RenderWindow Window;
 	sf::Music music;
+
 };
