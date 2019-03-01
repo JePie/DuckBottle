@@ -54,7 +54,6 @@ void Engine::SlpashScreen() {
 		sec++;
 		if (sec == 3000.0f)
 		{
-
 			mainWindow();
 		}
 		GameObject actor;
@@ -76,8 +75,13 @@ void Engine::mainWindow()
 		"Main",
 		sf::Style::Default);
 	WPARAM wParam = NULL;
+	sf::Clock timer;
+
 	while (Window.isOpen())
 	{
+		sf::Time dt = timer.restart();
+		dtAsSeconds = dt.asSeconds();
+
 		sf::Event event;
 		while (Window.pollEvent(event))
 		{
