@@ -15,6 +15,8 @@ duckTubeEngine duck;
 
 void Engine::InitializeWindow()
 {
+	resolution.x = sf::VideoMode::getDesktopMode().width;
+	resolution.y = sf::VideoMode::getDesktopMode().height;
 	SlpashScreen();
 	sf::Texture s = sf::Texture();
 
@@ -35,8 +37,6 @@ void Engine::NotifyCloseRequest()
 }
 
 void Engine::SlpashScreen() {
-	resolution.x = sf::VideoMode::getDesktopMode().width;
-	resolution.y = sf::VideoMode::getDesktopMode().height;
 
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Slpash Screen",
@@ -70,8 +70,6 @@ void Engine::SlpashScreen() {
 }
 void Engine::mainWindow() 
 {
-	resolution.x = sf::VideoMode::getDesktopMode().width;
-	resolution.y = sf::VideoMode::getDesktopMode().height;
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Main",
 		sf::Style::Default);
