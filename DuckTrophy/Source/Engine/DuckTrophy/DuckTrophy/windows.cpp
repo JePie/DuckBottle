@@ -83,12 +83,20 @@ void Engine::mainWindow() {
 				Window.close();
 		}
 		GameObject actor;
+		GameObject child;
+
 		Window.clear(sf::Color::Red);
 		actor.setImage("duck.png");
 		actor.setPosition(x, 50);
-		actor.setParent(actor);
 		//actor.draw();
 		Window.draw(actor.actor);
+
+		
+		child.setImage("duck.png");
+		child.setPosition(0, 150);
+		child.setParent(actor);
+		//actor.draw();
+		Window.draw(child.actor);
 
 		music.loadFromFile("ChillingMusic.wav");
 		sound.setBuffer(music);

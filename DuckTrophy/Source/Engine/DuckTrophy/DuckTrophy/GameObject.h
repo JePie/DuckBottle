@@ -22,6 +22,7 @@ public:
 	//actor
 	void setImage(std::string image);
 	void setPosition(float x, float y);
+	void getPosition();
 	void draw();
 	void Scale(float x, float y);
 	sf::Sprite actor;

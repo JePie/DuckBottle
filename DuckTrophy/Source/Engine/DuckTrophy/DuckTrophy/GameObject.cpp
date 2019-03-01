@@ -33,6 +33,9 @@ void GameObject::setImage(std::string image) {
 void GameObject::setPosition(float x, float y) {
 	actor.setPosition(x, y);
 }
+//void GameObject::getPosition() {
+//	actor.getPosition;
+//}
 
 void GameObject::draw() {
 	Engine engine;
