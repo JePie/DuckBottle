@@ -15,6 +15,8 @@ duckTubeEngine duck;
 
 void Engine::InitializeWindow()
 {
+	resolution.x = sf::VideoMode::getDesktopMode().width;
+	resolution.y = sf::VideoMode::getDesktopMode().height;
 	SlpashScreen();
 	sf::Texture s = sf::Texture();
 
@@ -23,6 +25,7 @@ void Engine::InitializeWindow()
 
 sf::Window* Engine::GetWindow() const
 {
+
 	return window;
 }
 
@@ -34,8 +37,6 @@ void Engine::NotifyCloseRequest()
 }
 
 void Engine::SlpashScreen() {
-	resolution.x = sf::VideoMode::getDesktopMode().width;
-	resolution.y = sf::VideoMode::getDesktopMode().height;
 
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Slpash Screen",
@@ -69,11 +70,6 @@ void Engine::SlpashScreen() {
 }
 void Engine::mainWindow() 
 {
-	music.openFromFile("ChillingMusic.wav");
-	music.play();
-
-	resolution.x = sf::VideoMode::getDesktopMode().width;
-	resolution.y = sf::VideoMode::getDesktopMode().height;
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Main",
 		sf::Style::Default);
@@ -92,6 +88,9 @@ void Engine::mainWindow()
 		actor.setPosition(x, 50);
 		//actor.draw();
 		Window.draw(actor.actor);
+
+		music.openFromFile("ChillingMusic.wav");
+		music.play();
 
 		icon.loadFromFile("duck.png");
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
