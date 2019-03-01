@@ -16,10 +16,10 @@ c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrop
           [
               T=float
           ]
-c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(86): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(83): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
           with
           [
               T=float
           ]
-c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(99): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(103): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   DuckTrophy.vcxproj -> C:\Users\Daimenion\Documents\GitHub\DuckBottle\DuckTrophy\Source\Engine\DuckTrophy\DuckTrophy\..\..\..\..\Game\Debug\Win32\DuckTrophy.exe
