@@ -17,6 +17,14 @@ void Engine::InitializeWindow()
 {
 	resolution.x = sf::VideoMode::getDesktopMode().width;
 	resolution.y = sf::VideoMode::getDesktopMode().height;
+
+	//Font Invoked here
+	duck.font.loadFromFile("blackjack.otf");
+	duck.welcomeText.setFont(duck.font);
+	duck.welcomeText.setFillColor(sf::Color::White);
+	duck.welcomeText.setCharacterSize(50);
+	duck.welcomeText.setPosition(20, 0);
+
 	SlpashScreen();
 	sf::Texture s = sf::Texture();
 
@@ -70,14 +78,8 @@ void Engine::mainWindow()
 	//Music Invoked Here
 	Audio::PlayMusic("ChillingMusic.wav");
 
-	//Font Invoked here
-	duck.font.loadFromFile("blackjack.otf");
-	duck.welcomeText.setFont(duck.font);
-	duck.welcomeText.setString("Welcome To the Game");
-	duck.welcomeText.setFillColor(sf::Color::White);
-	duck.welcomeText.setCharacterSize(50);
-	duck.welcomeText.setPosition(20, 0);
-
+	//Setting up the welcome text
+	duck.welcomeText.setString("Welcome");
 
 
 	//Generating the Window
