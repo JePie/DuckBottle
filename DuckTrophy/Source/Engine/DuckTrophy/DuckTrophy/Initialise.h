@@ -15,7 +15,7 @@ public:
 	~duckTubeEngine();
 	
 	bool Initialize();
-
+	void input();
 	void  Run();
 	bool  HasFreeDiskSpace();
 	bool ReadCPUSpeed();

@@ -5,15 +5,15 @@
 class TransformComponent : Component
 {
 public:
-	TransformComponent() : m_Position(), m_Rotation(), m_Scale(1.0f, 1.0f) {}
+	TransformComponent() : position(), rotation(), scale(1.0f, 1.0f) {}
 
 	void Start();
 	void Update();
 
 	sf::Transform transformMatrix;
-	Vector2 m_Position;
-	Vector2 m_Rotation;
-	Vector2 m_Scale;
+	Vector2 position;
+	Vector2 rotation;
+	Vector2 scale;
 
 	//Check
 	sf::Transformable transform;

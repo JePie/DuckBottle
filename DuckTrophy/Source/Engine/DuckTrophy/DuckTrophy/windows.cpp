@@ -70,6 +70,8 @@ void Engine::SlpashScreen() {
 }
 void Engine::mainWindow() 
 {
+	music.openFromFile("ChillingMusic.wav");
+	music.play();
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Main",
 		sf::Style::Default);
@@ -89,8 +91,7 @@ void Engine::mainWindow()
 		//actor.draw();
 		Window.draw(actor.actor);
 
-		music.openFromFile("ChillingMusic.wav");
-		music.play();
+
 
 		icon.loadFromFile("duck.png");
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
