@@ -9,7 +9,7 @@ void TransformComponent::Start()
 
 void TransformComponent::Update()
 {
-	std::cout << "Pos (x: " << m_Position.x << ", y: " << m_Position.y << ")" << std::endl;
+	std::cout << "Pos (x: " << position.x << ", y: " << position.y << ")" << std::endl;
 }
 
 void TransformComponent::move(float x, float y) {

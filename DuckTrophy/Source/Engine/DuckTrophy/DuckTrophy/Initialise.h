@@ -15,16 +15,19 @@ public:
 	~duckTubeEngine();
 	
 	bool Initialize();
-
+	void input();
 	void  Run();
 	bool  HasFreeDiskSpace();
 	bool ReadCPUSpeed();
 	bool CheckMemory();
+	sf::Text welcomeText;
+	sf::Font font;
 
 private:
 	friend base<duckTubeEngine>;
 	duckTubeEngine(const duckTubeEngine &_copy) = delete; 
 
 	bool  SystemRequirements();
+
 	
 };
