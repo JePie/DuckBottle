@@ -24,7 +24,6 @@ void Engine::InitializeWindow()
 
 sf::Window* Engine::GetWindow() const
 {
-
 	return window;
 }
 
@@ -37,9 +36,7 @@ void Engine::NotifyCloseRequest()
 
 void Engine::SlpashScreen() {
 
-	Window.create(sf::VideoMode(resolution.x, resolution.y),
-		"Slpash Screen",
-		sf::Style::Default);
+	Window.create(sf::VideoMode(resolution.x, resolution.y),"Slpash Screen",sf::Style::Default);
 	while (Window.isOpen())
 	{
 		sf::Event event;
@@ -74,15 +71,23 @@ void Engine::mainWindow()
 	Audio::PlayMusic("ChillingMusic.wav");
 
 	//Font Invoked here
-	duck.font.loadFromFile("blackjack.ttf");
+	duck.font.loadFromFile("blackjack.otf");
 	duck.welcomeText.setFont(duck.font);
 	duck.welcomeText.setString("Welcome To the Game");
 	duck.welcomeText.setFillColor(sf::Color::White);
-	duck.welcomeText.setCharacterSize(80);
+	duck.welcomeText.setCharacterSize(50);
 	duck.welcomeText.setPosition(20, 0);
 
+
+
+	//Generating the Window
 	Window.create(sf::VideoMode(resolution.x, resolution.y),"Main",sf::Style::Default);
 	WPARAM wParam = NULL;
+
+	//Icon to Window
+	icon.loadFromFile("duck.png");
+	Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
 	while (Window.isOpen())
 	{
 		sf::Event event;
@@ -97,11 +102,9 @@ void Engine::mainWindow()
 		actor.setPosition(x, 50);
 		//actor.draw();
 		Window.draw(actor.actor);
+		Window.draw(duck.welcomeText);
 
 
-
-		icon.loadFromFile("duck.png");
-		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 		Update::Update(dtAsSeconds);
 		Input input;
 		input.ProcessInput(wParam);
