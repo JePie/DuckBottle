@@ -5,8 +5,8 @@
 class TransformComponent : Component
 {
 public:
+	//Check
 	TransformComponent() : position(), rotation(), scale(1.0f, 1.0f) {}
-
 	void Start();
 	void Update();
 
@@ -15,10 +15,11 @@ public:
 	Vector2 rotation;
 	Vector2 scale;
 
-	//Check
 	sf::Transformable transform;
+
 	void moveObject(float x, float y);
 	void rotateObject(float x);
 	void scaleObject(float x, float y);
+
 };
 
