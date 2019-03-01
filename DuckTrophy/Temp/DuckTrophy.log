@@ -1,9 +1,40 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(376,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Actor.cpp
+  Audio.cpp
+  Component.cpp
+  GraphicsSystem.cpp
+  Initialise.cpp
+f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\initialise.cpp(144): warning C4244: 'initializing': conversion from 'ULONGLONG' to 'int', possible loss of data
+  Input.cpp
+  Main.cpp
+  TransformComponent.cpp
+f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\transformcomponent.h(21): error C2365: 'TransformComponent::rotation': redefinition; previous definition was 'data member'
+  f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\transformcomponent.h(15): note: see declaration of 'TransformComponent::rotation'
+f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\transformcomponent.h(22): error C2365: 'TransformComponent::scale': redefinition; previous definition was 'data member'
+  f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\transformcomponent.h(16): note: see declaration of 'TransformComponent::scale'
+f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\transformcomponent.cpp(18): error C2063: 'TransformComponent::rotation': not a function
+f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\transformcomponent.cpp(21): error C2063: 'TransformComponent::scale': not a function
   windows.cpp
-c:\users\extri\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(18): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-c:\users\extri\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(19): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-c:\users\extri\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(41): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\extri\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(74): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-c:\users\extri\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(94): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  DuckTrophy.vcxproj -> C:\Users\extri\Documents\GitHub\DuckBottle\DuckTrophy\Source\Engine\DuckTrophy\DuckTrophy\..\..\..\..\Game\Debug\Win32\DuckTrophy.exe
+f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(18): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(19): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(40): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(84): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+f:\gbc\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(97): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
