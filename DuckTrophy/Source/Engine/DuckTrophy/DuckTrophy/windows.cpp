@@ -68,13 +68,14 @@ void Engine::SlpashScreen() {
 
 
 }
-void Engine::mainWindow() {
+void Engine::mainWindow() 
+{
 	resolution.x = sf::VideoMode::getDesktopMode().width;
 	resolution.y = sf::VideoMode::getDesktopMode().height;
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Main",
 		sf::Style::Default);
-	
+	WPARAM wParam = NULL;
 	while (Window.isOpen())
 	{
 		sf::Event event;
@@ -89,14 +90,15 @@ void Engine::mainWindow() {
 		actor.setPosition(x, 50);
 		//actor.draw();
 		Window.draw(actor.actor);
-		music.openFromFile("jolly_good.mp3");
-		music.setVolume(30.f);
-		music.setLoop(true);
+
+		music.openFromFile("ChillingMusic.wav");
 		music.play();
+
 		icon.loadFromFile("duck.png");
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 		Update::Update(dtAsSeconds);
 		Input input;
+		input.ProcessInput(wParam);
 		x += 10;
 		if (x > resolution.x) {
 			x = 0;

@@ -16,6 +16,7 @@
 #include "Component.h"
 #include "Update.h"
 #include "Actor.h"
+#include "Audio.h"
 // C RunTime Header Files
 #include <stdlib.h>
 #include <winnt.h>
