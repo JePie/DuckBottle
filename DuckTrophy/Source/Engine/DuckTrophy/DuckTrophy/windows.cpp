@@ -16,13 +16,17 @@ duckTubeEngine duck;
 void Engine::InitializeWindow()
 {
 	resolution.x = sf::VideoMode::getDesktopMode().width;
-	resolution.y = sf::VideoMode::getDesktopMode().height;
+	resolution.y = sf::VideoMode::getDesktopMode().height;
+	//Font Invoked here
+	duck.font.loadFromFile("blackjack.otf");
+	duck.Text.setFont(duck.font);
+	duck.Text.setFillColor(sf::Color::White);
+	duck.Text.setCharacterSize(30);
+	duck.Text.setPosition(20, 0);
 	SlpashScreen();
-	sf::Texture s = sf::Texture();
-
-
-}
-
+	sf::Texture s = sf::Texture();
+}
+
 sf::Window* Engine::GetWindow() const
 {
 
@@ -52,7 +56,7 @@ void Engine::SlpashScreen() {
 
 		Update::Update(dtAsSeconds);
 		sec++;
-		if (sec == 3000.0f)
+		if (sec == 250.0f)//3000.0f is the original
 		{
 			mainWindow();
 		}
@@ -64,24 +68,22 @@ void Engine::SlpashScreen() {
 		Window.draw(actor.actor);
 		Window.display();
 	}
-
-
 }
 void Engine::mainWindow() 
 {
-	music.openFromFile("ChillingMusic.wav");
-	music.play();
+	Audio::PlayMusic("ChillingMusic.wav");
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Main",
 		sf::Style::Default);
 	WPARAM wParam = NULL;
+
 	sf::Clock timer;
+
+	sf::Time dt = timer.restart();
+	dtAsSeconds = dt.asSeconds(); 
 
 	while (Window.isOpen())
 	{
-		sf::Time dt = timer.restart();
-		dtAsSeconds = dt.asSeconds();
-
 		sf::Event event;
 		while (Window.pollEvent(event))
 		{
@@ -93,9 +95,7 @@ void Engine::mainWindow()
 		actor.setImage("duck.png");
 		actor.setPosition(x, 50);
 		//actor.draw();
-		Window.draw(actor.actor);
-
-
+		duck.Text.setString("timer: " + std::to_string(timer.getElapsedTime().asSeconds()));
 
 		icon.loadFromFile("duck.png");
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
@@ -106,6 +106,10 @@ void Engine::mainWindow()
 		if (x > resolution.x) {
 			x = 0;
 		}
+
+		Window.draw(duck.Text);
+		Window.draw(actor.actor);
+
 
 		Window.display();
 	}

@@ -20,7 +20,8 @@ public:
 	bool  HasFreeDiskSpace();
 	bool ReadCPUSpeed();
 	bool CheckMemory();
-
+	sf::Text Text;
+	sf::Font font;
 private:
 	friend base<duckTubeEngine>;
 	duckTubeEngine(const duckTubeEngine &_copy) = delete; 
