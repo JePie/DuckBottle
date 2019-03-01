@@ -17,6 +17,13 @@ void Engine::InitializeWindow()
 {
 	resolution.x = sf::VideoMode::getDesktopMode().width;
 	resolution.y = sf::VideoMode::getDesktopMode().height;
+
+	duck.font.loadFromFile("blackjack.otf");
+	duck.welcomeText.setFont(duck.font);
+	duck.welcomeText.setFillColor(sf::Color::White);
+	duck.welcomeText.setCharacterSize(30);
+	duck.welcomeText.setPosition(20, 0);
+
 	SlpashScreen();
 	sf::Texture s = sf::Texture();
 
@@ -74,12 +81,7 @@ void Engine::mainWindow()
 	Audio::PlayMusic("ChillingMusic.wav");
 
 	//Font Invoked here
-	duck.font.loadFromFile("blackjack.ttf");
-	duck.welcomeText.setFont(duck.font);
-	duck.welcomeText.setString("Welcome To the Game");
-	duck.welcomeText.setFillColor(sf::Color::White);
-	duck.welcomeText.setCharacterSize(80);
-	duck.welcomeText.setPosition(20, 0);
+	duck.welcomeText.setString("Welcome");
 
 	Window.create(sf::VideoMode(resolution.x, resolution.y),"Main",sf::Style::Default);
 	WPARAM wParam = NULL;
@@ -96,8 +98,6 @@ void Engine::mainWindow()
 		actor.setImage("duck.png");
 		actor.setPosition(x, 50);
 		//actor.draw();
-		Window.draw(actor.actor);
-
 
 
 		icon.loadFromFile("duck.png");
@@ -109,7 +109,9 @@ void Engine::mainWindow()
 		if (x > resolution.x) {
 			x = 0;
 		}
-
+		//draw stuff
+		Window.draw(actor.actor);
+		Window.draw(duck.welcomeText);
 		Window.display();
 	}
 }

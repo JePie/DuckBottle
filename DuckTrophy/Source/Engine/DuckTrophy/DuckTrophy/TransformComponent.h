@@ -17,8 +17,8 @@ public:
 
 	//Check
 	sf::Transformable transform;
-	void move(float x, float y);
-	void rotation(float x);
-	void scale(float x, float y);
+	void moveObject(float x, float y);
+	void rotateObject(float x);
+	void scaleObject(float x, float y);
 };
 
