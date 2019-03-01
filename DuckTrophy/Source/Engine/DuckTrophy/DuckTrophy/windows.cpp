@@ -20,7 +20,6 @@ void Engine::InitializeWindow()
 	SlpashScreen();
 	sf::Texture s = sf::Texture();
 
-
 }
 
 sf::Window* Engine::GetWindow() const
@@ -70,11 +69,19 @@ void Engine::SlpashScreen() {
 }
 void Engine::mainWindow() 
 {
-	music.openFromFile("ChillingMusic.wav");
-	music.play();
-	Window.create(sf::VideoMode(resolution.x, resolution.y),
-		"Main",
-		sf::Style::Default);
+	
+	//Music Invoked Here
+	Audio::PlayMusic("ChillingMusic.wav");
+
+	//Font Invoked here
+	duck.font.loadFromFile("blackjack.ttf");
+	duck.welcomeText.setFont(duck.font);
+	duck.welcomeText.setString("Welcome To the Game");
+	duck.welcomeText.setFillColor(sf::Color::White);
+	duck.welcomeText.setCharacterSize(80);
+	duck.welcomeText.setPosition(20, 0);
+
+	Window.create(sf::VideoMode(resolution.x, resolution.y),"Main",sf::Style::Default);
 	WPARAM wParam = NULL;
 	while (Window.isOpen())
 	{
