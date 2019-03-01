@@ -60,7 +60,6 @@ void Engine::SlpashScreen() {
 		sec++;
 		if (sec == 3000.0f)
 		{
-
 			mainWindow();
 		}
 		GameObject actor;
@@ -82,14 +81,22 @@ void Engine::mainWindow()
 
 	Window.create(sf::VideoMode(resolution.x, resolution.y),"Main",sf::Style::Default);
 	WPARAM wParam = NULL;
+<<<<<<< HEAD
 	
 	sf::Clock timer;
 
 	sf::Time dt = timer.restart();
 	dtAsSeconds = dt.asSeconds();
 	
+=======
+	sf::Clock timer;
+
+>>>>>>> 5c046e821d5c2f0ff297e2705788e4586f0d099f
 	while (Window.isOpen())
 	{
+		sf::Time dt = timer.restart();
+		dtAsSeconds = dt.asSeconds();
+
 		sf::Event event;
 		while (Window.pollEvent(event))
 		{
