@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Initialise.h"
 #include "Input.h"
+#include"TransformComponent.h"
 
 Engine::Engine()
 {
@@ -62,12 +63,12 @@ void Engine::SlpashScreen() {
 		{
 			mainWindow();
 		}
-		GameObject actor;
+		Actor actor;
 		actor.setImage("Duck_Trophy.png");
 		actor.setPosition(0, 0);
 		actor.Scale(5, 3.3f);
 		//actor.draw();
-		Window.draw(actor.actor);
+		Window.draw(actor.sprite);
 		Window.display();
 	}
 
@@ -98,7 +99,8 @@ void Engine::mainWindow()
 		}
 
 
-		GameObject actor;
+		Actor actor;
+		TransformComponent actorTransform;
 		Window.clear(sf::Color::Red);
 		actor.setImage("duck.png");
 		actor.setPosition(x, 50);
@@ -108,6 +110,14 @@ void Engine::mainWindow()
 		icon.loadFromFile("duck.png");
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
+		Actor player;
+		player.setImage("duck.png");
+		player.setPosition(500, 500);
+		player.moveObject(500, 0);
+		player.rotateObject(45);
+
+
+
 		Update::Update(dtAsSeconds);
 		Input input;
 		input.ProcessInput(wParam);
@@ -116,7 +126,8 @@ void Engine::mainWindow()
 			x = 0;
 		}
 		//draw stuff
-		Window.draw(actor.actor);
+		Window.draw(player.sprite);
+		Window.draw(actor.sprite);
 		Window.draw(duck.Text);
 		Window.display();
 	}

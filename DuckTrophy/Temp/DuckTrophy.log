@@ -1,25 +1,25 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(376,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
   windows.cpp
-c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(18): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
 c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(19): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(47): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(20): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(82): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(48): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
           with
           [
               T=float
           ]
-c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(104): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(83): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(106): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   DuckTrophy.vcxproj -> C:\Users\Daimenion\Documents\GitHub\DuckBottle\DuckTrophy\Source\Engine\DuckTrophy\DuckTrophy\..\..\..\..\Game\Debug\Win32\DuckTrophy.exe
