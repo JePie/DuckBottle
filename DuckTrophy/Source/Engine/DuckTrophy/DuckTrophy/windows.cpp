@@ -17,6 +17,13 @@ void Engine::InitializeWindow()
 {
 	resolution.x = sf::VideoMode::getDesktopMode().width;
 	resolution.y = sf::VideoMode::getDesktopMode().height;
+	//Font Invoked here
+	duck.font.loadFromFile("blackjack.otf");
+	duck.Text.setFont(duck.font);
+	duck.Text.setFillColor(sf::Color::White);
+	duck.Text.setCharacterSize(30);
+	duck.Text.setPosition(20, 0);
+
 	SlpashScreen();
 	sf::Texture s = sf::Texture();
 
@@ -58,7 +65,7 @@ void Engine::SlpashScreen() {
 		GameObject actor;
 		actor.setImage("Duck_Trophy.png");
 		actor.setPosition(0, 0);
-		actor.Scale(5, 3.5f);
+		actor.Scale(5, 3.3f);
 		//actor.draw();
 		Window.draw(actor.actor);
 		Window.display();
@@ -72,18 +79,19 @@ void Engine::mainWindow()
 	//Music Invoked Here
 	Audio::PlayMusic("ChillingMusic.wav");
 
-	//Font Invoked here
-	duck.font.loadFromFile("blackjack.ttf");
-	duck.welcomeText.setFont(duck.font);
-	duck.welcomeText.setString("Welcome To the Game");
-	duck.welcomeText.setFillColor(sf::Color::White);
-	duck.welcomeText.setCharacterSize(80);
-	duck.welcomeText.setPosition(20, 0);
-
 	Window.create(sf::VideoMode(resolution.x, resolution.y),"Main",sf::Style::Default);
 	WPARAM wParam = NULL;
+<<<<<<< HEAD
+	
 	sf::Clock timer;
 
+	sf::Time dt = timer.restart();
+	dtAsSeconds = dt.asSeconds();
+	
+=======
+	sf::Clock timer;
+
+>>>>>>> 5c046e821d5c2f0ff297e2705788e4586f0d099f
 	while (Window.isOpen())
 	{
 		sf::Time dt = timer.restart();
@@ -95,17 +103,18 @@ void Engine::mainWindow()
 			if (event.type == sf::Event::Closed)
 				Window.close();
 		}
+
+
 		GameObject actor;
 		Window.clear(sf::Color::Red);
 		actor.setImage("duck.png");
 		actor.setPosition(x, 50);
 		//actor.draw();
-		Window.draw(actor.actor);
-
-
+		duck.Text.setString("timer: "+ std::to_string(timer.getElapsedTime().asSeconds()));
 
 		icon.loadFromFile("duck.png");
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
 		Update::Update(dtAsSeconds);
 		Input input;
 		input.ProcessInput(wParam);
@@ -113,7 +122,9 @@ void Engine::mainWindow()
 		if (x > resolution.x) {
 			x = 0;
 		}
-
+		//draw stuff
+		Window.draw(actor.actor);
+		Window.draw(duck.Text);
 		Window.display();
 	}
 }
