@@ -23,7 +23,7 @@
     <ProjectGuid>{99EE242F-EA67-4C5C-9621-7DB00D553BC0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>DuckTrophy</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -184,6 +184,7 @@
     <ClInclude Include="Initialise.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="tubeStd.h" />
     <ClInclude Include="Update.h" />
@@ -205,6 +206,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="Update.cpp" />
     <ClCompile Include="windows.cpp" />

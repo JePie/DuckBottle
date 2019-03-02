@@ -19,13 +19,15 @@ public:
 	void setname(std::string n) { name = n; };
 	void InitializeGameObject();
 	sf::Texture objectTexture;
-	//actor
-	void setImage(std::string image);
-	void setPosition(float x, float y);
-	void draw();
-	void Scale(float x, float y);
-	sf::Sprite actor;
-	sf::Texture actorTexture;
+
+	////actor
+	//void setImage(std::string image);
+	//void setPosition(float x, float y);
+	//void draw();
+	//void Scale(float x, float y);
+	//sf::Sprite actor;
+	//sf::Texture actorTexture;
+
 protected:
 	GameObject* parent;
 	sf::Transform worldTransform;
