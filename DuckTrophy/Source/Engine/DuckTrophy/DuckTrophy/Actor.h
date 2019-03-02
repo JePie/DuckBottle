@@ -1,9 +1,11 @@
 #pragma once
 #include "tubeStd.h"
 #include "windows.h"
+#include "GameObject.h"
 #include<SFML/Graphics.hpp>
 #include <SFML/Graphics/Transformable.hpp>
-class Actor:sf::Transformable
+
+class Actor:sf::Transformable//,public GameObject
 {
 public:
 

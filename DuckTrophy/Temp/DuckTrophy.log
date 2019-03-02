@@ -22,4 +22,5 @@ c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrop
               T=float
           ]
 c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(106): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(117): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   DuckTrophy.vcxproj -> C:\Users\Daimenion\Documents\GitHub\DuckBottle\DuckTrophy\Source\Engine\DuckTrophy\DuckTrophy\..\..\..\..\Game\Debug\Win32\DuckTrophy.exe

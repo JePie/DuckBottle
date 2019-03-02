@@ -114,8 +114,8 @@ void Engine::mainWindow()
 		player.setImage("duck.png");
 		player.setPosition(500, 500);
 		player.moveObject(500, 0);
-		player.rotateObject(45);
-
+		player.rotateObject(x);
+		//player.setParent(actor);
 
 
 		Update::Update(dtAsSeconds);

@@ -2,6 +2,7 @@
 #include "GameObject.h"
 
 
+
 GameObject::~GameObject()
 {
 	for (unsigned int i = 0; i < children.size(); i++){
