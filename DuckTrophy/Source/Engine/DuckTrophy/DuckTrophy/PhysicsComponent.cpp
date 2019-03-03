@@ -71,6 +71,8 @@ void PhysicsComponent::ResolveCollision(Actor A, Actor B)
 		sf::Vector2f impulse = j * collisionNormal;
 		A.velocity -= 1 / A.mass * impulse;
 		B.velocity += 1 / B.mass * impulse;
+
+		
 }
 
 void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
@@ -81,6 +83,9 @@ void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
 
 	sf::Vector2f x1 = A.getPosition();
 	sf::Vector2f x2 = B.getPosition();
+
+	sf::FloatRect boundingBoxA = A.sprite.getGlobalBounds();
+	sf::FloatRect boundingBoxB = B.sprite.getGlobalBounds();
 
 	if (x1 != x2)
 	{
@@ -93,7 +98,7 @@ void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
 			collide = true;
 		}
 	}
-	else if (A.sprite.getGlobalBounds().intersects(B.sprite.getGlobalBounds()) || B.sprite.getGlobalBounds().intersects(A.sprite.getGlobalBounds())) {
+	else if (boundingBoxA.intersects(boundingBoxB)) {
 		A.velocity = sf::Vector2f(0, 0);
 		B.velocity = sf::Vector2f(0, 0);
 		ResolveCollision(A, B);
@@ -103,4 +108,31 @@ void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
 		collide = false;
 	}
 		
+}
+void PhysicsComponent::fall(Actor A, float time) {
+	if (inAir) {
+		//A.velocity.y += gravity.y*time*100;
+		A.moveObject({ A.velocity.x,A.velocity.y*time*10});
+	}
+	if (A.sprite.getPosition().y > 200) {
+		A.sprite.setPosition(0, 200);
+		inAir = false;
+	}
+	else 
+	{
+		inAir = true;
+	}
+
+	//if (physicsEngine.inAir == true) {
+	//	//player.velocity.y += physicsEngine.gravity.y*timer.getElapsedTime().asSeconds()*10;
+	//	player.moveObject({ player.velocity.x, player.velocity.y*timer.getElapsedTime().asSeconds() * 100 });
+	//}
+	//else if (physicsEngine.inAir &&player.getPosition().y > 150) {
+	//	player.velocity = sf::Vector2f(0, 0);
+	//	player.setPosition({ 1800,player.velocity.y });
+	//	physicsEngine.inAir = false;
+	//}
+	//else {
+	//	physicsEngine.inAir = true;
+	//}
 }

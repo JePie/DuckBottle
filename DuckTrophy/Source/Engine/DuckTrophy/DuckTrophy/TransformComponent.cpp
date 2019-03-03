@@ -12,12 +12,19 @@ void TransformComponent::Update()
 	std::cout << "Pos (x: " << position.x << ", y: " << position.y << ")" << std::endl;
 }
 
-//void TransformComponent::moveObject(float x, float y) {
-//	transform.move(x, y);
+
+//void TransformComponent::moveObject(Actor a, sf::Vector2f m) {
+//	a.move(m);
 //}
-//void TransformComponent::rotateObject(float x) {
-//	transform.rotate(x);
+//
+//void TransformComponent::rotateObject(Actor a, float x) {
+//	a.rotate(x);
 //}
-//void TransformComponent::scaleObject(float x, float y) {
-//	transform.scale(x, y);
+//void TransformComponent::Scale(Actor a, sf::Vector2f m) {
+//	a.setScale(m);
+//}
+//
+//void TransformComponent::UpdateTransform(float dtAsSec)
+//{
+//	dtAsSec = dt.asSeconds();
 //}

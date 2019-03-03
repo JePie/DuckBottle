@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Vector2.h"
+#include "Actor.h"
 
 class TransformComponent : Component
 {
@@ -14,12 +15,13 @@ public:
 	Vector2 position;
 	Vector2 rotation;
 	Vector2 scale;
+	sf::Clock clock;
+	sf::Time dt = clock.restart();
 
-	//sf::Transformable transform;
-
-	//void moveObject(float x, float y);
+	//Actor a;
+	//void moveObject(sf::Vector2f m);
 	//void rotateObject(float x);
-	//void scaleObject(float x, float y);
-
+	//void Scale(sf::Vector2f m);
+	//void UpdateTransform(float dtAsSec);
 };
 

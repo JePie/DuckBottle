@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "Component.h"
 class GameObject
 {
 public:
@@ -20,9 +19,11 @@ public:
 	//void InitializeGameObject();
 	sf::Texture objectTexture;
 
+	sf::Vector2f position;
 	sf::Vector2f velocity = sf::Vector2f(1,1);
 	float bounciness = 1;
 	float mass = 1;
+	
 	////actor
 	//void setImage(std::string image);
 	//void setPosition(float x, float y);
