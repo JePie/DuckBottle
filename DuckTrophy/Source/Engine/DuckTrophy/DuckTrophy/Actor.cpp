@@ -35,3 +35,9 @@ void Actor::scaleObject(float x, float y) {
 void Actor::Scale(float x,float y) {
 	sprite.setScale(x,y);
 }
+void Actor::UpdateTransform(float dtAsSec)
+{
+	dtAsSec = dt.asSeconds();
+	setPosition(velocity.x*dtAsSec, velocity.y*dtAsSec);
+}
+

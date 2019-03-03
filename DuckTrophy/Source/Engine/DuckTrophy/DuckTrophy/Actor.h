@@ -1,11 +1,12 @@
 #pragma once
-#include "tubeStd.h"
-#include "windows.h"
-#include "GameObject.h"
 #include<SFML/Graphics.hpp>
 #include <SFML/Graphics/Transformable.hpp>
+#include<SFML/Graphics/Sprite.hpp>
+#include "GameObject.h"
+#include "windows.h"
 
-class Actor:sf::Transformable//,public GameObject
+
+class Actor :public sf::Transformable , public GameObject
 {
 public:
 
@@ -17,11 +18,17 @@ public:
 
 	sf::Sprite sprite;
 	sf::Texture actorTexture;
+	float centerX = sprite.getGlobalBounds().width/2;
+	float centerY = sprite.getGlobalBounds().height / 2;
 
 	sf::Transformable transform;
+	sf::Clock clock;
+	sf::Time dt = clock.restart();
 	void moveObject(float x, float y);
 	void rotateObject(float x);
 	void scaleObject(float x, float y);
 	void Scale(float x, float y);
+	void UpdateTransform(float dtAsSec);
+
 };
 
