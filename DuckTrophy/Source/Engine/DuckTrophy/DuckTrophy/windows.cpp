@@ -12,7 +12,7 @@ Engine::Engine()
 {
 }
 float sec;
-int x = 0;
+float x = 0;
 duckTubeEngine duck;
 
 void Engine::InitializeWindow()
@@ -66,8 +66,8 @@ void Engine::SlpashScreen() {
 		}
 		Actor actor;
 		actor.setImage("Duck_Trophy.png");
-		actor.setPosition(0, 0);
-		actor.Scale(5, 3.3f);
+		actor.setPosition({ 0, 0 });
+		actor.Scale({ 5, 3.3f });
 		//actor.draw();
 		Window.draw(actor.sprite);
 		Window.display();
@@ -99,49 +99,59 @@ void Engine::mainWindow()
 			if (event.type == sf::Event::Closed)
 				Window.close();
 		}
+		//time
 		dtAsSeconds = dt.asSeconds();
+		duck.Text.setString("timer: " + std::to_string(timer.getElapsedTime().asSeconds()));
+		TransformComponent actorTransform;
 
 		Actor actor;
-		TransformComponent actorTransform;
 		Window.clear(sf::Color::Red);
 		actor.setImage("duck.png");
-		actor.setPosition(x, 50);
+		actor.setPosition({ 0, 50 });
+		actor.moveObject({ x,0 });
 		//actor.draw();
-		duck.Text.setString("timer: "+ std::to_string(timer.getElapsedTime().asSeconds()));
 
-		icon.loadFromFile("duck.png");
-		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 		Actor player;
 		player.setImage("duck.png");
-		player.setPosition(1800, 0);
-		player.moveObject(-x, 0);
-		player.scaleObject(-1,1);
+		player.setPosition({ 1800, 50 });
+		player.moveObject({ -x,0 });
+		player.Scale({ -1,1});
 		player.setParent(actor);
 
+		//physics
 		physicsEngine.setAABB(player);
 		physicsEngine.setAABB(actor);
+		physicsEngine.fall(player, timer.getElapsedTime().asSeconds());
+		physicsEngine.fall(actor, timer.getElapsedTime().asSeconds());
 		physicsEngine.checkCollision(player, actor);
-	
+
+		//icon
+		icon.loadFromFile("duck.png");
+		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 		Update::Update(dtAsSeconds);
 		Input input;
 		input.ProcessInput(wParam);
 
-		if (physicsEngine.collide) {
-			duck.Text.setString("collided");
-		}
-		else {
-			duck.Text.setString("nope");
-		}
-
 		x += timer.getElapsedTime().asSeconds()*player.velocity.x;
 		if (x > resolution.x) {
 			x = 0;
 		}
+		if (physicsEngine.inAir == true) {
+			player.moveObject({ player.velocity.x, player.velocity.y*timer.getElapsedTime().asSeconds() * 100 });
+		}
+		else if (physicsEngine.inAir &&player.getPosition().y > 150) {
+			player.velocity = sf::Vector2f(0, 0);
+			player.setPosition({ 1800,player.velocity.y });
+			physicsEngine.inAir = false;
+		}
+		else {
+			physicsEngine.inAir = true;
+		}
 		//draw stuff
-		Window.draw(player.sprite);
-		Window.draw(actor.sprite);
+		player.draw(Window);
+		actor.draw(Window);
 		Window.draw(duck.Text);
 		Window.display();
 	}

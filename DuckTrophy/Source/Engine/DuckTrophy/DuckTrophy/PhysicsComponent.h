@@ -23,17 +23,26 @@ public:
 		float radius;
 		sf::Vector2f position;
 	};
-	sf::Vector2f gravity = sf::Vector2f(0,-9.8);
+
+	bool inAir = true;
+	sf::Vector2f gravity = sf::Vector2f(0, 9.8);
+	void fall(Actor A,float time);
 	sf::Vector2f collisionNormal;
 	bool collide;
+
+	sf::Clock clock;
+
 	void setAABB(Actor A);
+
 	bool AABBvsAABB(AABB a, AABB b);
+
 	float Distance(sf::Vector2f a, sf::Vector2f b);
+
 	float dotprodcut(const sf::Vector2f &v, const sf::Vector2f &w);
 
 	bool CirclevsCircleUnoptimized(Circle a, Circle b);
 
-	bool CirclevsCircleOptimized(Circle a, Circle b);
+	//bool CirclevsCircleOptimized(Circle a, Circle b);
 
 	void ResolveCollision(Actor A, Actor B);
 

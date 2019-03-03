@@ -13,22 +13,25 @@ public:
 	Actor();
 	~Actor();
 	void setImage(std::string image);
-	void setPosition(float x, float y);
-	void draw();
-
+	void setPosition(sf::Vector2f newpos);
+	void draw(sf::RenderWindow &window);
+	
 	sf::Sprite sprite;
 	sf::Texture actorTexture;
-	float centerX = sprite.getGlobalBounds().width/2;
-	float centerY = sprite.getGlobalBounds().height / 2;
 
+	float centerX = sprite.getGlobalBounds().width/2;
+	float centerY = sprite.getGlobalBounds().height/2;
+	sf::Vector2f position;
 	sf::Transformable transform;
 	sf::Clock clock;
 	sf::Time dt = clock.restart();
-	void moveObject(float x, float y);
+
+	void moveObject(sf::Vector2f m);
 	void rotateObject(float x);
-	void scaleObject(float x, float y);
-	void Scale(float x, float y);
+	void scaleObject(sf::Vector2f m);
+	void Scale(sf::Vector2f m);
 	void UpdateTransform(float dtAsSec);
+
 
 };
 
