@@ -43,4 +43,26 @@ public:
 	void LeftMouseDown();
 	void LeftMouseUp();
 	void RightButtonDown();
+
+
+	//BOOLS A-Z
+	//wasd, space, arrowkeys
+	bool goLeft;
+	bool goRight;
+	bool goUp;
+	bool goDown;
+
+	bool isWPressed = false;
+	bool isAPressed = false;
+	bool isSPressed = false;
+	bool isDPressed = false;
+	bool isUpPressed = false;
+	bool isLeftPressed = false;
+	bool isDownPressed = false;
+	bool isRightPressed = false;
+	bool isSpacePressed = false;
+
+	void inputCheck(sf::Keyboard key);
+
+
 };
