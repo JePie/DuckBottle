@@ -6,6 +6,7 @@
 #include "Initialise.h"
 #include "Input.h"
 #include"TransformComponent.h"
+#include "PhysicsComponent.h"
 
 Engine::Engine()
 {
@@ -86,7 +87,8 @@ void Engine::mainWindow()
 	sf::Clock timer;
 
 	sf::Time dt = timer.restart();
-	dtAsSeconds = dt.asSeconds();
+
+	PhysicsComponent physicsEngine;
 
 	while (Window.isOpen())
 	{
@@ -97,7 +99,7 @@ void Engine::mainWindow()
 			if (event.type == sf::Event::Closed)
 				Window.close();
 		}
-
+		dtAsSeconds = dt.asSeconds();
 
 		Actor actor;
 		TransformComponent actorTransform;
@@ -112,16 +114,28 @@ void Engine::mainWindow()
 
 		Actor player;
 		player.setImage("duck.png");
-		player.setPosition(500, 500);
-		player.moveObject(500, 0);
-		player.rotateObject(x);
-		//player.setParent(actor);
+		player.setPosition(1800, 0);
+		player.moveObject(-x, 0);
+		player.scaleObject(-1,1);
+		player.setParent(actor);
 
+		physicsEngine.setAABB(player);
+		physicsEngine.setAABB(actor);
+		physicsEngine.checkCollision(player, actor);
+		physicsEngine.ResolveCollision(player, actor);
 
 		Update::Update(dtAsSeconds);
 		Input input;
 		input.ProcessInput(wParam);
-		x += 10;
+
+		if (physicsEngine.Distance(player.getPosition(),actor.getPosition())<0) {
+			duck.Text.setString("collided");
+		}
+		else {
+			duck.Text.setString("nope");
+		}
+
+		x += player.velocity.x*timer.getElapsedTime().asSeconds();
 		if (x > resolution.x) {
 			x = 0;
 		}
