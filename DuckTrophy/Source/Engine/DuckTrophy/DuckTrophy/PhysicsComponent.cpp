@@ -86,14 +86,21 @@ void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
 	{
 		if (dotprodcut(vB - vA, x2 - x1) < 0)
 		{
-			
+
 			sf::Vector2f pr = (vB - vA, x2 - x1);
 			A.velocity = vA + 2 * n / (m + n)*pr;
 			B.velocity = vB - 2 * m / (m + n)*pr;
 			collide = true;
 		}
 	}
+	else if (A.sprite.getGlobalBounds().intersects(B.sprite.getGlobalBounds()) || B.sprite.getGlobalBounds().intersects(A.sprite.getGlobalBounds())) {
+		A.velocity = sf::Vector2f(0, 0);
+		B.velocity = sf::Vector2f(0, 0);
+		ResolveCollision(A, B);
+		collide = true;
+	}
 	else {
 		collide = false;
 	}
+		
 }

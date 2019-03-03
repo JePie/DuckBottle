@@ -122,20 +122,20 @@ void Engine::mainWindow()
 		physicsEngine.setAABB(player);
 		physicsEngine.setAABB(actor);
 		physicsEngine.checkCollision(player, actor);
-		physicsEngine.ResolveCollision(player, actor);
+	
 
 		Update::Update(dtAsSeconds);
 		Input input;
 		input.ProcessInput(wParam);
 
-		if (physicsEngine.Distance(player.getPosition(),actor.getPosition())<0) {
+		if (physicsEngine.collide) {
 			duck.Text.setString("collided");
 		}
 		else {
 			duck.Text.setString("nope");
 		}
 
-		x += player.velocity.x*timer.getElapsedTime().asSeconds();
+		x += timer.getElapsedTime().asSeconds()*player.velocity.x;
 		if (x > resolution.x) {
 			x = 0;
 		}
