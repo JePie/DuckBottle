@@ -132,9 +132,9 @@ void Engine::mainWindow()
 		//player.rotateObject(270);
 
 
-		/*scenegraph.setParent(actor);
+		scenegraph.setParent(actor);
 		scenegraph.AddChild(&player);
-		scenegraph.Update(timer.getElapsedTime().asSeconds());*/
+		scenegraph.Update(timer.getElapsedTime().asSeconds());
 		//physics
 		physicsEngine.setAABB(player);
 		physicsEngine.setAABB(actor);
