@@ -99,7 +99,6 @@ void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
 		}
 	}
 	else if (boundingBoxA.intersects(boundingBoxB)) {
-		A.velocity = sf::Vector2f(0, 0);
 		B.velocity = sf::Vector2f(0, 0);
 		ResolveCollision(A, B);
 		collide = true;
@@ -109,13 +108,10 @@ void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
 	}
 		
 }
-void PhysicsComponent::fall(Actor A, float time) {
-	if (inAir) {
-		//A.velocity.y += gravity.y*time*100;
-		A.moveObject({ A.velocity.x,A.velocity.y*time*10});
-	}
-	if (A.sprite.getPosition().y > 200) {
-		A.sprite.setPosition(0, 200);
+void PhysicsComponent::fall(Actor A) {
+
+	if (A.sprite.getPosition().y > 500) {
+		A.sprite.setPosition(0, 500);
 		inAir = false;
 	}
 	else 

@@ -21,6 +21,7 @@ public:
 
 	float centerX = sprite.getGlobalBounds().width/2;
 	float centerY = sprite.getGlobalBounds().height/2;
+
 	sf::Vector2f position;
 	sf::Transformable transform;
 	sf::Clock clock;
