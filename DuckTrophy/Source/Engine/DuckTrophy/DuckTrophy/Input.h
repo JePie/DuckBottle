@@ -47,10 +47,10 @@ public:
 
 	//BOOLS A-Z
 	//wasd, space, arrowkeys
-	bool goLeft;
-	bool goRight;
-	bool goUp;
-	bool goDown;
+	bool goLeft = false;
+	bool goRight = false;
+	bool goUp = false;
+	bool goDown = false;
 
 	bool isWPressed = false;
 	bool isAPressed = false;
@@ -62,7 +62,7 @@ public:
 	bool isRightPressed = false;
 	bool isSpacePressed = false;
 
-	void inputCheck(sf::Keyboard key);
+	void inputCheck();
 
 
 };

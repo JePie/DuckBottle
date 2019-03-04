@@ -118,41 +118,54 @@ void Input::ProcessInput(WPARAM wParam) {
 
 
 
-void Input::inputCheck(sf::Keyboard key)
+void Input::inputCheck()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		isWPressed = true;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		isAPressed = true;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		isSPressed = true;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		isDPressed = true;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		isLeftPressed = true;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		isUpPressed = true;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		isDownPressed = true;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		isRightPressed = true;
 	}
+
+	if (isRightPressed||isDPressed)
+		goRight = true;
+
+	if (isLeftPressed || isAPressed)
+		goLeft = true;
+
+	if (isDownPressed || isSPressed)
+		goDown = true;
+
+	if (isUpPressed || isWPressed)
+		goUp = true;
+
 }
 //void Input::KeyboardHandler(UINT message, WPARAM wParam)
 //{

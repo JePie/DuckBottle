@@ -24,11 +24,14 @@ public:
 		sf::Vector2f position;
 	};
 
-	bool inAir = true;
+	bool inAir;
 	sf::Vector2f gravity = sf::Vector2f(0, 9.8);
-	void fall(Actor A,float time);
+
 	sf::Vector2f collisionNormal;
+
 	bool collide;
+
+	void fall(Actor A);
 
 	sf::Clock clock;
 
