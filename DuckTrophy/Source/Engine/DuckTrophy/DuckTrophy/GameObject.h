@@ -1,7 +1,6 @@
 #pragma once
-#include "tubeStd.h"
 #include <vector>
-#include "Component.h"
+#include <SFML/Graphics.hpp>
 class GameObject
 {
 public:
@@ -17,9 +16,14 @@ public:
 	
 	std::string name;
 	void setname(std::string n) { name = n; };
-	void InitializeGameObject();
+	//void InitializeGameObject();
 	sf::Texture objectTexture;
 
+	sf::Vector2f position;
+	sf::Vector2f velocity = sf::Vector2f(1,1);
+	float bounciness = 1;
+	float mass = 1;
+	
 	////actor
 	//void setImage(std::string image);
 	//void setPosition(float x, float y);

@@ -6,19 +6,19 @@
 #include "Initialise.h"
 #include "Input.h"
 #include"TransformComponent.h"
+#include "PhysicsComponent.h"
 
 Engine::Engine()
 {
 }
 float sec;
-int x = 0;
+float x = 0;
 duckTubeEngine duck;
 
 void Engine::InitializeWindow()
 {
 	resolution.x = sf::VideoMode::getDesktopMode().width;
 	resolution.y = sf::VideoMode::getDesktopMode().height;
-
 	//Font Invoked here
 	duck.font.loadFromFile("blackjack.otf");
 	duck.Text.setFont(duck.font);
@@ -66,8 +66,8 @@ void Engine::SlpashScreen() {
 		}
 		Actor actor;
 		actor.setImage("Duck_Trophy.png");
-		actor.setPosition(0, 0);
-		actor.Scale(5, 3.3f);
+		actor.setPosition({ 0, 0 });
+		actor.Scale({ 5, 3.3f });
 		//actor.draw();
 		Window.draw(actor.sprite);
 		Window.display();
@@ -75,6 +75,9 @@ void Engine::SlpashScreen() {
 
 
 }
+
+
+
 void Engine::mainWindow() 
 {
 	
@@ -87,49 +90,113 @@ void Engine::mainWindow()
 	sf::Clock timer;
 
 	sf::Time dt = timer.restart();
-	dtAsSeconds = dt.asSeconds();
+
+	PhysicsComponent physicsEngine = *new PhysicsComponent;
+	Actor actor = *new Actor;
+
+	Actor player = *new Actor;
+
+
+	GameObject scenegraph = *new GameObject;
+
 
 	while (Window.isOpen())
 	{
+
 
 		sf::Event event;
 		while (Window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				Window.close();
+			if (event.type == sf::Event::KeyReleased)
+				physicsEngine.inAir = false;
 		}
-
-
-		Actor actor;
+		//time
+		dtAsSeconds = dt.asSeconds();
+		duck.Text.setString("timer: " + std::to_string(timer.getElapsedTime().asSeconds()));
 		TransformComponent actorTransform;
-		Window.clear(sf::Color::Red);
-		actor.setImage("duck.png");
-		actor.setPosition(x, 50);
-		//actor.draw();
-		duck.Text.setString("timer: "+ std::to_string(timer.getElapsedTime().asSeconds()));
 
+		Window.clear(sf::Color::Blue);
+
+
+
+		actor.setImage("duck.png");
+		//actor.draw();
+
+
+		player.setImage("duck.png");
+		player.setPosition({ 1800, 50 });
+		player.moveObject({ -x,0 });
+		player.Scale({ -1,1});
+		//player.rotateObject(270);
+
+
+		scenegraph.setParent(actor);
+		scenegraph.AddChild(&player);
+		scenegraph.Update(timer.getElapsedTime().asSeconds());
+		//physics
+		physicsEngine.setAABB(player);
+		physicsEngine.setAABB(actor);
+		physicsEngine.fall(player);
+		physicsEngine.fall(actor);
+		physicsEngine.checkCollision(actor, player);
+		if (!physicsEngine.collide) 
+		{
+			player.velocity = sf::Vector2f(1, 1);
+		}
+		
+
+		//icon
 		icon.loadFromFile("duck.png");
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-		Actor player;
-		player.setImage("duck.png");
-		player.setPosition(500, 500);
-		player.moveObject(500, 0);
-		player.rotateObject(x);
-		//player.setParent(actor);
-
-
-		Update::Update(dtAsSeconds);
 		Input input;
 		input.ProcessInput(wParam);
-		x += 10;
+		input.inputCheck();
+		if (input.isDownPressed) {
+			actor.moveObject({ 0 ,50 });
+		}
+		else if (input.isUpPressed) {
+			actor.moveObject({ 0 ,-50 });
+			physicsEngine.inAir = true;
+		}
+		else if (input.isLeftPressed) {
+			actor.moveObject({ -50 ,0 });
+			actor.Scale({ -1,1 });
+		}
+		else if (input.isRightPressed) {
+			actor.moveObject({ 50 ,0 });
+			actor.Scale({ 1,1 });
+		}
+
+		if (input.isSPressed) {
+			actor.Scale({2,2});
+		}
+		else if (input.isWPressed) {
+			actor.Scale({ 0.2,0.2 });
+		}
+		else if (input.isAPressed) {
+			actor.rotateObject(45);
+		}
+		else if (input.isDPressed) {
+			actor.rotateObject(-45);
+		}
+
+		x += timer.getElapsedTime().asSeconds()*player.velocity.x;
 		if (x > resolution.x) {
 			x = 0;
 		}
 
+		if (physicsEngine.inAir == true) {
+			actor.moveObject({ 0, actor.velocity.y*physicsEngine.gravity.y });
+			player.moveObject({ 0, player.velocity.y*physicsEngine.gravity.y });
+		}
+
+
 		//draw stuff
-		Window.draw(player.sprite);
-		Window.draw(actor.sprite);
+		player.draw(Window);
+		actor.draw(Window);
 		Window.draw(duck.Text);
 		Window.display();
 	}

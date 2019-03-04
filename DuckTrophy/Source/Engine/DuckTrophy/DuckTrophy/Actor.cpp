@@ -15,23 +15,33 @@ void Actor::setImage(std::string image) {
 	actorTexture.loadFromFile(image);
 	sprite.setTexture(actorTexture);
 }
-void Actor::setPosition(float x, float y) {
-	sprite.setPosition(x, y);
+
+void Actor::setPosition(sf::Vector2f newpos) {
+	sprite.setPosition(newpos);
 }
 
-void Actor::draw() {
-	Engine engine;
-	engine.Window.draw(sprite);
+void Actor::draw(sf::RenderWindow &window) {
+	window.draw(sprite);
 }
-void Actor::moveObject(float x, float y) {
-	sprite.move(x, y);
+
+void Actor::moveObject(sf::Vector2f m) {
+	sprite.move(m);
 }
+
 void Actor::rotateObject(float x) {
 	sprite.rotate(x);
 }
-void Actor::scaleObject(float x, float y) {
-	sprite.scale(x, y);
+
+void Actor::scaleObject(sf::Vector2f m) {
+	sprite.scale(m);
 }
-void Actor::Scale(float x,float y) {
-	sprite.setScale(x,y);
+
+void Actor::Scale(sf::Vector2f m) {
+	sprite.setScale(m);
 }
+
+void Actor::UpdateTransform(float dtAsSec)
+{
+	dtAsSec = dt.asSeconds();
+}
+

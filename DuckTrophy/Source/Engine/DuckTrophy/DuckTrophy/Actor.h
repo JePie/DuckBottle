@@ -1,27 +1,38 @@
 #pragma once
-#include "tubeStd.h"
-#include "windows.h"
-#include "GameObject.h"
 #include<SFML/Graphics.hpp>
 #include <SFML/Graphics/Transformable.hpp>
+#include<SFML/Graphics/Sprite.hpp>
+#include "GameObject.h"
+#include "windows.h"
 
-class Actor:sf::Transformable//,public GameObject
+
+class Actor :public sf::Transformable , public GameObject
 {
 public:
 
 	Actor();
 	~Actor();
 	void setImage(std::string image);
-	void setPosition(float x, float y);
-	void draw();
-
+	void setPosition(sf::Vector2f newpos);
+	void draw(sf::RenderWindow &window);
+	
 	sf::Sprite sprite;
 	sf::Texture actorTexture;
 
+	float centerX = sprite.getGlobalBounds().width/2;
+	float centerY = sprite.getGlobalBounds().height/2;
+
+	sf::Vector2f position;
 	sf::Transformable transform;
-	void moveObject(float x, float y);
+	sf::Clock clock;
+	sf::Time dt = clock.restart();
+
+	void moveObject(sf::Vector2f m);
 	void rotateObject(float x);
-	void scaleObject(float x, float y);
-	void Scale(float x, float y);
+	void scaleObject(sf::Vector2f m);
+	void Scale(sf::Vector2f m);
+	void UpdateTransform(float dtAsSec);
+
+
 };
 

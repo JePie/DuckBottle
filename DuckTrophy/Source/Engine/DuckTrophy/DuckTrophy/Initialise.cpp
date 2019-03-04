@@ -85,13 +85,10 @@ bool  duckTubeEngine::CheckMemory() {
 
 	if (status.ullAvailPhys < physicalRAMNeeded) {
 		cout << "\tMemory Check Failure : Not enough physical memory.\n" << endl;
-
 		result = false;
 	}
-
 	if (status.ullAvailVirtual < virtualRAMNeeded) {
 		cout << "\tMemory Check Failure : Not enough virtual memory.\n" << endl;
-
 		result = false;
 	}
 	result = true;
@@ -106,26 +103,19 @@ bool duckTubeEngine::ReadCPUSpeed() {
 	HKEY hKey;
 	bool result = false;
 	std::string msgTxt;
-	long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
-		"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0,
-		KEY_READ, &hKey);
+	long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE,"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0,KEY_READ, &hKey);
 	if (lError == ERROR_SUCCESS) {
 		// query the key:
-		RegQueryValueEx(hKey, "~MHz", NULL, &type, (LPBYTE)
-			&dwMHz, &BufSize);
+		RegQueryValueEx(hKey, "~MHz", NULL, &type, (LPBYTE)&dwMHz, &BufSize);
 		cout << "CPU Speed aand Architecture:\n" << endl;
 		cout << "\t" << dwMHz << " MHz CPU Speed" << endl;
 	}
-
 	long mError = RegQueryValueEx(hKey, "ProcessorNameString", NULL, &strType, (LPBYTE)&myBuff, &BufSize);
-
 	while (mError == ERROR_MORE_DATA) {
 		BufSize++;
 		mError = RegQueryValueEx(hKey, "ProcessorNameString", NULL, &strType, (LPBYTE)&myBuff, &BufSize);
 	}
-
 	cout << "\t" << myBuff << "\n" << endl;
-
 	return result;
 }
 
@@ -138,11 +128,8 @@ bool duckTubeEngine::HasFreeDiskSpace()
 	ULARGE_INTEGER ulTotalSpace;
 	ULARGE_INTEGER ulTotalFreeSpace;
 	std::string msgTxt;
-
 	GetDiskFreeSpaceEx("C:", &ulFreeSpace, &ulTotalSpace, &ulTotalFreeSpace);
-
 	int totalFreeSpaceInMb = (ulTotalFreeSpace.QuadPart / (1024 * 1024));
-
 	if (requiredSpace > totalFreeSpaceInMb) {
 		cout << "\tCheck Storage Failure: Not enough physical storage.\n" << endl;
 		result = false;
