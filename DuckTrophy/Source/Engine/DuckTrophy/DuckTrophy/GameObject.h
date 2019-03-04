@@ -10,7 +10,7 @@ public:
 
 	void SetTransform(const sf::Transform &matrix) { transform = matrix; };
 
-	void setParent(GameObject& p); //{ parent = s; };
+	void setParent(GameObject& p){ parent = &p; };
 	void AddChild(GameObject* s);
 
 	virtual void Update(float msec);
@@ -19,13 +19,15 @@ public:
 	void setname(std::string n) { name = n; };
 	void InitializeGameObject();
 	sf::Texture objectTexture;
-	//actor
-	void setImage(std::string image);
-	void setPosition(float x, float y);
-	void draw();
-	void Scale(float x, float y);
-	sf::Sprite actor;
-	sf::Texture actorTexture;
+
+	////actor
+	//void setImage(std::string image);
+	//void setPosition(float x, float y);
+	//void draw();
+	//void Scale(float x, float y);
+	//sf::Sprite actor;
+	//sf::Texture actorTexture;
+
 protected:
 	GameObject* parent;
 	sf::Transform worldTransform;

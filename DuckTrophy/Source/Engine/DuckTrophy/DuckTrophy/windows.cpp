@@ -18,6 +18,7 @@ void Engine::InitializeWindow()
 {
 	resolution.x = sf::VideoMode::getDesktopMode().width;
 	resolution.y = sf::VideoMode::getDesktopMode().height;
+
 	//Font Invoked here
 	duck.font.loadFromFile("blackjack.otf");
 	duck.Text.setFont(duck.font);
@@ -125,6 +126,7 @@ void Engine::mainWindow()
 		if (x > resolution.x) {
 			x = 0;
 		}
+
 		//draw stuff
 		Window.draw(player.sprite);
 		Window.draw(actor.sprite);
