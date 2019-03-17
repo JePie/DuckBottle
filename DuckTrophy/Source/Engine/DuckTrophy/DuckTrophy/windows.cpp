@@ -95,7 +95,7 @@ void Engine::mainWindow()
 	Actor actor = *new Actor;
 
 	Actor player = *new Actor;
-
+	player.setPosition({ 1800, 50 });
 
 	GameObject scenegraph = *new GameObject;
 
@@ -124,23 +124,23 @@ void Engine::mainWindow()
 		actor.setImage("duck.png");
 		//actor.draw();
 
-
+		
 		player.setImage("duck.png");
-		player.setPosition({ 1800, 50 });
-		player.moveObject({ -x,0 });
+
 		player.Scale({ -1,1});
-		//player.rotateObject(270);
 
-
-		scenegraph.setParent(actor);
-		scenegraph.AddChild(&player);
-		scenegraph.Update(timer.getElapsedTime().asSeconds());
+		scenegraph.Start();
+		
+		actor.AddChild(&player);
+		actor.Update(timer.getElapsedTime().asSeconds());
 		//physics
 		physicsEngine.setAABB(player);
 		physicsEngine.setAABB(actor);
 		physicsEngine.fall(player);
 		physicsEngine.fall(actor);
 		physicsEngine.checkCollision(actor, player);
+
+		
 		if (!physicsEngine.collide) 
 		{
 			player.velocity = sf::Vector2f(1, 1);
@@ -187,16 +187,10 @@ void Engine::mainWindow()
 		if (x > resolution.x) {
 			x = 0;
 		}
-
-		if (physicsEngine.inAir == true) {
-			actor.moveObject({ 0, actor.velocity.y*physicsEngine.gravity.y });
-			player.moveObject({ 0, player.velocity.y*physicsEngine.gravity.y });
-		}
-
-
 		//draw stuff
 		player.draw(Window);
 		actor.draw(Window);
+		//Window.draw(physicsEngine.get_rectangleShape(actor));
 		Window.draw(duck.Text);
 		Window.display();
 	}
