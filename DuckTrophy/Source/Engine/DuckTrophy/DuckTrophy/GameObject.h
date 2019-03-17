@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <list>
+#include <map>
 #include <SFML/Graphics.hpp>
 class GameObject
 {
@@ -23,14 +25,13 @@ public:
 	sf::Vector2f velocity = sf::Vector2f(1,1);
 	float bounciness = 1;
 	float mass = 1;
-	
-	////actor
-	//void setImage(std::string image);
-	//void setPosition(float x, float y);
-	//void draw();
-	//void Scale(float x, float y);
-	//sf::Sprite actor;
-	//sf::Texture actorTexture;
+	void Start();
+
+
+
+private:
+	std::map<int, GameObject*> m_Objects;
+	static int nextObjectID;
 
 protected:
 	GameObject* parent;

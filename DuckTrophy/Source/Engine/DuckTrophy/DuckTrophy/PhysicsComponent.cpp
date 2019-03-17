@@ -74,6 +74,37 @@ void PhysicsComponent::ResolveCollision(Actor A, Actor B)
 
 		
 }
+float magnitude(const sf::Vector2f &v)
+{
+	return sqrt(v.x*v.x + v.y*v.y);
+}
+
+float angle(const sf::Vector2f &v)
+{
+	float pi = 3.14159265359;
+	if (v.x == 0)
+	{
+		if (v.y < 0) return 270;
+		return 90;
+	}
+
+	float angle = atan(v.y / v.x) * 180 / pi;
+	if (v.x < 0) angle += 180;
+	else if (v.y < 0) angle += 360;
+
+	return angle;
+}
+
+sf::RectangleShape PhysicsComponent::get_rectangleShape(Actor &A) const
+{
+	sf::RectangleShape rect(sf::Vector2f(get_length(), 2 * thickness));
+	rect.setOrigin(0, thickness);
+	rect.setPosition(A.getPosition());
+	rect.setRotation(angle(velocity_l));
+	rect.setFillColor(sf::Color(0,0,1));
+
+	return rect;
+}
 
 void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
 	float m = A.mass;
@@ -108,11 +139,13 @@ void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
 	}
 		
 }
-void PhysicsComponent::fall(Actor A) {
-
-	if (A.sprite.getPosition().y > 500) {
-		A.sprite.setPosition(0, 500);
-		inAir = false;
+void PhysicsComponent::fall(Actor &A) {
+	if (inAir == true) {
+		A.moveObject({ 0, A.velocity.y*gravity.y });
+	}
+	//player.moveObject({ 0, player.velocity.y*physicsEngine.gravity.y });
+	else if (A.sprite.getPosition().y > 500) {
+			inAir = false;
 	}
 	else 
 	{
