@@ -1,7 +1,8 @@
 #pragma once
-#include "tubeStd.h"
 #include <vector>
-#include "Component.h"
+#include <list>
+#include <map>
+#include <SFML/Graphics.hpp>
 class GameObject
 {
 public:
@@ -17,15 +18,21 @@ public:
 	
 	std::string name;
 	void setname(std::string n) { name = n; };
-	void InitializeGameObject();
+	//void InitializeGameObject();
 	sf::Texture objectTexture;
-	//actor
-	void setImage(std::string image);
-	void setPosition(float x, float y);
-	void draw();
-	void Scale(float x, float y);
-	sf::Sprite actor;
-	sf::Texture actorTexture;
+
+	sf::Vector2f position;
+	sf::Vector2f velocity = sf::Vector2f(1,1);
+	float bounciness = 1;
+	float mass = 1;
+	void Start();
+
+
+
+private:
+	std::map<int, GameObject*> m_Objects;
+	static int nextObjectID;
+
 protected:
 	GameObject* parent;
 	sf::Transform worldTransform;

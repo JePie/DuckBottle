@@ -113,6 +113,60 @@ void Input::ProcessInput(WPARAM wParam) {
 		toPrint = storedKey.c_str();
 	}
 }
+
+
+
+
+
+void Input::inputCheck()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		isWPressed = true;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		isAPressed = true;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		isSPressed = true;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		isDPressed = true;
+	}
+
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		isLeftPressed = true;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		isUpPressed = true;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		isDownPressed = true;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		isRightPressed = true;
+	}
+
+	if (isRightPressed||isDPressed)
+		goRight = true;
+
+	if (isLeftPressed || isAPressed)
+		goLeft = true;
+
+	if (isDownPressed || isSPressed)
+		goDown = true;
+
+	if (isUpPressed || isWPressed)
+		goUp = true;
+
+}
 //void Input::KeyboardHandler(UINT message, WPARAM wParam)
 //{
 //	wchar_t msg[32];
