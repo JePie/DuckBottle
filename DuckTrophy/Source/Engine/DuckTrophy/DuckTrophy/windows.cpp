@@ -98,7 +98,7 @@ void Engine::mainWindow()
 	player.setPosition({ 1800, 50 });
 
 	GameObject scenegraph = *new GameObject;
-
+	sf::Transform world;
 
 	while (Window.isOpen())
 	{
@@ -128,15 +128,15 @@ void Engine::mainWindow()
 		player.setImage("duck.png");
 
 		player.Scale({ -1,1});
-
 		scenegraph.Start();
-		
+		scenegraph.SetTransform(world);
+		scenegraph.setParent(actor);
 		actor.AddChild(&player);
-		actor.Update(timer.getElapsedTime().asSeconds());
+		scenegraph.Update(timer.getElapsedTime().asSeconds());
+	
 		//physics
 		physicsEngine.setAABB(player);
 		physicsEngine.setAABB(actor);
-		physicsEngine.fall(player);
 		physicsEngine.fall(actor);
 		physicsEngine.checkCollision(actor, player);
 
@@ -190,7 +190,7 @@ void Engine::mainWindow()
 		//draw stuff
 		player.draw(Window);
 		actor.draw(Window);
-		//Window.draw(physicsEngine.get_rectangleShape(actor));
+		Window.draw(physicsEngine.get_rectangleShape(actor));
 		Window.draw(duck.Text);
 		Window.display();
 	}

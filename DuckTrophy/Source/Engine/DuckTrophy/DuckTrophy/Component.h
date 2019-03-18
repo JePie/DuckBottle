@@ -6,6 +6,7 @@ class Component
 public:
 	Component();
 	virtual void Update();
+	void addComponent();
 	~Component();
 };
 

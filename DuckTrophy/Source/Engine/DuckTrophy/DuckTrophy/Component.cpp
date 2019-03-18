@@ -15,3 +15,6 @@ void Component::Update() {
 Component::~Component()
 {
 }
+void Component::addComponent() {
+
+}

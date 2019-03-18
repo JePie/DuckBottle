@@ -36,18 +36,4 @@ void GameObject::Update(float msec) {
 	}
 }
 
-//void GameObject::setImage(std::string image) {
-//	actorTexture.loadFromFile(image);
-//	actor.setTexture(actorTexture);
-//}
-//void GameObject::setPosition(float x, float y) {
-//	actor.setPosition(x, y);
-//}
-//
-//void GameObject::draw() {
-//	Engine engine;
-//	engine.Window.draw(actor);
-//}
-//void GameObject::Scale(float x,float y) {
-//	actor.setScale(x,y);
-//}
+

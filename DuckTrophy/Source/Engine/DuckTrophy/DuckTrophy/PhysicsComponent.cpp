@@ -59,7 +59,6 @@ float PhysicsComponent::dotprodcut(const sf::Vector2f &v, const sf::Vector2f &w)
 void PhysicsComponent::ResolveCollision(Actor A, Actor B)
 {
 	float minBounce = std::min(A.bounciness, B.bounciness);
-	// Calculate relative velocity
 	sf::Vector2f rv = B.velocity - A.velocity;
 
 	float velAlongNormal = dotprodcut(rv, collisionNormal);
