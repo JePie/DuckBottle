@@ -126,11 +126,12 @@ void Engine::mainWindow()
 
 		
 		player.setImage("duck.png");
-
 		player.Scale({ -1,1});
+
 		scenegraph.Start();
 		scenegraph.SetTransform(world);
 		scenegraph.setParent(actor);
+
 		actor.AddChild(&player);
 		scenegraph.Update(timer.getElapsedTime().asSeconds());
 	
@@ -154,17 +155,21 @@ void Engine::mainWindow()
 		Input input;
 		input.ProcessInput(wParam);
 		input.inputCheck();
+
 		if (input.isDownPressed) {
 			actor.moveObject({ 0 ,50 });
 		}
+
 		else if (input.isUpPressed) {
 			actor.moveObject({ 0 ,-50 });
 			physicsEngine.inAir = true;
 		}
+
 		else if (input.isLeftPressed) {
 			actor.moveObject({ -50 ,0 });
 			actor.Scale({ -1,1 });
 		}
+
 		else if (input.isRightPressed) {
 			actor.moveObject({ 50 ,0 });
 			actor.Scale({ 1,1 });
@@ -187,7 +192,7 @@ void Engine::mainWindow()
 		if (x > resolution.x) {
 			x = 0;
 		}
-		//draw stuff
+
 		player.draw(Window);
 		actor.draw(Window);
 		Window.draw(physicsEngine.get_rectangleShape(actor));
