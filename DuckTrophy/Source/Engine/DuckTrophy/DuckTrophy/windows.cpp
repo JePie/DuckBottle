@@ -54,6 +54,14 @@ void Engine::SlpashScreen()
 		sf::Style::Default);
 	while (Window.isOpen())
 	{
+		sf::Event event;
+		while (Window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				Window.close();
+		}
+		Input input;
+		input.inputCheck();
 		if (GAME_STATE == SPLASH)
 		{
 			Update::Update(dtAsSeconds);
@@ -71,11 +79,22 @@ void Engine::SlpashScreen()
 		}
 		if (GAME_STATE == MENU)
 		{
-			Window.draw(duck.MenuTitle);
+			duck.MenuTitle.setFont(duck.font);
+			duck.MenuTitle.setFillColor(sf::Color::Black);
+			duck.MenuTitle.setCharacterSize(30);
+			duck.MenuTitle.setPosition(20, 0);
 			duck.MenuTitle.setString("Tube Engine Menu");
+			Window.draw(duck.MenuTitle);
+
 			//Window.create(sf::VideoMode(resolution.x, resolution.y), duck.MenuTitle.getString, sf::Style::Default);
-			Window.draw(duck.MenuIntroduced);
+
+			duck.MenuIntroduced.setFont(duck.font);
+			duck.MenuIntroduced.setFillColor(sf::Color::Black);
+			duck.MenuIntroduced.setCharacterSize(30);
+			duck.MenuIntroduced.setPosition(resolution.x / 2, resolution.y / 2);
 			duck.MenuIntroduced.setString("Welcome to Duck trophy Production");
+			Window.draw(duck.MenuIntroduced);
+
 			if (input.isWPressed)
 			{
 				GAME_STATE = GAME;
@@ -86,12 +105,7 @@ void Engine::SlpashScreen()
 		{
 			mainWindow();
 		}
-		sf::Event event;
-		while (Window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				Window.close();
-		}
+
 		Window.display();
 	}
 }
@@ -136,9 +150,9 @@ void Engine::mainWindow()
 		actor.setImage("duck.png");
 		//actor.draw();
 
-		
+
 		player.setImage("duck.png");
-		player.Scale({ -1,1});
+		player.Scale({ -1,1 });
 		scenegraph.Start();
 		actor.AddChild(&player);
 		actor.Update(timer.getElapsedTime().asSeconds());
@@ -148,17 +162,17 @@ void Engine::mainWindow()
 		physicsEngine.fall(player);
 		physicsEngine.fall(actor);
 		physicsEngine.checkCollision(actor, player);
-		
-		if (!physicsEngine.collide) 
+
+		if (!physicsEngine.collide)
 		{
 			player.velocity = sf::Vector2f(1, 1);
 		}
-		
+
 		//icon
 		icon.loadFromFile("duck.png");
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-		
+		Input input;
 		input.ProcessInput(wParam);
 		input.inputCheck();
 		if (input.isDownPressed) {
@@ -178,7 +192,7 @@ void Engine::mainWindow()
 		}
 
 		if (input.isSPressed) {
-			actor.Scale({2,2});
+			actor.Scale({ 2,2 });
 		}
 		else if (input.isWPressed) {
 			actor.Scale({ 0.2,0.2 });
