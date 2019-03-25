@@ -150,17 +150,4 @@ void PhysicsComponent::fall(Actor &A) {
 	{
 		inAir = true;
 	}
-
-	//if (physicsEngine.inAir == true) {
-	//	//player.velocity.y += physicsEngine.gravity.y*timer.getElapsedTime().asSeconds()*10;
-	//	player.moveObject({ player.velocity.x, player.velocity.y*timer.getElapsedTime().asSeconds() * 100 });
-	//}
-	//else if (physicsEngine.inAir &&player.getPosition().y > 150) {
-	//	player.velocity = sf::Vector2f(0, 0);
-	//	player.setPosition({ 1800,player.velocity.y });
-	//	physicsEngine.inAir = false;
-	//}
-	//else {
-	//	physicsEngine.inAir = true;
-	//}
 }
