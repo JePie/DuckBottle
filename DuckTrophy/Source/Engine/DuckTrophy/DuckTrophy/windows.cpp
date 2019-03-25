@@ -14,11 +14,13 @@ Engine::Engine()
 float sec;
 float x = 0;
 duckTubeEngine duck;
+Input input;
 
 void Engine::InitializeWindow()
 {
 	resolution.x = sf::VideoMode::getDesktopMode().width;
 	resolution.y = sf::VideoMode::getDesktopMode().height;
+
 	//Font Invoked here
 	duck.font.loadFromFile("blackjack.otf");
 	duck.Text.setFont(duck.font);
@@ -29,14 +31,13 @@ void Engine::InitializeWindow()
 	SlpashScreen();
 	sf::Texture s = sf::Texture();
 
+	
 }
 
 sf::Window* Engine::GetWindow() const
 {
-
 	return window;
 }
-
 
 void Engine::NotifyCloseRequest()
 {
@@ -44,43 +45,61 @@ void Engine::NotifyCloseRequest()
 	window->close();
 }
 
-void Engine::SlpashScreen() {
-
+void Engine::SlpashScreen()
+{
+	SCENE scene = SPLASH;
+	int GAME_STATE = SPLASH;
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Slpash Screen",
 		sf::Style::Default);
 	while (Window.isOpen())
 	{
+		if (GAME_STATE == SPLASH)
+		{
+			Update::Update(dtAsSeconds);
+			sec++;
+			Actor actor;
+			actor.setImage("Duck_Trophy.png");
+			actor.setPosition({ 0, 0 });
+			actor.Scale({ 5, 3.3f });
+			//actor.draw();
+			Window.draw(actor.sprite);
+			if (sec == 3000.0f)
+			{
+				GAME_STATE = MENU;
+			}
+		}
+		if (GAME_STATE == MENU)
+		{
+			Window.draw(duck.MenuTitle);
+			duck.MenuTitle.setString("Tube Engine Menu");
+			//Window.create(sf::VideoMode(resolution.x, resolution.y), duck.MenuTitle.getString, sf::Style::Default);
+			Window.draw(duck.MenuIntroduced);
+			duck.MenuIntroduced.setString("Welcome to Duck trophy Production");
+			if (input.isWPressed)
+			{
+				GAME_STATE = GAME;
+			}
+
+		}
+		if (GAME_STATE == GAME)
+		{
+			mainWindow();
+		}
 		sf::Event event;
 		while (Window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				Window.close();
 		}
-
-		Update::Update(dtAsSeconds);
-		sec++;
-		if (sec == 3000.0f)
-		{
-			mainWindow();
-		}
-		Actor actor;
-		actor.setImage("Duck_Trophy.png");
-		actor.setPosition({ 0, 0 });
-		actor.Scale({ 5, 3.3f });
-		//actor.draw();
-		Window.draw(actor.sprite);
 		Window.display();
 	}
-
-
 }
 
 
 
 void Engine::mainWindow() 
 {
-	
 	//Music Invoked Here
 	Audio::PlayMusic("ChillingMusic.wav");
 
@@ -98,12 +117,8 @@ void Engine::mainWindow()
 	player.setPosition({ 1800, 50 });
 
 	GameObject scenegraph = *new GameObject;
-
-
 	while (Window.isOpen())
 	{
-
-
 		sf::Event event;
 		while (Window.pollEvent(event))
 		{
@@ -116,21 +131,15 @@ void Engine::mainWindow()
 		dtAsSeconds = dt.asSeconds();
 		duck.Text.setString("timer: " + std::to_string(timer.getElapsedTime().asSeconds()));
 		TransformComponent actorTransform;
-
 		Window.clear(sf::Color::Blue);
-
-
 
 		actor.setImage("duck.png");
 		//actor.draw();
 
 		
 		player.setImage("duck.png");
-
 		player.Scale({ -1,1});
-
 		scenegraph.Start();
-		
 		actor.AddChild(&player);
 		actor.Update(timer.getElapsedTime().asSeconds());
 		//physics
@@ -139,19 +148,17 @@ void Engine::mainWindow()
 		physicsEngine.fall(player);
 		physicsEngine.fall(actor);
 		physicsEngine.checkCollision(actor, player);
-
 		
 		if (!physicsEngine.collide) 
 		{
 			player.velocity = sf::Vector2f(1, 1);
 		}
 		
-
 		//icon
 		icon.loadFromFile("duck.png");
 		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-		Input input;
+		
 		input.ProcessInput(wParam);
 		input.inputCheck();
 		if (input.isDownPressed) {
@@ -194,4 +201,5 @@ void Engine::mainWindow()
 		Window.draw(duck.Text);
 		Window.display();
 	}
+
 }

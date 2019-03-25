@@ -27,6 +27,7 @@ public:
 	void NotifyCloseRequest();
 	void SlpashScreen();
 	void mainWindow();
+	void start();
 	sf::RenderWindow Window;
 	sf::Music music;
 
