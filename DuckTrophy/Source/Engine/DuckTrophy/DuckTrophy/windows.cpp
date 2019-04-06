@@ -110,8 +110,6 @@ void Engine::SlpashScreen()
 	}
 }
 
-
-
 void Engine::mainWindow() 
 {
 	//Music Invoked Here
