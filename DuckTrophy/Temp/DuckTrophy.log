@@ -1,7 +1,11 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(376,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
   windows.cpp
-c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\physicscomponent.h(28): warning C4305: 'argument': truncation from 'double' to 'T'
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\actor.h(10): warning C4584: 'Actor': base-class 'sf::Transformable' is already a base-class of 'GameObject'
+  c:\users\daimenion\documents\github\duckbottle\ducktrophy\lib\sfml-2.5.1\include\sfml\graphics\transformable.hpp(41): note: see declaration of 'sf::Transformable'
+  c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\gameobject.h(6): note: see declaration of 'GameObject'
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\physicscomponent.h(34): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\physicscomponent.h(38): warning C4305: 'argument': truncation from 'double' to 'T'
           with
           [
               T=float
@@ -26,7 +30,7 @@ c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrop
           [
               T=float
           ]
-c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(177): warning C4305: 'argument': truncation from 'double' to 'T'
+c:\users\daimenion\documents\github\duckbottle\ducktrophy\source\engine\ducktrophy\ducktrophy\windows.cpp(179): warning C4305: 'argument': truncation from 'double' to 'T'
           with
           [
               T=float

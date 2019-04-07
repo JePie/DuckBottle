@@ -18,7 +18,7 @@ bool PhysicsComponent::AABBvsAABB(AABB a, AABB b) {
 	}
 }
 
-void PhysicsComponent::setAABB(Actor A)
+void PhysicsComponent::setAABB(GameObject &A)
 {
 	aabb.min = sf::Vector2f(A.centerX - A.sprite.getGlobalBounds().width, A.centerY - A.sprite.getGlobalBounds().height);
 	aabb.max = sf::Vector2f(A.centerX + A.sprite.getGlobalBounds().width, A.centerY + A.sprite.getGlobalBounds().height);
@@ -56,7 +56,7 @@ float PhysicsComponent::dotprodcut(const sf::Vector2f &v, const sf::Vector2f &w)
 	return v.x*w.x + v.y*w.y;
 }
 
-void PhysicsComponent::ResolveCollision(Actor A, Actor B)
+void PhysicsComponent::ResolveCollision(GameObject &A, GameObject &B)
 {
 	float minBounce = std::min(A.bounciness, B.bounciness);
 	sf::Vector2f rv = B.velocity - A.velocity;
@@ -94,18 +94,24 @@ float angle(const sf::Vector2f &v)
 	return angle;
 }
 
-sf::RectangleShape PhysicsComponent::get_rectangleShape(Actor &A) const
+sf::RectangleShape PhysicsComponent::get_rectangleShape(GameObject &A) const
 {
 	sf::RectangleShape rect(sf::Vector2f(get_length(), 2 * thickness));
 	rect.setOrigin(0, thickness);
 	rect.setPosition(A.getPosition());
 	rect.setRotation(angle(velocity_l));
-	rect.setFillColor(sf::Color(0,0,1));
+	rect.setFillColor(sf::Color(1,0,0));
 
-	return rect;
+	sf::RectangleShape rectangle;
+	rectangle.setSize(sf::Vector2f(A.getScale()));
+	rectangle.setOutlineColor(sf::Color::Red);
+	rectangle.setOutlineThickness(5);
+	rectangle.setPosition(A.getPosition().x, A.getPosition().y);
+
+	return rectangle;
 }
 
-void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
+void PhysicsComponent::checkCollision(GameObject &A, GameObject &B) {
 	float m = A.mass;
 	float n = B.mass;
 	sf::Vector2f vA = A.velocity;
@@ -126,10 +132,10 @@ void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
 			A.velocity = vA + 2 * n / (m + n)*pr;
 			B.velocity = vB - 2 * m / (m + n)*pr;
 			collide = true;
+			ResolveCollision(A, B);
 		}
 	}
 	else if (boundingBoxA.intersects(boundingBoxB)) {
-		B.velocity = sf::Vector2f(0, 0);
 		ResolveCollision(A, B);
 		collide = true;
 	}
@@ -138,7 +144,7 @@ void PhysicsComponent::checkCollision(Actor &A, Actor &B) {
 	}
 		
 }
-void PhysicsComponent::fall(Actor &A) {
+void PhysicsComponent::fall(GameObject &A) {
 	if (inAir == true) {
 		A.moveObject({ 0, A.velocity.y*gravity.y });
 	}

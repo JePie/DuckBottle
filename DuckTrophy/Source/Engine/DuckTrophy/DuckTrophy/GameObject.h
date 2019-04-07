@@ -3,13 +3,13 @@
 #include <list>
 #include <map>
 #include <SFML/Graphics.hpp>
-class GameObject
+class GameObject :public sf::Transformable
 {
 public:
 	GameObject() { parent = NULL; };
 	~GameObject(void);
 
-	void SetTransform(const sf::Transform &matrix) { transform = matrix; };
+	void SetTransform(const sf::Transform &matrix) { transforms = matrix; };
 
 	void setParent(GameObject& p){ parent = &p; };
 	void AddChild(GameObject* s);
@@ -21,12 +21,31 @@ public:
 	//void InitializeGameObject();
 	sf::Texture objectTexture;
 
+	void Start();
+	//from actor
+	void setImage(std::string image);
+	void setPosition(sf::Vector2f newpos);
+	void draw(sf::RenderWindow &window);
+
+	sf::Sprite sprite;
+	sf::Texture actorTexture;
+
+	float centerX = sprite.getGlobalBounds().width / 2;
+	float centerY = sprite.getGlobalBounds().height / 2;
+
 	sf::Vector2f position;
-	sf::Vector2f velocity = sf::Vector2f(1,1);
+	sf::Vector2f velocity = sf::Vector2f(1, 1);
 	float bounciness = 1;
 	float mass = 1;
-	void Start();
+	sf::Transformable transform;
+	sf::Clock clock;
+	sf::Time dt = clock.restart();
 
+	void moveObject(sf::Vector2f m);
+	void rotateObject(float x);
+	void scaleObject(sf::Vector2f m);
+	void Scale(sf::Vector2f m);
+	void UpdateTransform(float dtAsSec);
 
 
 private:
@@ -36,7 +55,7 @@ private:
 protected:
 	GameObject* parent;
 	sf::Transform worldTransform;
-	sf::Transform transform;
+	sf::Transform transforms;
 	std::vector<GameObject*>children;
 };
 

@@ -23,6 +23,9 @@ public:
 	float centerY = sprite.getGlobalBounds().height/2;
 
 	sf::Vector2f position;
+	sf::Vector2f velocity = sf::Vector2f(1, 1);
+	float bounciness = 1;
+	float mass = 1;
 	sf::Transformable transform;
 	sf::Clock clock;
 	sf::Time dt = clock.restart();
