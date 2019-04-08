@@ -1,15 +1,5 @@
 #include "pch.h"
 #include "PhysicsComponent.h"
-
-
-PhysicsComponent::PhysicsComponent()
-{
-}
-
-
-PhysicsComponent::~PhysicsComponent()
-{
-}
 bool PhysicsComponent::AABBvsAABB(AABB a, AABB b) {
 	{
 		if (a.max.x < b.min.x or a.min.x > b.max.x) return false;

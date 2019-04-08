@@ -13,8 +13,6 @@ float magnitude(const sf::Vector2f &v);
 class PhysicsComponent :public Component
 {
 public:
-	PhysicsComponent();
-	~PhysicsComponent();
 	
 	struct AABB{
 		sf::Vector2f min;
@@ -64,6 +62,6 @@ public:
 	void checkCollision(GameObject &A, GameObject &B);
 
 	sf::RectangleShape get_rectangleShape(GameObject &A ) const;
-
 };
+
 

@@ -3,10 +3,11 @@
 #include <list>
 #include <map>
 #include <SFML/Graphics.hpp>
+#include "Collider.h"
 class GameObject :public sf::Transformable
 {
 public:
-	GameObject() { parent = NULL; };
+	GameObject();
 	~GameObject(void);
 
 	void SetTransform(const sf::Transform &matrix) { transforms = matrix; };
@@ -19,7 +20,7 @@ public:
 	std::string name;
 	void setname(std::string n) { name = n; };
 	//void InitializeGameObject();
-	sf::Texture objectTexture;
+	sf::Texture* objectTexture;
 
 	void Start();
 	//from actor
@@ -47,10 +48,15 @@ public:
 	void Scale(sf::Vector2f m);
 	void UpdateTransform(float dtAsSec);
 
+	Collider getcollider() { return Collider(body); };
+
+	void oncollision(sf::Vector2f direction);
+
 
 private:
 	std::map<int, GameObject*> m_Objects;
 	static int nextObjectID;
+	sf::RectangleShape body;
 
 protected:
 	GameObject* parent;

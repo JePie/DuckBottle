@@ -64,7 +64,7 @@ void Engine::SlpashScreen() {
 		{
 			mainWindow();
 		}
-		Actor actor;
+		GameObject actor;
 		actor.setImage("Duck_Trophy.png");
 		actor.setPosition({ 0, 0 });
 		actor.Scale({ 5, 3.3f });
@@ -91,15 +91,12 @@ void Engine::mainWindow()
 
 	sf::Time dt = timer.restart();
 
-	PhysicsComponent physicsEngine = *new PhysicsComponent;
 	GameObject *actor = new GameObject;
 
 	GameObject *player = new GameObject;
-
+	player->setPosition({ 1800, 50 });
 
 	GameObject *scenegraph = new GameObject;
-	sf::Transform world;
-
 	while (Window.isOpen())
 	{
 
@@ -109,8 +106,8 @@ void Engine::mainWindow()
 		{
 			if (event.type == sf::Event::Closed)
 				Window.close();
-			if (event.type == sf::Event::KeyReleased)
-				physicsEngine.inAir = false;
+			//if (event.type == sf::Event::KeyReleased)
+			//	physicsEngine.inAir = false;
 		}
 		//time
 		dtAsSeconds = dt.asSeconds();
@@ -126,24 +123,29 @@ void Engine::mainWindow()
 
 		
 		player->setImage("duck.png");
-		//player->Scale({ -1,1});
-
+		player->Scale({ -1,1});
+		sf::Vector2f direction;
 		scenegraph->AddChild(actor);
 		actor->AddChild(player);
+		if (actor->getcollider().CheckCollision(player->getcollider(), direction, 1.0f)) {
+			actor->oncollision(direction);
+			
+		}
+
 
 		//physics
-		physicsEngine.setAABB(*player);
-		physicsEngine.setAABB(*actor);
+		//physicsEngine.setAABB(*player);
+		//physicsEngine.setAABB(*actor);
 		//physicsEngine.fall(actor);
-		physicsEngine.checkCollision(*actor, *player);
+		//physicsEngine.checkCollision(*actor, *player);
 
 
-		
-		if (!physicsEngine.collide) 
-		{
-			player->velocity = sf::Vector2f(1, 1);
-		}
-		
+		//
+		//if (!physicsEngine.collide) 
+		//{
+		//	player->velocity = sf::Vector2f(1, 1);
+		//}
+		//
 
 		//icon
 		icon.loadFromFile("duck.png");
@@ -154,21 +156,21 @@ void Engine::mainWindow()
 		input.inputCheck();
 
 		if (input.isDownPressed) {
-			actor->moveObject({ 0 ,50 });
+			actor->moveObject({ 0 ,actor->velocity.x*50 });
 		}
 
 		else if (input.isUpPressed) {
-			actor->moveObject({ 0 ,-50 });
-			physicsEngine.inAir = true;
+			actor->moveObject({ 0 ,actor->velocity.x * -50 });
+			//physicsEngine.inAir = true;
 		}
 
 		else if (input.isLeftPressed) {
-			actor->moveObject({ -50 ,0 });
+			actor->moveObject({ actor->velocity.x * -50  ,0 });
 			//actor.Scale({ -1,1 });
 		}
 
 		else if (input.isRightPressed) {
-			actor->moveObject({ 50 ,0 });
+			actor->moveObject({ actor->velocity.x * 50  ,0 });
 			//actor.Scale({ 1,1 });
 		}
 
@@ -192,8 +194,8 @@ void Engine::mainWindow()
 
 		player->draw(Window);
 		actor->draw(Window);
-		Window.draw(physicsEngine.get_rectangleShape(*actor));
-		Window.draw(physicsEngine.get_rectangleShape(*player));
+		//Window.draw(physicsEngine.get_rectangleShape(*actor));
+		//Window.draw(physicsEngine.get_rectangleShape(*player));
 		Window.draw(duck.Text);
 		Window.display();
 	}

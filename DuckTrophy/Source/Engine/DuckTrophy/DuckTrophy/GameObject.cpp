@@ -2,7 +2,15 @@
 #include "GameObject.h"
 
 
+GameObject::GameObject()
+{
+	 parent = NULL;
 
+	 body.setSize(sf::Vector2f(100.0f, 100.0f));
+	 body.setOrigin(body.getSize() / 2.0f);
+	 body.setPosition(206.0f, 206.0f);
+	 body.setTexture(objectTexture);
+}
 GameObject::~GameObject()
 {
 	/*for (unsigned int i = 0; i < children.size(); i++){
@@ -71,6 +79,22 @@ void GameObject::Scale(sf::Vector2f m) {
 void GameObject::UpdateTransform(float dtAsSec)
 {
 	dtAsSec = dt.asSeconds();
+}
+
+void GameObject::oncollision(sf::Vector2f direction) {
+
+	if (direction.x < 0.0f) {
+		velocity.x = 0.0f;
+	}
+	else if (direction.x > 0.0f) {
+		velocity.x = 0.0f;
+	}
+	if (direction.y < 0.0f) {
+		velocity.y = 0.0f;
+	}
+	else if (direction.y > 0.0f) {
+		velocity.y = 0.0f;
+	}
 }
 
 
