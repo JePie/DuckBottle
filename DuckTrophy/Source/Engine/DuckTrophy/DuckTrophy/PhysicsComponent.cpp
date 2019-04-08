@@ -60,8 +60,6 @@ void PhysicsComponent::ResolveCollision(GameObject &A, GameObject &B)
 		sf::Vector2f impulse = j * collisionNormal;
 		A.velocity -= 1 / A.mass * impulse;
 		B.velocity += 1 / B.mass * impulse;
-
-		
 }
 float magnitude(const sf::Vector2f &v)
 {
@@ -87,13 +85,13 @@ float angle(const sf::Vector2f &v)
 sf::RectangleShape PhysicsComponent::get_rectangleShape(GameObject &A) const
 {
 	sf::RectangleShape rect(sf::Vector2f(get_length(), 2 * thickness));
-	rect.setOrigin(0, thickness);
+	rect.setOrigin(0, 5);
 	rect.setPosition(A.getPosition());
 	rect.setRotation(angle(velocity_l));
 	rect.setFillColor(sf::Color(1,0,0));
 
 	sf::RectangleShape rectangle;
-	rectangle.setSize(sf::Vector2f(A.getScale()));
+	rectangle.setSize(sf::Vector2f(100,50));
 	rectangle.setOutlineColor(sf::Color::Red);
 	rectangle.setOutlineThickness(5);
 	rectangle.setPosition(A.getPosition().x, A.getPosition().y);

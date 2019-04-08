@@ -10,7 +10,7 @@ public:
 	GameObject();
 	~GameObject(void);
 
-	void SetTransform(const sf::Transform &matrix) { transforms = matrix; };
+	//void SetTransform(const sf::Transformable &matrix) { transform = matrix; };
 
 	void setParent(GameObject& p){ parent = &p; };
 	void AddChild(GameObject* s);
@@ -25,7 +25,7 @@ public:
 	void Start();
 	//from actor
 	void setImage(std::string image);
-	void setPosition(sf::Vector2f newpos);
+	void setobjectPosition(sf::Vector2f newpos);
 	void draw(sf::RenderWindow &window);
 
 	sf::Sprite sprite;
@@ -51,6 +51,8 @@ public:
 	Collider getcollider() { return Collider(body); };
 
 	void oncollision(sf::Vector2f direction);
+	sf::Transform transforms;
+
 
 
 private:
@@ -58,10 +60,11 @@ private:
 	static int nextObjectID;
 	sf::RectangleShape body;
 
+
 protected:
 	GameObject* parent;
-	sf::Transform worldTransform;
-	sf::Transform transforms;
+	sf::Transformable worldTransform;
+
 	std::vector<GameObject*>children;
 };
 

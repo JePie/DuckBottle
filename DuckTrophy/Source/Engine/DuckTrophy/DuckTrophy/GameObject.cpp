@@ -32,11 +32,12 @@ void GameObject::AddChild(GameObject* s) {
 }
 
 void GameObject::Update(float msec) {
-	if (parent) { //This node has a parent...
-		worldTransform = parent->worldTransform * transforms;
+	if (parent) { 
+		//worldTransform = parent->worldTransform * transforms;
+		//this->setPosition(parent->getPosition() + this->getPosition());
 	}
-	else { //Root node, world transform is local transform!
-		worldTransform = transforms;
+	else { 
+		//worldTransform = transforms;
 	}
 	for (std::vector<GameObject*>::iterator i = children.begin(); i !=
 		children.end(); ++i) {
@@ -52,8 +53,10 @@ void GameObject::setImage(std::string image) {
 	sprite.setTexture(actorTexture);
 }
 
-void GameObject::setPosition(sf::Vector2f newpos) {
+void GameObject::setobjectPosition( sf::Vector2f newpos) {
+	this->setPosition(newpos);
 	sprite.setPosition(newpos);
+
 }
 
 void GameObject::draw(sf::RenderWindow &window) {
@@ -61,18 +64,22 @@ void GameObject::draw(sf::RenderWindow &window) {
 }
 
 void GameObject::moveObject(sf::Vector2f m) {
+	this->move(m);
 	sprite.move(m);
 }
 
 void GameObject::rotateObject(float x) {
+	this->rotate(x);
 	sprite.rotate(x);
 }
 
 void GameObject::scaleObject(sf::Vector2f m) {
+	this->scale(m);
 	sprite.scale(m);
 }
 
 void GameObject::Scale(sf::Vector2f m) {
+	this->setScale(m);
 	sprite.setScale(m);
 }
 

@@ -66,7 +66,7 @@ void Engine::SlpashScreen() {
 		}
 		GameObject actor;
 		actor.setImage("Duck_Trophy.png");
-		actor.setPosition({ 0, 0 });
+		actor.setobjectPosition({ 0, 0 });
 		actor.Scale({ 5, 3.3f });
 		//actor.draw();
 		Window.draw(actor.sprite);
@@ -94,9 +94,11 @@ void Engine::mainWindow()
 	GameObject *actor = new GameObject;
 
 	GameObject *player = new GameObject;
-	player->setPosition({ 1800, 50 });
+	player->setobjectPosition({ 500, 50 });
 
 	GameObject *scenegraph = new GameObject;
+
+	PhysicsComponent physicsEngine;
 	while (Window.isOpen())
 	{
 
@@ -123,10 +125,14 @@ void Engine::mainWindow()
 
 		
 		player->setImage("duck.png");
-		player->Scale({ -1,1});
+		//player->Scale({ -1,1});
 		sf::Vector2f direction;
 		scenegraph->AddChild(actor);
+		
 		actor->AddChild(player);
+
+		//player->Update(timer.getElapsedTime().asSeconds());
+		//player->setobjectPosition({ actor->getPosition().x * player->getPosition().x, actor->getPosition().y * player->getPosition().y });
 		if (actor->getcollider().CheckCollision(player->getcollider(), direction, 1.0f)) {
 			actor->oncollision(direction);
 			
@@ -194,8 +200,8 @@ void Engine::mainWindow()
 
 		player->draw(Window);
 		actor->draw(Window);
-		//Window.draw(physicsEngine.get_rectangleShape(*actor));
-		//Window.draw(physicsEngine.get_rectangleShape(*player));
+		Window.draw(physicsEngine.get_rectangleShape(*actor));
+		Window.draw(physicsEngine.get_rectangleShape(*player));
 		Window.draw(duck.Text);
 		Window.display();
 	}
