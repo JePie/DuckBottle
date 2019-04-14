@@ -107,8 +107,6 @@ void PhysicsComponent::checkCollision(GameObject &A, GameObject &B) {
 	sf::Vector2f x1 = A.getPosition();
 	sf::Vector2f x2 = B.getPosition();
 
-	sf::FloatRect boundingBoxA = A.sprite.getGlobalBounds();
-	sf::FloatRect boundingBoxB = B.sprite.getGlobalBounds();
 
 	if (x1 != x2)
 	{
@@ -120,12 +118,6 @@ void PhysicsComponent::checkCollision(GameObject &A, GameObject &B) {
 			B.velocity = vB - 2 * m / (m + n)*pr;
 			collide = true;
 		}
-	}
-	else if (boundingBoxA.intersects(boundingBoxB)) {
-		collide = true;
-	}
-	else {
-		collide = false;
 	}
 		
 }

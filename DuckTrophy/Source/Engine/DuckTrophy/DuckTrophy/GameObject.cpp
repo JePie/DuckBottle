@@ -72,6 +72,7 @@ void GameObject::setImage(std::string image) {
 	sprite.setOrigin(sf::Vector2f(centerX, centerY));
 
 	body.setTexture(pTexture);
+	
 }
 
 void GameObject::setobjectPosition( sf::Vector2f newpos) {

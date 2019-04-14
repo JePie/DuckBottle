@@ -95,13 +95,15 @@ void Engine::mainWindow()
 
 	GameObject *player = new GameObject();
 	
+	GameObject *child = new GameObject();
 
-	actor->setobjectPosition({ 500, 500 });
-	player->setobjectPosition({ 900, 500 });
+	actor->setobjectPosition({ 900, 500 });
+	player->setobjectPosition({ 500, 500 });
 
-	//actor->AddChild(player);
+	//player->AddChild(actor);
+	//actor->setParent(*player);
+	//actor->initialAngleToParent = 90;
 
-	//player->setParent(*actor);
 
 	actor->setImage("duck.png");
 
@@ -132,16 +134,17 @@ void Engine::mainWindow()
 		//scene graph ---------------------------------
 		sf::Vector2f direction;
 		
-		actor->setOrigin(sf::Vector2f(200, 200));
+		player->setOrigin(sf::Vector2f(200, 200));
 	
-		//player->Update(timer.getElapsedTime().asSeconds());
+		//actor->Update(timer.getElapsedTime().asSeconds());
 
 		//player->setobjectPosition({ actor->getPosition().x + 500, actor->getPosition().y + 50 });
 		
 	
-		if (actor->getcollider().CheckCollision(player->getcollider(), direction, 1.0f)) {
-			actor->oncollision(direction);
-			
+		if (player->getcollider().CheckCollision(actor->getcollider(), direction, 1.0f)) {
+			//actor->oncollision(direction);
+			physicsEngine.checkCollision(*actor, *player);
+			physicsEngine.ResolveCollision(*actor, *player);
 		}
 
 
@@ -149,8 +152,7 @@ void Engine::mainWindow()
 		//physicsEngine.setAABB(*player);
 		//physicsEngine.setAABB(*actor);
 		//physicsEngine.fall(actor);
-		physicsEngine.checkCollision(*actor, *player);
-		//physicsEngine.ResolveCollision(*actor, *player);
+
 
 		//
 		//if (!physicsEngine.collide) 
@@ -168,35 +170,35 @@ void Engine::mainWindow()
 		input.inputCheck();
 
 		if (input.isDownPressed) {
-			actor->moveObject({ 0 ,actor->velocity.y*10 });
+			player->moveObject({ 0 ,player->velocity.y*10 });
 		}
 
 		else if (input.isUpPressed) {
-			actor->moveObject({ 0 ,-actor->velocity.y * 10 });
+			player->moveObject({ 0 ,-player->velocity.y * 10 });
 			//physicsEngine.inAir = true;
 		}
 
 		else if (input.isLeftPressed) {
-			actor->moveObject({ -actor->velocity.x * 10  ,0 });
+			player->moveObject({ -player->velocity.x * 10  ,0 });
 			//actor.Scale({ -1,1 });
 		}
 
 		else if (input.isRightPressed) {
-			actor->moveObject({ actor->velocity.x * 10  ,0 });
+			player->moveObject({ player->velocity.x * 10  ,0 });
 			//actor.Scale({ 1,1 });
 		}
 
 		if (input.isSPressed) {
-			actor->Scale({2,2});
+			player->Scale({2,2});
 		}
 		else if (input.isWPressed) {
-			actor->Scale({ 1,1 });
+			player->Scale({ 1,1 });
 		}
 		else if (input.isAPressed) {
-			actor->rotateObject(-5);
+			player->rotateObject(-5);
 		}
 		else if (input.isDPressed) {
-			actor->rotateObject(5);
+			player->rotateObject(5);
 		}
 
 		//x += timer.getElapsedTime().asSeconds()*player->velocity.x;
