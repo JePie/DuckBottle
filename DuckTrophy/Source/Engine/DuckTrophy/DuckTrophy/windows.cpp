@@ -7,7 +7,8 @@
 #include "Input.h"
 #include"TransformComponent.h"
 #include "PhysicsComponent.h"
-
+#include "sceneManager.h"
+#include "Bullet.h"
 Engine::Engine()
 {
 }
@@ -45,10 +46,15 @@ void Engine::NotifyCloseRequest()
 }
 
 void Engine::SlpashScreen() {
-
+	SCENE scene = SPLASH;
+	int GAME_STATE = SPLASH;
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Slpash Screen",
 		sf::Style::Default);
+	GameObject *actor = new GameObject();
+	actor->setImage("Duck_Trophy.png");
+	actor->setobjectPosition({ 1000, 550 });
+	actor->Scale({ 5, 3.3f });
 	while (Window.isOpen())
 	{
 		sf::Event event;
@@ -57,19 +63,50 @@ void Engine::SlpashScreen() {
 			if (event.type == sf::Event::Closed)
 				Window.close();
 		}
+		Input input;
+		input.inputCheck();
+		if (GAME_STATE == SPLASH)
+		{
+			Update::Update(dtAsSeconds);
+			sec++;
+			
+			//actor.draw();
+			Window.draw(actor->sprite);
+			if (sec == 3000.0f)
+			{
+				GAME_STATE = MENU;
+			}
+		}
+		if (GAME_STATE == MENU)
+		{
+			Window.clear();
+			duck.MenuTitle.setFont(duck.font);
+			duck.MenuTitle.setFillColor(sf::Color::White);
+			duck.MenuTitle.setCharacterSize(30);
+			duck.MenuTitle.setPosition(20, 0);
+			duck.MenuTitle.setString("Tube Engine Menu");
+			Window.draw(duck.MenuTitle);
 
-		Update::Update(dtAsSeconds);
-		sec++;
-		if (sec == 3000.0f)
+			//Window.create(sf::VideoMode(resolution.x, resolution.y), duck.MenuTitle.getString, sf::Style::Default);
+
+			duck.MenuIntroduced.setFont(duck.font);
+			duck.MenuIntroduced.setFillColor(sf::Color::White);
+			duck.MenuIntroduced.setCharacterSize(30);
+			duck.MenuIntroduced.setPosition(resolution.x / 2, resolution.y / 2);
+			duck.MenuIntroduced.setString("Press w to start game");
+			Window.draw(duck.MenuIntroduced);
+
+			if (input.isWPressed)
+			{
+				GAME_STATE = GAME;
+			}
+
+		}
+		if (GAME_STATE == GAME)
 		{
 			mainWindow();
 		}
-		GameObject actor;
-		actor.setImage("Duck_Trophy.png");
-		actor.setobjectPosition({ 1000, 550 });
-		actor.Scale({ 5, 3.3f });
-		//actor.draw();
-		Window.draw(actor.sprite);
+
 		Window.display();
 	}
 
@@ -77,38 +114,88 @@ void Engine::SlpashScreen() {
 }
 
 
-
-void Engine::mainWindow() 
+void Engine::mainWindow()
 {
-	
+
 	//Music Invoked Here
 	//Audio::PlayMusic("ChillingMusic.wav");
 
-	Window.create(sf::VideoMode(resolution.x, resolution.y),"Main",sf::Style::Default);
+	Window.create(sf::VideoMode(resolution.x, resolution.y), "Main", sf::Style::Default);
 	WPARAM wParam = NULL;
-	
+
 	sf::Clock timer;
 
 	sf::Time dt = timer.restart();
+	//Location for Positioning
+	float tileSize = 50;
+	float xStart = 485;
+	float yStart = 65;
 
-	GameObject *actor = new GameObject();
+	//Outer Borders
+	GameObject *blackWalls = new GameObject[4];
+
+	GameObject *blackwallOne = new GameObject();
+	blackWalls[0] = *blackwallOne;
+	blackWalls[0].setImage("BlackBox.png");
+	blackWalls[0].setBodySize({ 1920,40 });
+	blackWalls[0].setBodyOrigin({ 960,20 });
+	blackWalls[0].setobjectPosition({ 960,20 });
+
+	GameObject *blackwallTwo = new GameObject();
+	blackWalls[1] = *blackwallTwo;
+	blackWalls[1].setImage("BlackBox.png");
+	blackWalls[1].setBodySize({ 1920,40 });
+	blackWalls[1].setBodyOrigin({ 960,20 });
+	blackWalls[1].setobjectPosition({ 960,1060 });
+
+
+	GameObject *blackwallThree = new GameObject();
+	blackWalls[2] = *blackwallThree;
+	blackWalls[2].setImage("BlackBox.png");
+	blackWalls[2].setBodySize({ 460,1080 });
+	blackWalls[2].setBodyOrigin({ 230,540 });
+	blackWalls[2].setobjectPosition({ 230,540 });
+
+	GameObject *blackwallFour = new GameObject();
+	blackWalls[3] = *blackwallFour;
+	blackWalls[3].setImage("BlackBox.png");
+	blackWalls[3].setBodySize({ 460,1080 });
+	blackWalls[3].setBodyOrigin({ 230,540 });
+	blackWalls[3].setobjectPosition({ 1690,540 });
+
+
+	//List of all initial actors excluding the player
+	GameObject *object = new GameObject[500];
+	int numOfObjects = 0;
+	int numOfWalls = 0;
+
+	bool grid[20][20];
+	for (int row = 0; row < 20; row++) {
+		for (int column = 0; column < 20; column++) {
+			grid[row][column] = false;
+		}
+	}
+
+	GameObject *walls = new GameObject[500];
+
+	for (float x = 6; x < 8; x++)
+	{
+		for (float y = 6; y < 8; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
 
 	GameObject *player = new GameObject();
-	
-	GameObject *child = new GameObject();
-
-	actor->setobjectPosition({ 900, 500 });
-	player->setobjectPosition({ 500, 500 });
-
+	player->setobjectPosition({ xStart + (tileSize * 0), yStart + (tileSize * 0) });
+	player->setImage("Tank.png");
 	//player->AddChild(actor);
 	//actor->setParent(*player);
 	//actor->initialAngleToParent = 90;
-
-
-	actor->setImage("duck.png");
-
-	player->setImage("duck.png");
-
 	PhysicsComponent physicsEngine;
 	while (Window.isOpen())
 	{
@@ -133,26 +220,8 @@ void Engine::mainWindow()
 
 		//scene graph ---------------------------------
 		sf::Vector2f direction;
-		
-		player->setOrigin(sf::Vector2f(200, 200));
-	
-		//actor->Update(timer.getElapsedTime().asSeconds());
 
-		//player->setobjectPosition({ actor->getPosition().x + 500, actor->getPosition().y + 50 });
-		
-	
-		if (player->getcollider().CheckCollision(actor->getcollider(), direction, 1.0f)) {
-			//actor->oncollision(direction);
-			physicsEngine.checkCollision(*actor, *player);
-			physicsEngine.ResolveCollision(*actor, *player);
-		}
-
-
-		//physics
-		//physicsEngine.setAABB(*player);
-		//physicsEngine.setAABB(*actor);
-		//physicsEngine.fall(actor);
-
+		object[1].setOrigin(sf::Vector2f(200, 200));
 
 		//
 		//if (!physicsEngine.collide) 
@@ -170,26 +239,31 @@ void Engine::mainWindow()
 		input.inputCheck();
 
 		if (input.isDownPressed) {
-			player->moveObject({ 0 ,player->velocity.y*10 });
+
+			player->moveObject({ 0 ,player->velocity.y * 5 });
+			player->setrotation(180);
 		}
 
 		else if (input.isUpPressed) {
-			player->moveObject({ 0 ,-player->velocity.y * 10 });
-			//physicsEngine.inAir = true;
+
+			player->moveObject({ 0 ,-player->velocity.y * 5 });
+			player->setrotation(0);
 		}
 
 		else if (input.isLeftPressed) {
-			player->moveObject({ -player->velocity.x * 10  ,0 });
-			//actor.Scale({ -1,1 });
+
+			player->moveObject({ -player->velocity.x * 5  ,0 });
+			player->setrotation(270);
 		}
 
 		else if (input.isRightPressed) {
-			player->moveObject({ player->velocity.x * 10  ,0 });
-			//actor.Scale({ 1,1 });
+
+			player->moveObject({ player->velocity.x * 5  ,0 });
+			player->setrotation(90);
 		}
 
 		if (input.isSPressed) {
-			player->Scale({2,2});
+			player->Scale({ 2,2 });
 		}
 		else if (input.isWPressed) {
 			player->Scale({ 1,1 });
@@ -207,7 +281,39 @@ void Engine::mainWindow()
 		//}
 
 		player->draw(Window);
-		actor->draw(Window);
+		for (int i = 0; i < numOfObjects; i++)
+		{
+			object[i].draw(Window);
+			if (player->getcollider().CheckCollision(object[i].getcollider(), direction, 1.0f)) {
+				//player->oncollision(direction);
+				//physicsEngine.checkCollision(*actor, *player);
+				//physicsEngine.ResolveCollision(*actor, *player);
+
+				for (int a = i; i < numOfObjects; i++)
+				{
+					object[a] = object[a + 1];
+				}
+				numOfObjects--;
+			}
+		}
+
+
+		for (int i = 0; i < numOfWalls; i++)
+		{
+			walls[i].draw(Window);
+			player->getcollider().CheckCollision(walls[i].getcollider(), direction, 1.0f);
+
+
+		}
+
+
+		for (int i = 0; i < 4; i++)
+		{
+			blackWalls[i].draw(Window);
+			player->getcollider().CheckCollision(blackWalls[i].getcollider(), direction, 1.0f);
+
+
+		}
 		//Window.draw(physicsEngine.get_rectangleShape(*actor));
 		//Window.draw(physicsEngine.get_rectangleShape(*player));
 		Window.draw(duck.Text);

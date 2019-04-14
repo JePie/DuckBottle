@@ -12,7 +12,7 @@ public:
 
 	//void SetTransform(const sf::Transformable &matrix) { transform = matrix; };
 
-	void setParent(GameObject& p){ parent = &p; };
+	void setParent(GameObject& p) { parent = &p; };
 	void AddChild(GameObject* s);
 
 	virtual void Update(float msec);
@@ -45,11 +45,14 @@ public:
 	sf::Transformable transform;
 	sf::Clock clock;
 	sf::Time dt = clock.restart();
+	void setrotation(float x);
 
 	void moveObject(sf::Vector2f m);
 	void rotateObject(float x);
 	void scaleObject(sf::Vector2f m);
 	void Scale(sf::Vector2f m);
+	void setBodySize(sf::Vector2f m);
+	void setBodyOrigin(sf::Vector2f m);
 	void UpdateTransform(float dtAsSec);
 
 	Collider getcollider() { return Collider(body); };
@@ -57,13 +60,13 @@ public:
 	void oncollision(sf::Vector2f direction);
 	sf::Transform transforms;
 
-
+	sf::RectangleShape body;
 
 private:
 	std::map<int, GameObject*> m_Objects;
 	static int nextObjectID;
-	sf::RectangleShape body;
-	
+
+
 
 protected:
 	GameObject* parent;

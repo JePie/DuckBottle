@@ -20,6 +20,8 @@ public:
 	bool  HasFreeDiskSpace();
 	bool ReadCPUSpeed();
 	bool CheckMemory();
+	sf::Text MenuTitle;
+	sf::Text MenuIntroduced;
 	sf::Text Text;
 	sf::Font font;
 

@@ -4,15 +4,15 @@
 
 GameObject::GameObject()
 {
-	 parent = NULL;
+	parent = NULL;
 
-	 body.setSize(sf::Vector2f(100.0f, 100.0f));
-	 body.setOrigin(body.getSize() / 2.0f);
-	 body.setOutlineColor(sf::Color::Red);
-	 body.setOutlineThickness(5);
+	body.setSize(sf::Vector2f(50.0f, 50.0f));
+	body.setOrigin(body.getSize() / 2.0f);
+	body.setOutlineColor(sf::Color::Red);
+	body.setOutlineThickness(1);
 
-	 distanceFromParent = 0;
-	 rotationOffsetFromParent = (sf::Vector2f(0,0));
+	distanceFromParent = 0;
+	rotationOffsetFromParent = (sf::Vector2f(0, 0));
 }
 GameObject::~GameObject()
 {
@@ -28,27 +28,27 @@ void GameObject::Start()
 	}
 }
 
-void GameObject::AddChild(GameObject* s) 
+void GameObject::AddChild(GameObject* s)
 {
-	s->ChildOffsetFromParent = s->getPosition()- this->getPosition();
-	s->distanceFromParent = sqrt((pow(s->ChildOffsetFromParent.x, 2)) + (pow(s->ChildOffsetFromParent.y, 2)));	
-	s->rotationOffsetFromParent = {0, 0};
+	s->ChildOffsetFromParent = s->getPosition() - this->getPosition();
+	s->distanceFromParent = sqrt((pow(s->ChildOffsetFromParent.x, 2)) + (pow(s->ChildOffsetFromParent.y, 2)));
+	s->rotationOffsetFromParent = { 0, 0 };
 	s->initialAngleToParent = acos(0 * s->ChildOffsetFromParent.x + 1 * s->ChildOffsetFromParent.y);
 }
 
 void GameObject::Update(float msec) {
-	if (parent) { 
+	if (parent) {
 		//worldTransform = parent->worldTransform * transforms;
 		//this->setPosition(parent->getPosition() + this->getPosition());
-		this->rotationOffsetFromParent = (sf::Vector2f (sin((this->parent->getRotation()+ initialAngleToParent)*3.14159 / 180), sin(((this->parent->getRotation()+ initialAngleToParent)+ 90)*3.14159 / 180)));
+		this->rotationOffsetFromParent = (sf::Vector2f(sin((this->parent->getRotation() + initialAngleToParent)*3.14159 / 180), sin(((this->parent->getRotation() + initialAngleToParent) + 90)*3.14159 / 180)));
 		this->setobjectPosition({ parent->getPosition().x + (distanceFromParent*rotationOffsetFromParent.x), parent->getPosition().y - (distanceFromParent*rotationOffsetFromParent.y) });
-		this->rotateObject(parent->getRotation()-this->getRotation());
+		this->rotateObject(parent->getRotation() - this->getRotation());
 		this->Scale(parent->getScale());
-		
+
 		//parent->getTransform()*this->getTransform();
 	}
-	else { 
-		
+	else {
+
 	}
 	for (std::vector<GameObject*>::iterator i = children.begin(); i !=
 		children.end(); ++i) {
@@ -72,10 +72,10 @@ void GameObject::setImage(std::string image) {
 	sprite.setOrigin(sf::Vector2f(centerX, centerY));
 
 	body.setTexture(pTexture);
-	
+
 }
 
-void GameObject::setobjectPosition( sf::Vector2f newpos) {
+void GameObject::setobjectPosition(sf::Vector2f newpos) {
 	this->setPosition(newpos);
 	body.setPosition(newpos);
 	sprite.setPosition(newpos);
@@ -92,7 +92,10 @@ void GameObject::moveObject(sf::Vector2f m) {
 	body.move(m);
 	//sprite.move(m);
 }
-
+void GameObject::setrotation(float x) {
+	this->setRotation(x);
+	body.setRotation(x);
+}
 void GameObject::rotateObject(float x) {
 	this->rotate(x);
 	body.rotate(x);
@@ -109,6 +112,14 @@ void GameObject::Scale(sf::Vector2f m) {
 	this->setScale(m);
 	body.setScale(m);
 	sprite.setScale(m);
+}
+
+void GameObject::setBodySize(sf::Vector2f m) {
+	body.setSize(m);
+}
+
+void GameObject::setBodyOrigin(sf::Vector2f m) {
+	body.setOrigin(m);;
 }
 
 void GameObject::UpdateTransform(float dtAsSec)

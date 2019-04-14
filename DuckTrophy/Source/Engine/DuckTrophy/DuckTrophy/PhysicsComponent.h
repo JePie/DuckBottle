@@ -3,7 +3,6 @@
 #include <vector>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "Actor.h"
 #include "Component.h"
 #include <math.h>
 #include <complex> 

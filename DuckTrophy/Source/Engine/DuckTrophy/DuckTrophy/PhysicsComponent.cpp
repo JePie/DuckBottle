@@ -97,7 +97,7 @@ void PhysicsComponent::ResolveCollision(GameObject &A, GameObject &B)
 	A.velocity -= 1 / A.mass * impulse;
 	B.velocity += 1 / B.mass * impulse;
 }
-
+ 
 void PhysicsComponent::checkCollision(GameObject &A, GameObject &B) {
 	float m = A.mass;
 	float n = B.mass;
