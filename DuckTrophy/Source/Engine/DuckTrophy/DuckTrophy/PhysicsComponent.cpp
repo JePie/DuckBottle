@@ -46,21 +46,7 @@ float PhysicsComponent::dotprodcut(const sf::Vector2f &v, const sf::Vector2f &w)
 	return v.x*w.x + v.y*w.y;
 }
 
-void PhysicsComponent::ResolveCollision(GameObject &A, GameObject &B)
-{
-	float minBounce = std::min(A.bounciness, B.bounciness);
-	sf::Vector2f rv = B.velocity - A.velocity;
 
-	float velAlongNormal = dotprodcut(rv, collisionNormal);
-
-		if (velAlongNormal > 0)
-			return;
-		float j = -(1 + minBounce) * velAlongNormal;
-		j /= 1 / A.mass + 1 / B.mass;
-		sf::Vector2f impulse = j * collisionNormal;
-		A.velocity -= 1 / A.mass * impulse;
-		B.velocity += 1 / B.mass * impulse;
-}
 float magnitude(const sf::Vector2f &v)
 {
 	return sqrt(v.x*v.x + v.y*v.y);
@@ -84,19 +70,32 @@ float angle(const sf::Vector2f &v)
 
 sf::RectangleShape PhysicsComponent::get_rectangleShape(GameObject &A) const
 {
-	sf::RectangleShape rect(sf::Vector2f(get_length(), 2 * thickness));
-	rect.setOrigin(0, 5);
-	rect.setPosition(A.getPosition());
-	rect.setRotation(angle(velocity_l));
-	rect.setFillColor(sf::Color(1,0,0));
+	const sf::Texture *pTexture = &A.actorTexture;
 
 	sf::RectangleShape rectangle;
-	rectangle.setSize(sf::Vector2f(100,50));
+	rectangle.setSize(sf::Vector2f(100, 100));
 	rectangle.setOutlineColor(sf::Color::Red);
 	rectangle.setOutlineThickness(5);
 	rectangle.setPosition(A.getPosition().x, A.getPosition().y);
-
+	rectangle.setTexture(pTexture);
+	
 	return rectangle;
+}
+
+void PhysicsComponent::ResolveCollision(GameObject &A, GameObject &B)
+{
+	float minBounce = std::min(A.bounciness, B.bounciness);
+	sf::Vector2f rv = B.velocity - A.velocity;
+
+	float velAlongNormal = dotprodcut(rv, collisionNormal);
+
+	if (velAlongNormal > 0)
+		return;
+	float j = -(1 + minBounce) * velAlongNormal;
+	j /= 1 / A.mass + 1 / B.mass;
+	sf::Vector2f impulse = j * collisionNormal;
+	A.velocity -= 1 / A.mass * impulse;
+	B.velocity += 1 / B.mass * impulse;
 }
 
 void PhysicsComponent::checkCollision(GameObject &A, GameObject &B) {
@@ -120,11 +119,9 @@ void PhysicsComponent::checkCollision(GameObject &A, GameObject &B) {
 			A.velocity = vA + 2 * n / (m + n)*pr;
 			B.velocity = vB - 2 * m / (m + n)*pr;
 			collide = true;
-			ResolveCollision(A, B);
 		}
 	}
 	else if (boundingBoxA.intersects(boundingBoxB)) {
-		ResolveCollision(A, B);
 		collide = true;
 	}
 	else {
