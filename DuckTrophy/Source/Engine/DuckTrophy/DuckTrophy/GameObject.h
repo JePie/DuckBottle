@@ -36,6 +36,9 @@ public:
 
 	sf::Vector2f position;
 	sf::Vector2f ChildOffsetFromParent;
+	float distanceFromParent;
+	sf::Vector2f rotationOffsetFromParent;
+	float initialAngleToParent;
 	sf::Vector2f velocity = sf::Vector2f(1, 1);
 	float bounciness = 1;
 	float mass = 1;
