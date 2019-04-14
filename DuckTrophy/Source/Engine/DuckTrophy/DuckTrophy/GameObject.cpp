@@ -8,8 +8,9 @@ GameObject::GameObject()
 
 	 body.setSize(sf::Vector2f(100.0f, 100.0f));
 	 body.setOrigin(body.getSize() / 2.0f);
-	 body.setPosition(206.0f, 206.0f);
+	 body.setPosition(0.0f, 0.0f);
 	 body.setTexture(objectTexture);
+
 }
 GameObject::~GameObject()
 {
@@ -26,18 +27,22 @@ void GameObject::Start()
 	}
 }
 
-void GameObject::AddChild(GameObject* s) {
-	children.push_back(s);
-	s->parent = this;
+void GameObject::AddChild(GameObject* s) 
+{
+	s->ChildOffsetFromParent = s->getPosition()- this->getPosition();
 }
 
 void GameObject::Update(float msec) {
 	if (parent) { 
 		//worldTransform = parent->worldTransform * transforms;
 		//this->setPosition(parent->getPosition() + this->getPosition());
+		this->setobjectPosition({ parent->getPosition().x + ChildOffsetFromParent.x, parent->getPosition().y + ChildOffsetFromParent.y });
+		this->rotateObject(parent->getRotation()-this->getRotation());
+		
+		//parent->getTransform()*this->getTransform();
 	}
 	else { 
-		//worldTransform = transforms;
+		
 	}
 	for (std::vector<GameObject*>::iterator i = children.begin(); i !=
 		children.end(); ++i) {

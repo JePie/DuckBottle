@@ -16,7 +16,7 @@ public:
 	void AddChild(GameObject* s);
 
 	virtual void Update(float msec);
-	
+
 	std::string name;
 	void setname(std::string n) { name = n; };
 	//void InitializeGameObject();
@@ -35,6 +35,7 @@ public:
 	float centerY = sprite.getGlobalBounds().height / 2;
 
 	sf::Vector2f position;
+	sf::Vector2f ChildOffsetFromParent;
 	sf::Vector2f velocity = sf::Vector2f(1, 1);
 	float bounciness = 1;
 	float mass = 1;
@@ -59,7 +60,7 @@ private:
 	std::map<int, GameObject*> m_Objects;
 	static int nextObjectID;
 	sf::RectangleShape body;
-
+	
 
 protected:
 	GameObject* parent;

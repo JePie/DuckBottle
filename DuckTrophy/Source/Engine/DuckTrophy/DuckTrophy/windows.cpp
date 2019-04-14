@@ -82,7 +82,7 @@ void Engine::mainWindow()
 {
 	
 	//Music Invoked Here
-	Audio::PlayMusic("ChillingMusic.wav");
+	//Audio::PlayMusic("ChillingMusic.wav");
 
 	Window.create(sf::VideoMode(resolution.x, resolution.y),"Main",sf::Style::Default);
 	WPARAM wParam = NULL;
@@ -95,8 +95,11 @@ void Engine::mainWindow()
 
 	GameObject *player = new GameObject;
 	player->setobjectPosition({ 500, 50 });
+	
 
-	GameObject *scenegraph = new GameObject;
+	actor->AddChild(player);
+	player->setParent(*actor);
+
 
 	PhysicsComponent physicsEngine;
 	while (Window.isOpen())
@@ -126,13 +129,17 @@ void Engine::mainWindow()
 		
 		player->setImage("duck.png");
 		//player->Scale({ -1,1});
-		sf::Vector2f direction;
-		scenegraph->AddChild(actor);
-		
-		actor->AddChild(player);
 
+		//scene graph ---------------------------------
+		sf::Vector2f direction;
+		
+	
+	
 		//player->Update(timer.getElapsedTime().asSeconds());
-		//player->setobjectPosition({ actor->getPosition().x * player->getPosition().x, actor->getPosition().y * player->getPosition().y });
+
+		//player->setobjectPosition({ actor->getPosition().x + 500, actor->getPosition().y + 50 });
+		
+	
 		if (actor->getcollider().CheckCollision(player->getcollider(), direction, 1.0f)) {
 			actor->oncollision(direction);
 			
