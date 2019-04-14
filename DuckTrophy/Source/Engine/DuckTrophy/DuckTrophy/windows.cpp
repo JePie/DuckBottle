@@ -14,13 +14,11 @@ Engine::Engine()
 float sec;
 float x = 0;
 duckTubeEngine duck;
-Input input;
 
 void Engine::InitializeWindow()
 {
 	resolution.x = sf::VideoMode::getDesktopMode().width;
 	resolution.y = sf::VideoMode::getDesktopMode().height;
-
 	//Font Invoked here
 	duck.font.loadFromFile("blackjack.otf");
 	duck.Text.setFont(duck.font);
@@ -31,13 +29,14 @@ void Engine::InitializeWindow()
 	SlpashScreen();
 	sf::Texture s = sf::Texture();
 
-	
 }
 
 sf::Window* Engine::GetWindow() const
 {
+
 	return window;
 }
+
 
 void Engine::NotifyCloseRequest()
 {
@@ -45,10 +44,8 @@ void Engine::NotifyCloseRequest()
 	window->close();
 }
 
-void Engine::SlpashScreen()
-{
-	SCENE scene = SPLASH;
-	int GAME_STATE = SPLASH;
+void Engine::SlpashScreen() {
+
 	Window.create(sf::VideoMode(resolution.x, resolution.y),
 		"Slpash Screen",
 		sf::Style::Default);
@@ -60,60 +57,32 @@ void Engine::SlpashScreen()
 			if (event.type == sf::Event::Closed)
 				Window.close();
 		}
-		Input input;
-		input.inputCheck();
-		if (GAME_STATE == SPLASH)
-		{
-			Update::Update(dtAsSeconds);
-			sec++;
-			Actor actor;
-			actor.setImage("Duck_Trophy.png");
-			actor.setPosition({ 0, 0 });
-			actor.Scale({ 5, 3.3f });
-			//actor.draw();
-			Window.draw(actor.sprite);
-			if (sec == 3000.0f)
-			{
-				GAME_STATE = MENU;
-			}
-		}
-		if (GAME_STATE == MENU)
-		{
-			duck.MenuTitle.setFont(duck.font);
-			duck.MenuTitle.setFillColor(sf::Color::Black);
-			duck.MenuTitle.setCharacterSize(30);
-			duck.MenuTitle.setPosition(20, 0);
-			duck.MenuTitle.setString("Tube Engine Menu");
-			Window.draw(duck.MenuTitle);
 
-			//Window.create(sf::VideoMode(resolution.x, resolution.y), duck.MenuTitle.getString, sf::Style::Default);
-
-			duck.MenuIntroduced.setFont(duck.font);
-			duck.MenuIntroduced.setFillColor(sf::Color::Black);
-			duck.MenuIntroduced.setCharacterSize(30);
-			duck.MenuIntroduced.setPosition(resolution.x / 2, resolution.y / 2);
-			duck.MenuIntroduced.setString("Welcome to Duck trophy Production");
-			Window.draw(duck.MenuIntroduced);
-
-			if (input.isWPressed)
-			{
-				GAME_STATE = GAME;
-			}
-
-		}
-		if (GAME_STATE == GAME)
+		Update::Update(dtAsSeconds);
+		sec++;
+		if (sec == 3000.0f)
 		{
 			mainWindow();
 		}
-
+		GameObject actor;
+		actor.setImage("Duck_Trophy.png");
+		actor.setobjectPosition({ 1000, 550 });
+		actor.Scale({ 5, 3.3f });
+		//actor.draw();
+		Window.draw(actor.sprite);
 		Window.display();
 	}
+
+
 }
+
+
 
 void Engine::mainWindow() 
 {
+	
 	//Music Invoked Here
-	Audio::PlayMusic("ChillingMusic.wav");
+	//Audio::PlayMusic("ChillingMusic.wav");
 
 	Window.create(sf::VideoMode(resolution.x, resolution.y),"Main",sf::Style::Default);
 	WPARAM wParam = NULL;
@@ -122,49 +91,75 @@ void Engine::mainWindow()
 
 	sf::Time dt = timer.restart();
 
-	PhysicsComponent physicsEngine = *new PhysicsComponent;
-	Actor actor = *new Actor;
+	GameObject *actor = new GameObject();
 
-	Actor player = *new Actor;
-	player.setPosition({ 1800, 50 });
+	GameObject *player = new GameObject();
+	
+	GameObject *child = new GameObject();
 
-	GameObject scenegraph = *new GameObject;
+	actor->setobjectPosition({ 900, 500 });
+	player->setobjectPosition({ 500, 500 });
+
+	//player->AddChild(actor);
+	//actor->setParent(*player);
+	//actor->initialAngleToParent = 90;
+
+
+	actor->setImage("duck.png");
+
+	player->setImage("duck.png");
+
+	PhysicsComponent physicsEngine;
 	while (Window.isOpen())
 	{
+
+
 		sf::Event event;
 		while (Window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				Window.close();
-			if (event.type == sf::Event::KeyReleased)
-				physicsEngine.inAir = false;
+			//if (event.type == sf::Event::KeyReleased)
+			//	physicsEngine.inAir = false;
 		}
 		//time
 		dtAsSeconds = dt.asSeconds();
 		duck.Text.setString("timer: " + std::to_string(timer.getElapsedTime().asSeconds()));
 		TransformComponent actorTransform;
+
 		Window.clear(sf::Color::Blue);
 
-		actor.setImage("duck.png");
-		//actor.draw();
+		//player->Scale({ -1,1});
 
+		//scene graph ---------------------------------
+		sf::Vector2f direction;
+		
+		player->setOrigin(sf::Vector2f(200, 200));
+	
+		//actor->Update(timer.getElapsedTime().asSeconds());
 
-		player.setImage("duck.png");
-		player.Scale({ -1,1 });
-		scenegraph.Start();
-		actor.AddChild(&player);
-		actor.Update(timer.getElapsedTime().asSeconds());
-		//physics
-		physicsEngine.setAABB(player);
-		physicsEngine.setAABB(actor);
-		physicsEngine.fall(player);
-		physicsEngine.fall(actor);
-		physicsEngine.checkCollision(actor, player);
-
-		if (!physicsEngine.collide)
-		{
-			player.velocity = sf::Vector2f(1, 1);
+		//player->setobjectPosition({ actor->getPosition().x + 500, actor->getPosition().y + 50 });
+		
+	
+		if (player->getcollider().CheckCollision(actor->getcollider(), direction, 1.0f)) {
+			//actor->oncollision(direction);
+			physicsEngine.checkCollision(*actor, *player);
+			physicsEngine.ResolveCollision(*actor, *player);
 		}
+
+
+		//physics
+		//physicsEngine.setAABB(*player);
+		//physicsEngine.setAABB(*actor);
+		//physicsEngine.fall(actor);
+
+
+		//
+		//if (!physicsEngine.collide) 
+		//{
+		//	player->velocity = sf::Vector2f(1, 1);
+		//}
+		//
 
 		//icon
 		icon.loadFromFile("duck.png");
@@ -173,45 +168,49 @@ void Engine::mainWindow()
 		Input input;
 		input.ProcessInput(wParam);
 		input.inputCheck();
+
 		if (input.isDownPressed) {
-			actor.moveObject({ 0 ,50 });
+			player->moveObject({ 0 ,player->velocity.y*10 });
 		}
+
 		else if (input.isUpPressed) {
-			actor.moveObject({ 0 ,-50 });
-			physicsEngine.inAir = true;
+			player->moveObject({ 0 ,-player->velocity.y * 10 });
+			//physicsEngine.inAir = true;
 		}
+
 		else if (input.isLeftPressed) {
-			actor.moveObject({ -50 ,0 });
-			actor.Scale({ -1,1 });
+			player->moveObject({ -player->velocity.x * 10  ,0 });
+			//actor.Scale({ -1,1 });
 		}
+
 		else if (input.isRightPressed) {
-			actor.moveObject({ 50 ,0 });
-			actor.Scale({ 1,1 });
+			player->moveObject({ player->velocity.x * 10  ,0 });
+			//actor.Scale({ 1,1 });
 		}
 
 		if (input.isSPressed) {
-			actor.Scale({ 2,2 });
+			player->Scale({2,2});
 		}
 		else if (input.isWPressed) {
-			actor.Scale({ 0.2,0.2 });
+			player->Scale({ 1,1 });
 		}
 		else if (input.isAPressed) {
-			actor.rotateObject(45);
+			player->rotateObject(-5);
 		}
 		else if (input.isDPressed) {
-			actor.rotateObject(-45);
+			player->rotateObject(5);
 		}
 
-		x += timer.getElapsedTime().asSeconds()*player.velocity.x;
-		if (x > resolution.x) {
-			x = 0;
-		}
-		//draw stuff
-		player.draw(Window);
-		actor.draw(Window);
-		//Window.draw(physicsEngine.get_rectangleShape(actor));
+		//x += timer.getElapsedTime().asSeconds()*player->velocity.x;
+		//if (x > resolution.x) {
+		//	x = 0;
+		//}
+
+		player->draw(Window);
+		actor->draw(Window);
+		//Window.draw(physicsEngine.get_rectangleShape(*actor));
+		//Window.draw(physicsEngine.get_rectangleShape(*player));
 		Window.draw(duck.Text);
 		Window.display();
 	}
-
 }
