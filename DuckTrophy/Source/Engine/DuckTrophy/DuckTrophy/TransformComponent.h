@@ -1,7 +1,6 @@
 #pragma once
 #include "Component.h"
 #include "Vector2.h"
-#include "Actor.h"
 
 class TransformComponent : Component
 {
