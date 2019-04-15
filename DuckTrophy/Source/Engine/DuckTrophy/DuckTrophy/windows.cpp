@@ -119,7 +119,7 @@ void Engine::mainWindow()
 {
 
 	//Music Invoked Here
-	//Audio::PlayMusic("ChillingMusic.wav");
+	Audio::PlayMusic("ChillingMusic.wav");
 
 	Window.create(sf::VideoMode(resolution.x, resolution.y), "Main", sf::Style::Default);
 	WPARAM wParam = NULL;  
@@ -514,9 +514,9 @@ void Engine::mainWindow()
 		{
 			if (walls[i].stage == 0)
 				walls[i].setImage("GreenBrick1.png");
-			if (walls[i].stage == 1)
+			else if (walls[i].stage == 1)
 				walls[i].setImage("GreenBrick2.png");
-			if (walls[i].stage == 2)
+			else if (walls[i].stage == 2)
 				walls[i].setImage("GreenBrick3.png");
 			walls[i].draw(Window);
 			player->getcollider().CheckCollision(walls[i].getcollider(), direction, 1.0f);
@@ -576,20 +576,16 @@ void Engine::mainWindow()
 						walls[a] = walls[a + 1];
 					}
 				}
-					 else if (walls[other].stage == 0)
+					 else
 					{
 						walls[other].stage++;
 					}
-					else if (walls[other].stage == 1)
-					{
-						walls[other].stage++;
-					}		
 					cout << "cnumofBullets" << numOfPBullets << " other number--------" << other << endl;
 				}
 			}
 
 
-		}
+		}	
 
 		//Window.draw(physicsEngine.get_rectangleShape(*actor));
 		//Window.draw(physicsEngine.get_rectangleShape(*player));
