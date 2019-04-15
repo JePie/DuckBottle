@@ -33,6 +33,7 @@ public:
 
 	float centerX = sprite.getGlobalBounds().width / 2;
 	float centerY = sprite.getGlobalBounds().height / 2;
+	int stage;
 
 	sf::Vector2f position;
 	sf::Vector2f ChildOffsetFromParent;

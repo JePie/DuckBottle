@@ -11,6 +11,7 @@ GameObject::GameObject()
 	body.setOutlineColor(sf::Color::Red);
 	body.setOutlineThickness(1);
 
+	stage = 0;
 	distanceFromParent = 0;
 	rotationOffsetFromParent = (sf::Vector2f(0, 0));
 }
@@ -54,6 +55,8 @@ void GameObject::Update(float msec) {
 		children.end(); ++i) {
 		(*i)->Update(msec);
 	}
+
+	this->setPosition(body.getPosition());
 }
 
 
@@ -72,7 +75,6 @@ void GameObject::setImage(std::string image) {
 	sprite.setOrigin(sf::Vector2f(centerX, centerY));
 
 	body.setTexture(pTexture);
-
 }
 
 void GameObject::setobjectPosition(sf::Vector2f newpos) {

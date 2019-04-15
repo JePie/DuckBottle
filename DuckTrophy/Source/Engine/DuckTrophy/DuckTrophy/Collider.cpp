@@ -3,7 +3,7 @@
 
 
 
-Collider::Collider(sf::RectangleShape& body) : 
+Collider::Collider(sf::RectangleShape& body) :
 	body(body)
 {
 }
@@ -21,8 +21,8 @@ bool Collider::CheckCollision(Collider other, sf::Vector2f& direction, float pus
 	sf::Vector2f thisHalfSize = GetHalfSize();
 	float deltaX = otherPosition.x - thisPosition.x;
 	float deltaY = otherPosition.y - thisPosition.y;
-	float intersetX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x+5);
-	float intersetY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y+5);
+	float intersetX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x + 5);
+	float intersetY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y + 5);
 	if (intersetX < 0.0f && intersetY < 0.0f)
 	{
 		push = std::min(std::max(push, 0.0f), 1.0f);
@@ -63,4 +63,5 @@ bool Collider::CheckCollision(Collider other, sf::Vector2f& direction, float pus
 		return true;
 	}
 	return false;
+	move = false;
 }

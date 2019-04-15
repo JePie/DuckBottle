@@ -11,9 +11,12 @@ class Bullet :public sf::Transformable , public GameObject
 public:
 
 	Bullet();
+	Bullet(int d, float v,sf::Vector2f pos);
 	~Bullet();
 	int direction;
+	float velocity;
+	void movedir();
 
-	void movedir(int dir);
+	virtual void updateBullet();
 };
 

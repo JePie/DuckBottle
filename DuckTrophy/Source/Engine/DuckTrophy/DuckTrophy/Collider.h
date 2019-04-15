@@ -6,8 +6,8 @@ class Collider
 public:
 	Collider(sf::RectangleShape& shape);
 	~Collider();
-
-	void Move(float dx, float dy) { body.move(dx, dy); }
+	bool move;
+	void Move(float dx, float dy) { body.move(dx, dy); move = true; }
 
 	bool CheckCollision(Collider& other, float push);
 	bool CheckCollision(Collider other, sf::Vector2f& direction, float push);
@@ -17,4 +17,3 @@ public:
 private:
 	sf::RectangleShape& body;
 };
-

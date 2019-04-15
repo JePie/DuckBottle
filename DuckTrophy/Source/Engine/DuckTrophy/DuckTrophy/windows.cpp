@@ -9,6 +9,7 @@
 #include "PhysicsComponent.h"
 #include "sceneManager.h"
 #include "Bullet.h"
+#include <iostream>
 Engine::Engine()
 {
 }
@@ -121,7 +122,11 @@ void Engine::mainWindow()
 	//Audio::PlayMusic("ChillingMusic.wav");
 
 	Window.create(sf::VideoMode(resolution.x, resolution.y), "Main", sf::Style::Default);
-	WPARAM wParam = NULL;
+	WPARAM wParam = NULL;  
+	
+	//icon
+	icon.loadFromFile("duck.png");
+	Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 	sf::Clock timer;
 
@@ -178,9 +183,168 @@ void Engine::mainWindow()
 
 	GameObject *walls = new GameObject[500];
 
-	for (float x = 6; x < 8; x++)
+	for (float x = 0; x < 1; x++)
 	{
-		for (float y = 6; y < 8; y++)
+		for (float y = 0; y < 20; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+
+	for (float x = 0; x < 20; x++)
+	{
+		for (float y = 0; y < 1; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+
+	for (float x = 4; x < 5; x++)
+	{
+		for (float y = 7; y < 10; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+
+
+	for (float x = 9; x < 10; x++)
+	{
+		for (float y = 7; y < 10; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+
+	for (float x = 14; x < 15; x++)
+	{
+		for (float y = 7; y < 10; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+
+	for (float x = 19; x < 20; x++)
+	{
+		for (float y = 0; y < 20; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+	// next set of walls 
+
+
+	for (float x = 3; x < 8; x++)
+	{
+		for (float y = 12; y < 13; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}	
+	
+	for (float x = 12; x < 17; x++)
+	{
+		for (float y = 12; y < 13; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+	//spawn walls 
+	for (float x = 8; x < 9; x++)
+	{
+		for (float y = 18; y < 20; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+
+	for (float x = 12; x < 13; x++)
+	{
+		for (float y = 18; y < 20; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+	//blocks
+	for (float x = 16; x < 18; x++)
+	{
+		for (float y = 15; y < 17; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+
+	for (float x = 2; x < 4; x++)
+	{
+		for (float y = 15; y < 17; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+
+	for (float x = 4; x < 7; x++)
+	{
+		for (float y = 3; y < 5; y++)
+		{
+			GameObject *brick = new GameObject();
+			walls[numOfWalls] = *brick;
+			walls[numOfWalls].setobjectPosition({ xStart + (tileSize*x), yStart + (tileSize*y) });
+			walls[numOfWalls].setImage("GreenBrick1.png");
+			numOfWalls++;
+		}
+	}
+
+	for (float x = 12; x < 15; x++)
+	{
+		for (float y = 3; y < 5; y++)
 		{
 			GameObject *brick = new GameObject();
 			walls[numOfWalls] = *brick;
@@ -191,12 +355,19 @@ void Engine::mainWindow()
 	}
 
 	GameObject *player = new GameObject();
-	player->setobjectPosition({ xStart + (tileSize * 0), yStart + (tileSize * 0) });
+	player->setobjectPosition({ xStart + (tileSize * 10), yStart + (tileSize * 10) });
 	player->setImage("Tank.png");
 	//player->AddChild(actor);
 	//actor->setParent(*player);
 	//actor->initialAngleToParent = 90;
 	PhysicsComponent physicsEngine;
+
+
+	Bullet *PBullets = new Bullet[500];
+	int numOfPBullets = 0;
+	int bulletTimer = 0;
+	bool loop = true;
+
 	while (Window.isOpen())
 	{
 
@@ -216,6 +387,9 @@ void Engine::mainWindow()
 
 		Window.clear(sf::Color::Blue);
 
+		if (bulletTimer > 0)
+			bulletTimer--;
+
 		//player->Scale({ -1,1});
 
 		//scene graph ---------------------------------
@@ -230,9 +404,6 @@ void Engine::mainWindow()
 		//}
 		//
 
-		//icon
-		icon.loadFromFile("duck.png");
-		Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 		Input input;
 		input.ProcessInput(wParam);
@@ -263,7 +434,47 @@ void Engine::mainWindow()
 		}
 
 		if (input.isSPressed) {
-			player->Scale({ 2,2 });
+
+			if (bulletTimer <= 0)
+			{
+				Bullet *bullet = new Bullet();
+				cout << "shooooooooottt;lkasdmf;ld :::: " << bulletTimer;
+
+				if (player->getRotation() == 0)
+				{
+					bullet = new Bullet(1, 5.0f, { player->getPosition().x,player->getPosition().y - 30 });
+					PBullets[numOfPBullets] = *bullet;
+					numOfPBullets++;
+					cout << "up" << endl;
+				}
+				else if (player->getRotation() == 90)
+				{
+					bullet = new Bullet(2, 5.0f, { player->getPosition().x + 30,player->getPosition().y });
+					PBullets[numOfPBullets] = *bullet;
+					numOfPBullets++;
+					cout << "r" << endl;
+				}
+				else if (player->getRotation() == 180)
+				{
+					bullet = new Bullet(3, 5.0f, { player->getPosition().x,player->getPosition().y + 30 });
+					PBullets[numOfPBullets] = *bullet;
+					numOfPBullets++;
+					cout << "d" << endl;
+				}
+				else if (player->getRotation() == 270)
+				{
+					bullet = new Bullet(4, 5.0f, { player->getPosition().x - 30,player->getPosition().y });
+					PBullets[numOfPBullets] = *bullet;
+					numOfPBullets++;
+					cout << "l" << endl;
+				}
+				bulletTimer = 35;
+			}
+
+
+			cout << "number of bullets :  " << numOfPBullets << endl;
+
+
 		}
 		else if (input.isWPressed) {
 			player->Scale({ 1,1 });
@@ -285,6 +496,7 @@ void Engine::mainWindow()
 		{
 			object[i].draw(Window);
 			if (player->getcollider().CheckCollision(object[i].getcollider(), direction, 1.0f)) {
+				player->setobjectPosition(player->body.getPosition());
 				//player->oncollision(direction);
 				//physicsEngine.checkCollision(*actor, *player);
 				//physicsEngine.ResolveCollision(*actor, *player);
@@ -300,9 +512,15 @@ void Engine::mainWindow()
 
 		for (int i = 0; i < numOfWalls; i++)
 		{
+			if (walls[i].stage == 0)
+				walls[i].setImage("GreenBrick1.png");
+			if (walls[i].stage == 1)
+				walls[i].setImage("GreenBrick2.png");
+			if (walls[i].stage == 2)
+				walls[i].setImage("GreenBrick3.png");
 			walls[i].draw(Window);
 			player->getcollider().CheckCollision(walls[i].getcollider(), direction, 1.0f);
-
+			player->setobjectPosition(player->body.getPosition());
 
 		}
 
@@ -311,9 +529,68 @@ void Engine::mainWindow()
 		{
 			blackWalls[i].draw(Window);
 			player->getcollider().CheckCollision(blackWalls[i].getcollider(), direction, 1.0f);
+			player->setobjectPosition(player->body.getPosition());
+		}
+
+		for (int i = 0; i < numOfPBullets; i++)
+		{
+			PBullets[i].updateBullet();
+			PBullets[i].setImage("Ball.png");
+			PBullets[i].draw(Window);
+			loop = true;
+			for (int other = 0; other < 4 && loop == true; other++)
+			{
+				if (PBullets[i].getcollider().CheckCollision(blackWalls[other].getcollider(), direction, 1.0f))
+
+				{
+					for (int a = i; a < numOfPBullets; a++)
+					{
+						PBullets[a] = PBullets[a + 1];
+					}
+					numOfPBullets--;
+					loop = false;
+					cout << "cnumofBullets" <<numOfPBullets<< " other number--------" << other <<endl;
+				}
+			}
+
+			for (int other = 0; other < numOfWalls && loop == true; other++)
+			{
+				if (PBullets[i].getcollider().CheckCollision(walls[other].getcollider(), direction, 1.0f))
+
+				{
+					for (int a = i; a < numOfPBullets; a++)
+					{
+						PBullets[a] = PBullets[a + 1];
+					}
+					numOfPBullets--;
+					loop = false;
+
+					//Changing wall picture or destroying wall
+
+
+				 if (walls[other].stage == 2)
+				{
+					numOfWalls--;
+					for (int a = other; a < numOfWalls; a++)
+					{
+						walls[a] = walls[a + 1];
+					}
+				}
+					 else if (walls[other].stage == 0)
+					{
+						walls[other].stage++;
+					}
+					else if (walls[other].stage == 1)
+					{
+						walls[other].stage++;
+					}		
+					cout << "cnumofBullets" << numOfPBullets << " other number--------" << other << endl;
+				}
+			}
 
 
 		}
+
 		//Window.draw(physicsEngine.get_rectangleShape(*actor));
 		//Window.draw(physicsEngine.get_rectangleShape(*player));
 		Window.draw(duck.Text);
