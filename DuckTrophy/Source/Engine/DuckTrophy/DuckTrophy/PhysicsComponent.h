@@ -3,7 +3,6 @@
 #include <vector>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "Actor.h"
 #include "Component.h"
 #include <math.h>
 #include <complex> 
@@ -13,8 +12,6 @@ float magnitude(const sf::Vector2f &v);
 class PhysicsComponent :public Component
 {
 public:
-	PhysicsComponent();
-	~PhysicsComponent();
 	
 	struct AABB{
 		sf::Vector2f min;
@@ -33,7 +30,7 @@ public:
 
 	float pi = 3.14159265359;
 
-	float thickness;
+	float thickness = 1.0f;
 	bool inAir;
 	sf::Vector2f gravity = sf::Vector2f(0, 9.8);
 
@@ -43,11 +40,11 @@ public:
 
 	float get_length() const { return magnitude(velocity_l); }
 
-	void fall(Actor &A);
+	void fall(GameObject &A);
 
 	sf::Clock clock;
 
-	void setAABB(Actor A);
+	void setAABB(GameObject &A);
 
 	bool AABBvsAABB(AABB a, AABB b);
 
@@ -59,11 +56,11 @@ public:
 
 	//bool CirclevsCircleOptimized(Circle a, Circle b);
 
-	void ResolveCollision(Actor A, Actor B);
+	void ResolveCollision(GameObject &A, GameObject &B);
 
-	void checkCollision(Actor &A, Actor &B);
+	void checkCollision(GameObject &A, GameObject &B);
 
-	sf::RectangleShape get_rectangleShape(Actor &A) const;
-
+	sf::RectangleShape get_rectangleShape(GameObject &A ) const;
 };
+
 
