@@ -5,6 +5,7 @@ DuckTube Engine is engine developed by DuckBottle Studio at George Brown College
 * **Puraj Desai**- [Puraj](https://github.com/puraj123)
 * **Minxu Huang** - [Jack](http://gitub.com/daimenion)
 * **John Paul Valdez** - [JP](http://github.com/JePie)
+* **Gavin Tang** - [Gavin](https://github.com/Coolgav)
 
 ## Starting Engine
 * Find the latest.exe file  under the Game folder.
