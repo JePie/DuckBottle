@@ -175,9 +175,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="base.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphicsSystem.h" />
@@ -185,7 +186,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicsComponent.h" />
-    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="sceneManager.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="tubeStd.h" />
     <ClInclude Include="Update.h" />
@@ -193,8 +194,9 @@
     <ClInclude Include="windows.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicsSystem.cpp" />
