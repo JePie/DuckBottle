@@ -357,9 +357,19 @@ void Engine::mainWindow()
 	GameObject *player = new GameObject();
 	player->setobjectPosition({ xStart + (tileSize * 10), yStart + (tileSize * 10) });
 	player->setImage("Tank.png");
-	//player->AddChild(actor);
-	//actor->setParent(*player);
-	//actor->initialAngleToParent = 90;
+
+	GameObject *actor = new GameObject();
+	actor->setobjectPosition({ 200,200 });
+	actor->setImage("duck.png");
+
+	GameObject *child = new GameObject();
+	child->setobjectPosition({ 300,200 });
+	child->setImage("duck.png");
+
+	actor->AddChild(child);
+	child->setParent(*actor);
+	child->initialAngleToParent = 90;
+
 	PhysicsComponent physicsEngine;
 
 
@@ -389,6 +399,10 @@ void Engine::mainWindow()
 
 		if (bulletTimer > 0)
 			bulletTimer--;
+
+		//Rotate ducks for example
+		child->Update(timer.getElapsedTime().asSeconds());
+		actor->rotateObject(1);
 
 		//player->Scale({ -1,1});
 
@@ -442,28 +456,28 @@ void Engine::mainWindow()
 
 				if (player->getRotation() == 0)
 				{
-					bullet = new Bullet(1, 5.0f, { player->getPosition().x,player->getPosition().y - 30 });
+					bullet = new Bullet(1, 8.0f, { player->getPosition().x,player->getPosition().y - 30 });
 					PBullets[numOfPBullets] = *bullet;
 					numOfPBullets++;
 					cout << "up" << endl;
 				}
 				else if (player->getRotation() == 90)
 				{
-					bullet = new Bullet(2, 5.0f, { player->getPosition().x + 30,player->getPosition().y });
+					bullet = new Bullet(2, 8.0f, { player->getPosition().x + 30,player->getPosition().y });
 					PBullets[numOfPBullets] = *bullet;
 					numOfPBullets++;
 					cout << "r" << endl;
 				}
 				else if (player->getRotation() == 180)
 				{
-					bullet = new Bullet(3, 5.0f, { player->getPosition().x,player->getPosition().y + 30 });
+					bullet = new Bullet(3, 8.0f, { player->getPosition().x,player->getPosition().y + 30 });
 					PBullets[numOfPBullets] = *bullet;
 					numOfPBullets++;
 					cout << "d" << endl;
 				}
 				else if (player->getRotation() == 270)
 				{
-					bullet = new Bullet(4, 5.0f, { player->getPosition().x - 30,player->getPosition().y });
+					bullet = new Bullet(4, 8.0f, { player->getPosition().x - 30,player->getPosition().y });
 					PBullets[numOfPBullets] = *bullet;
 					numOfPBullets++;
 					cout << "l" << endl;
@@ -492,6 +506,7 @@ void Engine::mainWindow()
 		//}
 
 		player->draw(Window);
+
 		for (int i = 0; i < numOfObjects; i++)
 		{
 			object[i].draw(Window);
@@ -587,9 +602,12 @@ void Engine::mainWindow()
 
 		}	
 
+		actor->draw(Window);
+		child->draw(Window);
 		//Window.draw(physicsEngine.get_rectangleShape(*actor));
 		//Window.draw(physicsEngine.get_rectangleShape(*player));
 		Window.draw(duck.Text);
 		Window.display();
+
 	}
 }
